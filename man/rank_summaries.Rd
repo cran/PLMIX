@@ -5,41 +5,40 @@
 \title{Descriptive summaries for a partial ordering/ranking dataset}
 \usage{
 rank_summaries(data, format = c("ordering", "ranking"), mean_rank = TRUE,
-  marginals = TRUE, pairedcomparisons = TRUE)
+  marginals = TRUE, pc = TRUE)
 }
 \arguments{
 \item{data}{Numeric \eqn{N}\eqn{\times}{x}\eqn{K} data matrix of partial sequences.}
 
 \item{format}{Character string indicating the format of the \code{data} argument.}
 
-\item{mean_rank}{Logical: whether the mean rank vector has to be computed.}
+\item{mean_rank}{Logical: whether the mean rank vector has to be computed. Default is \code{TRUE}.}
 
-\item{marginals}{Logical: whether the marginal rank distributions have to be computed.}
+\item{marginals}{Logical: whether the marginal rank distributions have to be computed. Default is \code{TRUE}.}
 
-\item{pairedcomparisons}{Logical: whether the paired comparison matrix has to be computed.}
+\item{pc}{Logical: whether the paired comparison matrix has to be computed. Default is \code{TRUE}.}
 }
 \value{
 A list of named objects:
 
  \item{\code{nranked}}{ Numeric vector of length \eqn{N} with the number of items ranked by each sample unit.}
  \item{\code{nranked_distr}}{ Frequency distribution of the \code{nranked} vector.}
- \item{\code{missing_positions}}{ Numeric vector of length \eqn{K} with the number of missing positions for each item.}
+ \item{\code{missing_pos}}{ Numeric vector of length \eqn{K} with the number of missing positions for each item.}
  \item{\code{mean_rank}}{ Numeric vector of length \eqn{K} with the mean rank of each item.}
  \item{\code{marginals}}{ Numeric \eqn{K}\eqn{\times}{x}\eqn{K} matrix of the marginal rank distributions: the \eqn{(i,j)}-th entry indicates the number of units that ranked item \eqn{i} in the \eqn{j}-th position.}
- \item{\code{pairedcomparisons}}{ Numeric \eqn{K}\eqn{\times}{x}\eqn{K} paired comparison matrix: the \eqn{(i,i')}-th entry indicates the number of sample units that preferred item \eqn{i} to item \eqn{i'}.}
+ \item{\code{pc}}{ Numeric \eqn{K}\eqn{\times}{x}\eqn{K} paired comparison matrix: the \eqn{(i,i')}-th entry indicates the number of sample units that preferred item \eqn{i} to item \eqn{i'}.}
 }
 \description{
 Compute rank summaries and censoring patterns for a partial ordering/ranking dataset.
 }
 \examples{
-library(PLMIX)
+
 data(d_carconf)
 rank_summaries(data=d_carconf, format="ordering")
+}
+\references{
+Mollica, C. and Tardella, L. (2017). Bayesian Plackett-Luce mixture models for partially ranked data. \emph{Psychometrika}, \bold{82}(2), pages 442--458, ISSN: 0033-3123, DOI: 10.1007/s11336-016-9530-0.
 }
 \author{
 Cristina Mollica and Luca Tardella
 }
-\references{
-Mollica, C., Tardella, L. (2016). Bayesian Plackett-Luce mixture models for partially ranked data. \emph{Psychometrika} (published online), DOI: 10.1007/s11336-016-9530-0.
-}
-

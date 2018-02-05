@@ -54,22 +54,22 @@ double chisqmeasuretheocond(int N, Rcpp::NumericMatrix ref_order, Rcpp::NumericM
 	 }
        }
       /* if the items ranked by subject s are not hmr put all 0 */
-       if(temphmr!=(hmr+1)){        /**/
+       if(temphmr!=(hmr+1)){
 	   for(slot=0; slot<K; slot++){
 	     temp_pi_inv(s,slot)=0;
 	   }
 	 }
     }
 
-    tau_mat = tau(temp_pi_inv); /******/
+    tau_mat = tau(temp_pi_inv); 
        for(slot=0; slot<K; slot++){
          for(slot2=0; slot2<slot; slot2++){
 	   T_mat(slot,slot2) = tau_mat(slot,slot2) + tau_mat(slot2,slot);
 	   T_mat(slot2,slot) = T_mat(slot,slot2) ;
 	   tau_star_mat(slot,slot2) = ((double) T_mat(slot,slot2))*marg_p[slot]/(marg_p[slot]+marg_p[slot2]);
-	   if(tau_star_mat(slot,slot2)>0){  /**/
+	   if(tau_star_mat(slot,slot2)>0){
 	   f = f + (((double) tau_mat(slot,slot2))-tau_star_mat(slot,slot2))*(((double) tau_mat(slot,slot2))-tau_star_mat(slot,slot2))/(tau_star_mat(slot,slot2));
-	   }                                /**/
+	   }                             
 	 }
        }
 

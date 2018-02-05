@@ -10,19 +10,21 @@ unit_to_freq(data)
 \item{data}{Numeric \eqn{N}\eqn{\times}{x}\eqn{K} data matrix of observed individual sequences.}
 }
 \value{
-Numeric matrix of the observed sequences with the corresponding frequencies indicated in the last \eqn{(K+1)}-th column.
+Numeric matrix of the distinct observed sequences with the corresponding frequencies indicated in the last \eqn{(K+1)}-th column.
 }
 \description{
-Construct the frequency distribution of the observed sequences from the dataset of individual rankings/orderings.
+Construct the frequency distribution of the distinct observed sequences from the dataset of individual rankings/orderings.
 }
 \examples{
 
-library(PLMIX)
+# Frequency distribution of complete orderings 
 data(d_german)
 unit_to_freq(data=d_german)
 
+# Frequency distribution of partial orderings
+data(d_apa)
+unit_to_freq(data=d_apa)
 }
 \author{
 Cristina Mollica and Luca Tardella
 }
-

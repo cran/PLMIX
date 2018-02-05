@@ -4,9 +4,9 @@
 \alias{mapPLMIX_multistart}
 \title{MAP estimation for a Bayesian mixture of Plackett-Luce models with multiple starting values}
 \usage{
-mapPLMIX_multistart(pi_inv, K, G, n_start = 1, init = list(list(p = NULL,
-  omega = NULL))[rep(1, n_start)], n_iter = 200, hyper = list(shape0 =
-  matrix(1, nrow = G, ncol = K), rate0 = rep(0, G), alpha0 = rep(1, G)),
+mapPLMIX_multistart(pi_inv, K, G, n_start = 1, init = rep(list(list(p =
+  NULL, omega = NULL)), times = n_start), n_iter = 200, hyper = list(shape0
+  = matrix(1, nrow = G, ncol = K), rate0 = rep(0, G), alpha0 = rep(1, G)),
   eps = 10^(-6), plot_objective = FALSE, init_index = 1:n_start,
   parallel = FALSE, centered_start = FALSE)
 }
@@ -19,57 +19,58 @@ mapPLMIX_multistart(pi_inv, K, G, n_start = 1, init = list(list(p = NULL,
 
 \item{n_start}{Number of starting values.}
 
-\item{init}{List of \code{n_start} lists of named objects with initialization values: \code{p} is a numeric \eqn{G}\eqn{\times}{x}\eqn{K} matrix of component-specific support parameters; \code{omega} is a numeric vector of \eqn{G} mixture weights. Default is \code{NULL}. In this case initialization values are randomly generated with a uniform distribution. With the optional argument \code{centered_start} one can draw from a different distribution enforcing the expectation of the support parameters to coincide with the relative frequency that each item has been ranked top.}
+\item{init}{List of \code{n_start} lists of named objects with initialization values: \code{p} is a numeric \eqn{G}\eqn{\times}{x}\eqn{K} matrix of component-specific support parameters; \code{omega} is a numeric vector of \eqn{G} mixture weights. If starting values are not supplied (\code{NULL}), they are randomly generated with a uniform distribution. Default is \code{NULL}.}
 
 \item{n_iter}{Maximum number of EM iterations.}
 
-\item{hyper}{List of named objects with hyperparameter values for prior specification: \code{shape0} is a numeric \eqn{G}\eqn{\times}{x}\eqn{K} matrix of shape hyperparameters; \code{rate0} is a numeric vector of \eqn{G} rate hyperparameters; \code{alpha0} is a numeric vector of \eqn{G} Dirichlet hyperparameters. Default is noninformative (flat) prior setting.}
+\item{hyper}{List of named objects with hyperparameter values for the conjugate prior specification: \code{shape0} is a numeric \eqn{G}\eqn{\times}{x}\eqn{K} matrix of shape hyperparameters; \code{rate0} is a numeric vector of \eqn{G} rate hyperparameters; \code{alpha0} is a numeric vector of \eqn{G} Dirichlet hyperparameters. Default is noninformative (flat) prior setting.}
 
 \item{eps}{Tolerance value for the convergence criterion.}
 
 \item{plot_objective}{Logical: whether the objective function should be plotted. Default is \code{FALSE}.}
 
-\item{init_index}{Numeric vector of the elements of the \code{init} argument to be actually launched. Useful to select the most promising starting values identified after a preliminary run. Default is all the starting points in the \code{init} argument.}
+\item{init_index}{Numeric vector indicating the positions of the starting values in the \code{init} list to be actually launched. Useful to launch the most promising starting values identified after a preliminary run. Default is run all the starting points in the \code{init} list.}
 
 \item{parallel}{Logical: whether parallelization should be used. Default is \code{FALSE}.}
 
-\item{centered_start}{Logical: whether a random start whose support parameters and weights are constrained to be centered around the observed relative frequency that each item has been ranked top. Default is \code{FALSE}. Ignored when \code{init} is not \code{NULL}.}
+\item{centered_start}{Logical: whether a random start whose support parameters and weights should be centered around the observed relative frequency that each item has been ranked top. Default is \code{FALSE}. Ignored when \code{init} is not \code{NULL}.}
 }
 \value{
 A list of named objects:
 
  \item{\code{mod}}{ List of named objects describing the best model in terms of maximized posterior distribution. See output values of the single-run \code{\link{mapPLMIX}} function for a detailed explanation of the list elements.}
  \item{\code{max_objective}}{ Numeric vector of the maximized objective function values for each initialization.}
- \item{\code{convergence}}{ Binary vector of length \code{length(init_index)} with convergence indicators for each initialization: 1 = convergence has been achieved, 0 = otherwise.}
+ \item{\code{convergence}}{ Binary vector with \code{length(init_index)} convergence indicators for each initialization: 1 = convergence has been achieved, 0 = otherwise.}
 }
 \description{
 Perform MAP estimation via EM algorithm with multiple starting values for a Bayesian mixture of Plackett-Luce models fitted to partial orderings.
 }
 \details{
-Under noninformative (flat) prior setting, the EM algorithm for MAP estimation corresponds to the EMM algorithm described by Gormley and Murphy (2006) to perform frequentist inference. Thus, in this case the MAP solution coincides with the MLE. In this case, also the \code{log_lik} and \code{objective} output vectors coincide. The best model in terms of maximized posterior distribution is returned.
+Under noninformative (flat) prior setting, the EM algorithm for MAP estimation corresponds to the EMM algorithm described by Gormley and Murphy (2006) to perform frequentist inference. In this case the MAP solution coincides with the MLE. The best model in terms of maximized posterior distribution is returned.
 }
 \examples{
-library(PLMIX)
-data(d_carconf)
-K <- ncol(d_carconf)
-G <- 3
-n.starting=2
-outputMAP_multistart <- mapPLMIX_multistart(pi_inv=d_carconf, K=K, G=G, 
-                                            n_start=n.starting, n_iter=400*G)
-str(outputMAP_multistart)
-outputMAP_multistart$mod$P_map
-outputMAP_multistart$mod$W_map
 
-}
-\author{
-Cristina Mollica and Luca Tardella
+require(MCMCpack)
+
+data(d_carconf)
+
+MAP_mult <- mapPLMIX_multistart(pi_inv=d_carconf, K=ncol(d_carconf), G=3, 
+                                            n_start=2, n_iter=400*3)
+str(MAP_mult)
+MAP_mult$mod$P_map
+MAP_mult$mod$W_map
+
 }
 \references{
-Mollica, C., Tardella, L. (2016). Bayesian Plackett-Luce mixture models for partially ranked data. \emph{Psychometrika} (published online), DOI: 10.1007/s11336-016-9530-0.
+Mollica, C. and Tardella, L. (2017). Bayesian Plackett-Luce mixture models for partially ranked data. \emph{Psychometrika}, \bold{82}(2), pages 442--458, ISSN: 0033-3123, DOI: 10.1007/s11336-016-9530-0.
 
-Mollica, C., Tardella, L. (2014). Epitope profiling via mixture modeling for ranked data. \emph{Statistics in Medicine}, \bold{33}(21), pages 3738--3758, ISSN: 0277-6715, DOI: 10.1002/sim.6224.
+Mollica, C. and Tardella, L. (2014). Epitope profiling via mixture modeling for ranked data. \emph{Statistics in Medicine}, \bold{33}(21), pages 3738--3758, ISSN: 0277-6715, DOI: 10.1002/sim.6224.
+
+Gormley, I. C. and Murphy, T. B. (2006). Analysis of Irish third-level college applications data. \emph{Journal of the Royal Statistical Society: Series A}, \bold{169}(2), pages 361--379, ISSN: 0964-1998, DOI: 10.1111/j.1467-985X.2006.00412.x.
 }
 \seealso{
 \code{\link{mapPLMIX}}
 }
-
+\author{
+Cristina Mollica and Luca Tardella
+}

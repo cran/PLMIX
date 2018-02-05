@@ -75,14 +75,10 @@ if(availablenext == 1.0){
        }
             temp_pdenom = temp_pdenom - p(group,((int) pi_inv(s,slot))-1) ;
 
-/*printf("temp_pdenom successivo = %lf \\n ",temp_pdenom); */
-
          }
 }
 
        den(group,item) = den(group,item) + z_hat(s,group)*temp[s] ;
-
-/* printf("temp_pdenom = %lf \\n ",temp[s]);  */
 
 }
 

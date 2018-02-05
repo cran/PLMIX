@@ -20,14 +20,16 @@ Numeric \eqn{K}\eqn{\times}{x}\eqn{K} paired comparison matrix: the \eqn{(i,i')}
 Construct the paired comparison matrix for a partial ordering/ranking dataset.
 }
 \examples{
-library(PLMIX)
+
 data(d_dublinwest)
 paired_comparisons(data=d_dublinwest, format="ordering")
+}
+\references{
+Mollica, C. and Tardella, L. (2017). Bayesian Plackett-Luce mixture models for partially ranked data. \emph{Psychometrika}, \bold{82}(2), pages 442--458, ISSN: 0033-3123, DOI: 10.1007/s11336-016-9530-0.
+}
+\seealso{
+\code{\link{rank_summaries}}
 }
 \author{
 Cristina Mollica and Luca Tardella
 }
-\references{
-Mollica, C., Tardella, L. (2016). Bayesian Plackett-Luce mixture models for partially ranked data. \emph{Psychometrika} (published online), DOI: 10.1007/s11336-016-9530-0.
-}
-

@@ -2,92 +2,92 @@
 # Generator token: 10BE3573-1514-4C36-9D1C-5A225CD40393
 
 chisqmeasureobs <- function(pi_inv, p, weights) {
-    .Call('PLMIX_chisqmeasureobs', PACKAGE = 'PLMIX', pi_inv, p, weights)
+    .Call(`_PLMIX_chisqmeasureobs`, pi_inv, p, weights)
 }
 
 chisqmeasureobs1dim <- function(pi_inv, p, weights) {
-    .Call('PLMIX_chisqmeasureobs1dim', PACKAGE = 'PLMIX', pi_inv, p, weights)
+    .Call(`_PLMIX_chisqmeasureobs1dim`, pi_inv, p, weights)
 }
 
 chisqmeasureobscond <- function(pi_inv, p, weights) {
-    .Call('PLMIX_chisqmeasureobscond', PACKAGE = 'PLMIX', pi_inv, p, weights)
+    .Call(`_PLMIX_chisqmeasureobscond`, pi_inv, p, weights)
 }
 
 chisqmeasureobsmatrix1dim <- function(pi_inv, p, weights) {
-    .Call('PLMIX_chisqmeasureobsmatrix1dim', PACKAGE = 'PLMIX', pi_inv, p, weights)
+    .Call(`_PLMIX_chisqmeasureobsmatrix1dim`, pi_inv, p, weights)
 }
 
 chisqmeasuretheo <- function(N, ref_order, p, weights, pi_inv_obs) {
-    .Call('PLMIX_chisqmeasuretheo', PACKAGE = 'PLMIX', N, ref_order, p, weights, pi_inv_obs)
+    .Call(`_PLMIX_chisqmeasuretheo`, N, ref_order, p, weights, pi_inv_obs)
 }
 
 chisqmeasuretheo1dim <- function(N, ref_order, p, weights, pi_inv_obs) {
-    .Call('PLMIX_chisqmeasuretheo1dim', PACKAGE = 'PLMIX', N, ref_order, p, weights, pi_inv_obs)
+    .Call(`_PLMIX_chisqmeasuretheo1dim`, N, ref_order, p, weights, pi_inv_obs)
 }
 
 chisqmeasuretheocond <- function(N, ref_order, p, weights, pi_inv_obs) {
-    .Call('PLMIX_chisqmeasuretheocond', PACKAGE = 'PLMIX', N, ref_order, p, weights, pi_inv_obs)
+    .Call(`_PLMIX_chisqmeasuretheocond`, N, ref_order, p, weights, pi_inv_obs)
 }
 
 chisqmeasuretheomatrix1dim <- function(N, ref_order, p, weights, pi_inv_obs) {
-    .Call('PLMIX_chisqmeasuretheomatrix1dim', PACKAGE = 'PLMIX', N, ref_order, p, weights, pi_inv_obs)
+    .Call(`_PLMIX_chisqmeasuretheomatrix1dim`, N, ref_order, p, weights, pi_inv_obs)
 }
 
 CompProbZpartial <- function(p, pi_inv, Y, u_bin, n_rank, omega) {
-    .Call('PLMIX_CompProbZpartial', PACKAGE = 'PLMIX', p, pi_inv, Y, u_bin, n_rank, omega)
+    .Call(`_PLMIX_CompProbZpartial`, p, pi_inv, Y, u_bin, n_rank, omega)
 }
 
 CompRateP <- function(pi_inv, Y, z, u_bin, n_rank, rate0) {
-    .Call('PLMIX_CompRateP', PACKAGE = 'PLMIX', pi_inv, Y, z, u_bin, n_rank, rate0)
+    .Call(`_PLMIX_CompRateP`, pi_inv, Y, z, u_bin, n_rank, rate0)
 }
 
 CompRateYpartial <- function(p, pi_inv, ref_order, z, n_rank) {
-    .Call('PLMIX_CompRateYpartial', PACKAGE = 'PLMIX', p, pi_inv, ref_order, z, n_rank)
+    .Call(`_PLMIX_CompRateYpartial`, p, pi_inv, ref_order, z, n_rank)
 }
 
 Estep <- function(p, ref_order, weights, pi_inv) {
-    .Call('PLMIX_Estep', PACKAGE = 'PLMIX', p, ref_order, weights, pi_inv)
+    .Call(`_PLMIX_Estep`, p, ref_order, weights, pi_inv)
 }
 
 howmanyranked <- function(pi_inv) {
-    .Call('PLMIX_howmanyranked', PACKAGE = 'PLMIX', pi_inv)
+    .Call(`_PLMIX_howmanyranked`, pi_inv)
 }
 
 #' @rdname loglikelihood
 #' @export
 loglikPLMIX <- function(p, ref_order, weights, pi_inv) {
-    .Call('PLMIX_loglikPLMIX', PACKAGE = 'PLMIX', p, ref_order, weights, pi_inv)
+    .Call(`_PLMIX_loglikPLMIX`, p, ref_order, weights, pi_inv)
 }
 
 PLMIXsim <- function(N, K, G, p, ref_order, weights, rankingFormat, pi_inv) {
-    .Call('PLMIX_PLMIXsim', PACKAGE = 'PLMIX', N, K, G, p, ref_order, weights, rankingFormat, pi_inv)
+    .Call(`_PLMIX_PLMIXsim`, N, K, G, p, ref_order, weights, rankingFormat, pi_inv)
 }
 
 quickintsample <- function(n, size, prob) {
-    .Call('PLMIX_quickintsample', PACKAGE = 'PLMIX', n, size, prob)
+    .Call(`_PLMIX_quickintsample`, n, size, prob)
 }
 
 SimYpsilon <- function(rate, n_rank) {
-    .Call('PLMIX_SimYpsilon', PACKAGE = 'PLMIX', rate, n_rank)
+    .Call(`_PLMIX_SimYpsilon`, rate, n_rank)
 }
 
 tau <- function(pi_inv) {
-    .Call('PLMIX_tau', PACKAGE = 'PLMIX', pi_inv)
+    .Call(`_PLMIX_tau`, pi_inv)
 }
 
 top1freq1dim <- function(pi_inv) {
-    .Call('PLMIX_top1freq1dim', PACKAGE = 'PLMIX', pi_inv)
+    .Call(`_PLMIX_top1freq1dim`, pi_inv)
 }
 
 umat <- function(pi_inv) {
-    .Call('PLMIX_umat', PACKAGE = 'PLMIX', pi_inv)
+    .Call(`_PLMIX_umat`, pi_inv)
 }
 
 UpPhetpartial <- function(p, ref_order, pi_inv, u_bin, z_hat, shape0, rate0, n_rank) {
-    .Call('PLMIX_UpPhetpartial', PACKAGE = 'PLMIX', p, ref_order, pi_inv, u_bin, z_hat, shape0, rate0, n_rank)
+    .Call(`_PLMIX_UpPhetpartial`, p, ref_order, pi_inv, u_bin, z_hat, shape0, rate0, n_rank)
 }
 
 UpWhet <- function(z_hat, alpha0) {
-    .Call('PLMIX_UpWhet', PACKAGE = 'PLMIX', z_hat, alpha0)
+    .Call(`_PLMIX_UpWhet`, z_hat, alpha0)
 }
 

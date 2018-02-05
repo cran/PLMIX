@@ -7,26 +7,26 @@
 freq_to_unit(freq_distr)
 }
 \arguments{
-\item{freq_distr}{Numeric matrix of the observed sequences with the corresponding frequencies indicated in the last \eqn{(K+1)}-th column.}
+\item{freq_distr}{Numeric matrix of the distinct observed sequences with the corresponding frequencies indicated in the last \eqn{(K+1)}-th column.}
 }
 \value{
 Numeric \eqn{N}\eqn{\times}{x}\eqn{K} data matrix of observed individual sequences.
 }
 \description{
-Construct the dataset of individual rankings/orderings from the frequency distribution of the observed sequences.
+Construct the dataset of individual rankings/orderings from the frequency distribution of the distinct observed sequences.
 }
 \examples{
 
-library(PLMIX)
-library(combinat)
-K <- 4
-permutation_matrix <- t(matrix(unlist(permn(x=K)),nrow=K,ncol=factorial(K)))
-aggregate_data <- cbind(permutation_matrix,sample(factorial(K)))
-aggregate_data
+library(gtools)
 
-freq_to_unit(freq_distr=aggregate_data)
+K <- 4
+perm_matrix <- permutations(n=K,r=K)
+freq_data <- cbind(perm_matrix,sample(1:factorial(K)))
+freq_data
+
+freq_to_unit(freq_distr=freq_data)
+
 }
 \author{
 Cristina Mollica and Luca Tardella
 }
-

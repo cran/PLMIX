@@ -37,15 +37,7 @@ double chisqmeasuretheo1dim(int N, Rcpp::NumericMatrix ref_order, Rcpp::NumericM
           }
 	  }
 
-	  /*	  printf("MIAO 1");
 
-         for(item=0; item<K; item++){
-	   printf(" %lf ",marg_p[item]); 
-          }
-
-	 printf("\\n");
-	 printf("\\n"); */
-  
        /* compute the observed absolute frequency of times  */
        /* that item has been chosen as top1 */
        /* for each conditional distribution (conditional on hmr ranked items) */
@@ -53,16 +45,6 @@ double chisqmeasuretheo1dim(int N, Rcpp::NumericMatrix ref_order, Rcpp::NumericM
 
        pi_inv = PLMIXsim(N, K, G, p, ref_order, weights, false, pi_inv_obs) ;
        top1freq_mat = top1freq1dim(pi_inv); 
-
-       /*	  printf("MIAO 2");
-
-       for(hmr=0; hmr<K; hmr++){
-         for(item=0; item<K; item++){
-	   printf(" %d ",top1freq_mat(hmr,item));
-          }
-	 printf("\\n");
-       }
-       printf("\\n"); */
 
        /* compute the THEORETICAL absolute frequency of times  */
        /* that item should be chosen as top1 */
@@ -80,25 +62,6 @@ double chisqmeasuretheo1dim(int N, Rcpp::NumericMatrix ref_order, Rcpp::NumericM
 	 top1freq_star_mat(hmr,slot) = ((double) (conditionalobs[hmr]))* marg_p[slot]; 
 	 }
        }
-
-       /*
-       for(hmr=0; hmr<K; hmr++){
-	   printf(" %d ",conditionalobs[hmr]);
-	 }
-
-
-
-       for(hmr=0; hmr<K; hmr++){
-         for(item=0; item<K; item++){
-	   printf(" %lf ",top1freq_star_mat(hmr,item));
-          }
-	 printf("\\n");
-       }
-	 printf("\\n");
-
-
-	 printf("MIAO 3"); */
-
 
        for(hmr=0; hmr<K; hmr++){
          for(slot=0; slot<K; slot++){	   

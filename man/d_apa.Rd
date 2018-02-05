@@ -9,15 +9,15 @@
 \format{
   Data matrix of partial orderings with \eqn{N=15449} rows and \eqn{K=5} columns, named as:
   \describe{
-    \item{\code{rank1}}{Candidate occupying position 1 (most-liked)}.
-    \item{\code{rank2}}{Candidate occupying position 2}.
-    \item{\code{rank3}}{Candidate occupying position 3}.
-    \item{\code{rank4}}{Candidate occupying position 4}.
-    \item{\code{rank6}}{Candidate occupying position 5 (least-liked)}.
+    \item{\code{rank1}}{Candidate occupying position 1 (most-liked).}
+    \item{\code{rank2}}{Candidate occupying position 2.}
+    \item{\code{rank3}}{Candidate occupying position 3.}
+    \item{\code{rank4}}{Candidate occupying position 4.}
+    \item{\code{rank6}}{Candidate occupying position 5 (least-liked).}
   }
 }
 \references{
-Mollica, C., Tardella, L. (2016). Bayesian Plackett-Luce mixture models for partially ranked data. \emph{Psychometrika} published online, DOI: 10.1007/s11336-016-9530-0.
+Mollica, C. and Tardella, L. (2017). Bayesian Plackett-Luce mixture models for partially ranked data. \emph{Psychometrika}, \bold{82}(2), pages 442--258, ISSN: 0033-3123, DOI: 10.1007/s11336-016-9530-0.
 
 Diaconis, P. W. (1988). Group representations in probability and statistics. \emph{Lecture Notes-Monograph Series}, pages 94--96.
 
@@ -25,7 +25,12 @@ Diaconis, P. W. (1987). Spectral analysis for ranked data. Technical Report 282,
 }
 \examples{
 data(d_apa)
-head(d_apa) 
+head(d_apa)
+
+# Subset of complete sequences
+
+d_apa_compl=d_apa[rowSums(d_apa!=0)>=(ncol(d_apa)-1),]
+head(d_apa_compl)
 }
 \keyword{datasets}
 

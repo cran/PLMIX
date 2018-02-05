@@ -6,7 +6,7 @@
 \usage{
 gibbsPLMIX(pi_inv, K, G, init = list(z = NULL, p = NULL), n_iter = 1000,
   n_burn = 500, hyper = list(shape0 = matrix(1, nrow = G, ncol = K), rate0 =
-  rep(0.001, G), alpha0 = rep(1, G)))
+  rep(0.001, G), alpha0 = rep(1, G)), centered_start = FALSE)
 }
 \arguments{
 \item{pi_inv}{Numeric \eqn{N}\eqn{\times}{x}\eqn{K} data matrix of partial orderings.}
@@ -15,48 +15,46 @@ gibbsPLMIX(pi_inv, K, G, init = list(z = NULL, p = NULL), n_iter = 1000,
 
 \item{G}{Number of mixture components.}
 
-\item{init}{List of named objects with initialization values: \code{p} is a numeric \eqn{G}\eqn{\times}{x}\eqn{K} matrix of component-specific support parameters; \code{z} is a numeric \eqn{N}\eqn{\times}{x}\eqn{G} matrix of binary component memberships. If not supplied (\code{NULL}), initialization values are randomly generated. Default is \code{NULL}.}
+\item{init}{List of named objects with initialization values: \code{z} is a numeric \eqn{N}\eqn{\times}{x}\eqn{G} matrix of binary component memberships; \code{p} is a numeric \eqn{G}\eqn{\times}{x}\eqn{K} matrix of component-specific support parameters. If starting values are not supplied (\code{NULL}), they are randomly generated with a uniform distribution. Default is \code{NULL}.}
 
-\item{n_iter}{Number of total MCMC iterations.}
+\item{n_iter}{Total number of MCMC iterations.}
 
-\item{n_burn}{Number of initial burn-in samples removed from the MCMC sample.}
+\item{n_burn}{Number of initial burn-in drawings removed from the final MCMC sample.}
 
-\item{hyper}{List of named objects with hyperparameter values for prior specification: \code{shape0} is a numeric \eqn{G}\eqn{\times}{x}\eqn{K} matrix of shape hyperparameters; \code{rate0} is a numeric vector of \eqn{G} rate hyperparameters; \code{alpha0} is a numeric vector of \eqn{G} Dirichlet hyperparameters. Default is vague prior setting.}
+\item{hyper}{List of named objects with hyperparameter values for the conjugate prior specification: \code{shape0} is a numeric \eqn{G}\eqn{\times}{x}\eqn{K} matrix of shape hyperparameters; \code{rate0} is a numeric vector of \eqn{G} rate hyperparameters; \code{alpha0} is a numeric vector of \eqn{G} Dirichlet hyperparameters. Default is vague prior setting.}
+
+\item{centered_start}{Logical: whether a random start whose support parameters and weights should be centered around the observed relative frequency that each item has been ranked top. Default is \code{FALSE}. Ignored when \code{init} is not \code{NULL}.}
 }
 \value{
 A list of named objects:
 
- \item{\code{W}}{ Numeric \eqn{L}\eqn{\times}{x}\eqn{G} matrix with posterior MCMC samples of the mixture weights.}
- \item{\code{P}}{ Numeric \eqn{L}\eqn{\times}{x}\eqn{(G*K)} matrix with posterior MCMC samples of the component-specific support parameters.}
+ \item{\code{W}}{ Numeric \eqn{L}\eqn{\times}{x}\eqn{G} matrix with MCMC samples of the mixture weights.}
+ \item{\code{P}}{ Numeric \eqn{L}\eqn{\times}{x}\eqn{(G*K)} matrix with MCMC samples of the component-specific support parameters.}
  \item{\code{log_lik}}{ Numeric vector of posterior log-likelihood values.}
- \item{\code{deviance}}{ Numeric vector of posterior deviance values (-2*\code{log_lik}).}
+ \item{\code{deviance}}{ Numeric vector of posterior deviance values (\eqn{-2 * }\code{log_lik}).}
 }
 \description{
 Perform Gibbs sampling simulation for a Bayesian mixture of Plackett-Luce models fitted to partial orderings.
 }
 \details{
-The size \eqn{L} of the final posterior MCMC sample is equal to \code{n_iter}-\code{n_burn}.
+The size \eqn{L} of the final posterior sample is equal to \code{n_iter}-\code{n_burn}.
 }
 \examples{
-library(PLMIX)
-data(d_carconf)
-K <- ncol(d_carconf)
-G <- 3
-mcmc_iterations=30
-burnin=10
-outputGIBBS <- gibbsPLMIX(pi_inv=d_carconf, K=K, G=G, 
-                          n_iter=mcmc_iterations, n_burn=burnin)
-str(outputGIBBS)
-outputGIBBS$P
-outputGIBBS$W
 
+data(d_carconf)
+GIBBS <- gibbsPLMIX(pi_inv=d_carconf, K=ncol(d_carconf), G=3, n_iter=30, n_burn=10)
+str(GIBBS)
+
+# Get posterior samples of Plackett-Luce mixture parameters
+GIBBS$P
+GIBBS$W
+
+}
+\references{
+Mollica, C. and Tardella, L. (2017). Bayesian Plackett-Luce mixture models for partially ranked data. \emph{Psychometrika}, \bold{82}(2), pages 442--458, ISSN: 0033-3123, DOI: 10.1007/s11336-016-9530-0.
+
+Mollica, C. and Tardella, L. (2014). Epitope profiling via mixture modeling for ranked data. \emph{Statistics in Medicine}, \bold{33}(21), pages 3738--3758, ISSN: 0277-6715, DOI: 10.1002/sim.6224.
 }
 \author{
 Cristina Mollica and Luca Tardella
 }
-\references{
-Mollica, C., Tardella, L. (2016). Bayesian Plackett-Luce mixture models for partially ranked data. \emph{Psychometrika} (published online), DOI: 10.1007/s11336-016-9530-0.
-
-Mollica, C., Tardella, L. (2014). Epitope profiling via mixture modeling for ranked data. \emph{Statistics in Medicine}, \bold{33}(21), pages 3738--3758, ISSN: 0277-6715, DOI: 10.1002/sim.6224.
-}
-

@@ -10,25 +10,30 @@ The survey did not require a complete ranking elicitation, therefore the dataset
 \format{
   Data matrix of partial orderings with \eqn{N=435} rows and \eqn{K=6} columns, named as:
   \describe{
-    \item{\code{rank1}}{Item occupying position 1 (most-liked)}.
-    \item{\code{rank2}}{Item occupying position 2}.
-    \item{\code{rank3}}{Item occupying position 3}.
-    \item{\code{rank4}}{Item occupying position 4}.
-    \item{\code{rank5}}{Item occupying position 5}.
-    \item{\code{rank6}}{Item occupying position 6 (least-liked)}.
+    \item{\code{rank1}}{Item occupying position 1 (most-liked).}
+    \item{\code{rank2}}{Item occupying position 2.}
+    \item{\code{rank3}}{Item occupying position 3.}
+    \item{\code{rank4}}{Item occupying position 4.}
+    \item{\code{rank5}}{Item occupying position 5.}
+    \item{\code{rank6}}{Item occupying position 6 (least-liked).}
   }
 }
 \references{
-Mollica, C., Tardella, L. (2016). Bayesian Plackett-Luce mixture models for partially ranked data. \emph{Psychometrika} published online, DOI: 10.1007/s11336-016-9530-0.
+Mollica, C. and Tardella, L. (2017). Bayesian Plackett-Luce mixture models for partially ranked data. \emph{Psychometrika}, \bold{82}(2), pages 442--458, ISSN: 0033-3123, DOI: 10.1007/s11336-016-9530-0.
 
-Hatzinger, R., Dittrich, R. (2012). Prefmod: An R package for modeling preferences based on paired comparisons, rankings, or ratings. \emph{Journal of Statistical Software}, \bold{48}(10), pages 1--31.
+Hatzinger, R. and Dittrich, R. (2012). Prefmod: An R package for modeling preferences based on paired comparisons, rankings, or ratings. \emph{Journal of Statistical Software}, \bold{48}(10), pages 1--31.
 
-Dabic, M., Hatzinger, R. (2009). Zielgruppenadaequate Ablaeufe in Konfigurationssystemen - eine empirische Studie im Automobilmarkt - Partial Rankings. In Hatzinger, R., Dittrich, R. and  Salzberger, T., editors, \emph{Praeferenzanalyse mit R: Anwendungen aus Marketing, Behavioural
+Dabic, M. and Hatzinger, R. (2009). Zielgruppenadaequate Ablaeufe in Konfigurationssystemen - eine empirische Studie im Automobilmarkt - Partial Rankings. In Hatzinger, R., Dittrich, R. and  Salzberger, T. (eds), \emph{Praeferenzanalyse mit R: Anwendungen aus Marketing, Behavioural
 Finance und Human Resource Management}. Wien: Facultas.
 
 }
 \examples{
 data(d_carconf)
 head(d_carconf)
+
+# Subset of complete sequences
+
+d_carconf_compl=d_carconf[rowSums(d_carconf!=0)>=(ncol(d_carconf)-1),]
+head(d_carconf_compl)
 }
 \keyword{datasets}

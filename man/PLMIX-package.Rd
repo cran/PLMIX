@@ -1,28 +1,69 @@
-\name{PLMIX}
+\name{PLMIX-package}
+\alias{PLMIX-package}
 \alias{PLMIX}
 \docType{package}
 \title{
 Bayesian Analysis of Finite Mixtures of Plackett-Luce Models for Partial Rankings/Orderings
 }
 \description{
-The PLMIX package for R provides functions to fit and analyze finite mixtures of Plackett-Luce models for partial top rankings/orderings within the Bayesian framework. It provides MAP point estimates via EM algorithm and posterior MCMC simulations via Gibbs Sampling. It also fits MLE as a special case of the noninformative Bayesian analysis with vague priors.
+The PLMIX package for R provides functions to fit and analyze finite mixtures of Plackett-Luce models for partial top rankings/orderings within the Bayesian framework. It provides MAP point estimates via EM algorithm and posterior MCMC simulations via Gibbs Sampling. It also fits MLE as a special case of the noninformative Bayesian analysis with vague priors. 
+
+In addition to inferential techniques, the package assists other fundamental phases of a model-based analysis for partial rankings/orderings, by including functions for data manipulation, simulation, descriptive summary, model selection and goodness-of-fit evaluation.
 }
 \details{
 The Plackett-Luce model is one of the most popular and frequently applied parametric distributions to analyze partial top rankings/orderings of a finite set of items. The present package allows to account for unobserved sample heterogeneity of partially ranked data with a model-based analysis relying on Bayesian finite mixtures of Plackett-Luce models. The package provides a suite of functions that covers the fundamental phases of a model-based analysis: 
+
+\strong{Ranking data manipulation}
+  \describe{
+      \item{\code{\link{binary_group_ind}}}{Binary group membership matrix from the mixture component labels.}
+      \item{\code{\link{freq_to_unit}}}{From the frequency distribution to the dataset of individual orderings/rankings.}
+      \item{\code{\link{make_complete}}}{Random completion of partial orderings/rankings data.}
+      \item{\code{\link{make_partial}}}{Censoring of complete orderings/rankings data.}
+      \item{\code{\link{rank_ord_switch}}}{From rankings to orderings and vice-versa.}
+      \item{\code{\link{unit_to_freq}}}{From the dataset of individual orderings/rankings to the frequency distribution.}
+    }
+\strong{Ranking data simulation}
+  \describe{
+   \item{\code{\link{rPLMIX}}}{Random sample from a finite mixture of Plackett-Luce models.}
+    }
+\strong{Ranking data description}
+  \describe{
+    \item{\code{\link{paired_comparisons}}}{Paired comparison frequencies.}
+    \item{\code{\link{rank_summaries}}}{Summary statistics of partial ranking/ordering data.}
+  }    
+\strong{Model estimation}
+  \describe{
+   \item{\code{\link{label_switchPLMIX}}}{Label switching adjustment for Bayesian mixtures of Plackett-Luce models.}
+   \item{\code{\link{likPLMIX}}}{Likelihood evaluation for a mixture of Plackett-Luce models.}
+   \item{\code{\link{loglikPLMIX}}}{Loglikelihood evaluation for a mixture of Plackett-Luce models.}
+   \item{\code{\link{gibbsPLMIX}}}{Bayesian analysis with MCMC posterior simulation via Gibbs sampling.}
+   \item{\code{\link{mapPLMIX}}}{MAP estimation via EM algorithm.}
+   \item{\code{\link{mapPLMIX_multistart}}}{MAP estimation via EM algorithm with multiple starting values.}
+    }
+\strong{Model selection}
+  \describe{
+   \item{\code{\link{bicPLMIX}}}{BIC value for a mixture of Plackett-Luce models.}
+   \item{\code{\link{selectPLMIX}}}{Bayesian model selection criteria.}
+    }
+\strong{Model assessment}
+  \describe{
+   \item{\code{\link{ppcheckPLMIX}}}{ Posterior predictive diagnostics.}
+   \item{\code{\link{ppcheckPLMIX_cond}}}{Posterior predictive diagnostics conditionally on the number of ranked items.}
+    }
+\strong{Datasets}
+  \describe{
+   \item{\code{\link{d_apa}}}{American Psychological Association Data (partial orderings).}
+   \item{\code{\link{d_carconf}}}{Car Configurator Data (partial orderings).}
+   \item{\code{\link{d_dublinwest}}}{Dublin West Data (partial orderings).}
+   \item{\code{\link{d_german}}}{German Sample Data (complete orderings).}
+   \item{\code{\link{d_nascar}}}{NASCAR Data (partial orderings).}
+    }
+Data have to be supplied as an object of class \code{matrix}, where missing positions/items are denoted with zero entries and Rank = 1 indicates the most-liked alternative. For a more efficient implementation of the methods, partial sequences with a single missing entry should be preliminarily filled in, as they correspond to complete rankings/orderings. In the present setting, ties are not allowed. Some quantities frequently recalled in the manual are the following: 
 \describe{
-    \item{Ranking data manipulation}{\code{\link{rank_ord_switch}} switches data format from rankings to orderings and vice-versa;  \code{\link{make_complete}} performs random completion of partial orderings/rankings data; \code{\link{make_partial}} performs censoring of complete data; \code{\link{binary_group_ind}} constructs binary group membership matrix from mixture component labels; \code{\link{freq_to_unit}} transforms from frequency distribution representation to individual orderings/rankings; \code{\link{unit_to_freq}} does the vice-versa}.
-    \item{Ranking data simulation}{\code{\link{rPLMIX}} draws a random sample of complete rankings/orderings according to a finite mixture of plackett-Luce model specification}.
-    \item{Ranking data description}{\code{\link{rank_summaries}} provides basic summary statistics of ranking/ordering data, \code{\link{paired_comparisons}} computes the paired comparison frequencies}.
-    \item{Model estimation}{\code{\link{mapPLMIX}} performs MAP estimation via EM algorithm; \code{\link{mapPLMIX_multistart}} does the same with multiple stating values; \code{\link{gibbsPLMIX}} provides Bayesian analysis with MCMC posterior simulation via Gibbs sampling; \code{\link{likPLMIX}} and \code{\link{loglikPLMIX}} provide likelihood and loglikelihood evaluation for a mixture of Placket-Luce model}.
-    \item{Model selection}{\code{\link{selectPLMIX}} computes alternative Bayesian model selection criteria;  \code{\link{bicPLMIX}} computes the BIC value}.
-    \item{Model assessment}{\code{\link{ppcheckPLMIX}} and \code{\link{ppcheckPLMIX_cond}} provide posterior predictive diagnostics}.
-}
-Data have to be supplied as an object of class \code{matrix} with missing positions denotes as zero entries. For a more efficient implementation of the methods, partial sequences with a single missing entry should be preliminarily filled in, as they correspond to complete rankings/orderings. In the present setting, ties are not allowed. Some quantities frequently recalled in the manual are the following: 
-\describe{
-    \item{\eqn{N}}{Sample size}.
-    \item{\eqn{K}}{Number of possible items}.
-    \item{\eqn{G}}{Number of mixture components}.
-    \item{\eqn{L}}{Size of the final posterior MCMC sample (after burn-in phase)}.
+    \item{\eqn{N}}{Sample size.}
+    \item{\eqn{K}}{Number of possible items.}
+    \item{\eqn{G}}{Number of mixture components.}
+    \item{\eqn{L}}{Size of the final posterior MCMC sample (after burn-in phase).}
 }
 }
 \author{
@@ -31,7 +72,9 @@ Cristina Mollica and Luca Tardella
 Maintainer: Cristina Mollica <\url{cristina.mollica@uniroma1.it}>
 }
 \references{
-Mollica, C., Tardella, L. (2016). Bayesian Plackett-Luce mixture models for partially ranked data. \emph{Psychometrika} (published online): \url{http://dx.doi.org/10.1007/s11336-016-9530-0}
+Mollica, C. and Tardella, L. (2017). Bayesian Plackett-Luce mixture models for partially ranked data. \emph{Psychometrika}, \bold{82}(2), pages 442--458, ISSN: 0033-3123, \url{http://dx.doi.org/10.1007/s11336-016-9530-0}.
+
+Mollica, C. and Tardella, L. (2014). Epitope profiling via mixture modeling for ranked data. \emph{Statistics in Medicine}, \bold{33}(21), pages 3738--3758, ISSN: 0277-6715, \url{http://onlinelibrary.wiley.com/doi/10.1002/sim.6224/full}.
 }
 \keyword{
 Ranking data, Plackett-Luce model, Mixture models, Bayesian inference, MAP estimation, MCMC approximation

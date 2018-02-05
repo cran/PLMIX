@@ -5,44 +5,45 @@
 \title{Completion of partial rankings/orderings}
 \usage{
 make_complete(data, format = c("ordering", "ranking"), nranked = NULL,
-  probitems = rep(1, K))
+  probitems = rep(1, ncol(data)))
 }
 \arguments{
-\item{data}{Numeric \eqn{N}\eqn{\times}{x}\eqn{K} data matrix of partial sequences.}
+\item{data}{Numeric \eqn{N}\eqn{\times}{x}\eqn{K} data matrix of partial sequences to be completed.}
 
 \item{format}{Character string indicating the format of the \code{data} argument.}
 
 \item{nranked}{Optional numeric vector of length \eqn{N} with the number of items ranked by each sample unit.}
 
-\item{probitems}{Numeric vector with the \eqn{K} item-specific probabilities to be employed for the random generation of the missing positions (normalization is not necessary). See Details for further explanation. Default is equal probabilities.}
+\item{probitems}{Numeric vector with the \eqn{K} item-specific probabilities to be employed for the random generation of the missing positions/items (normalization is not necessary). See Details for further explanation. Default is equal probabilities.}
 }
 \value{
 A list of two named objects:
 
- \item{\code{completedata}}{ Numeric \eqn{N}\eqn{\times}{x}\eqn{K} data matrix of complete sequences.}	
+ \item{\code{completedata}}{ Numeric \eqn{N}\eqn{\times}{x}\eqn{K} data matrix of complete sequences with the same format of the input \code{data}.}	
  \item{\code{nranked}}{ Numeric vector of length \eqn{N} with the number of items ranked by each sample unit of the input \code{data}.}
 }
 \description{
-Return complete rankings/orderings from partial sequences relying on a random generation of the missing positions.
+Return complete rankings/orderings from partial sequences relying on a random generation of the missing positions/items.
 }
 \details{
-The completion of the partial top rankings/orderings is performed according to the Plackett-Luce scheme, that is, with a sampling without replacement of the not-ranked items by using the positive values in the \code{probitems} argument as support parameters.  The returned \code{completedata} matrix has the same format of the input \code{data}.
+The completion of the partial top rankings/orderings is performed according to the Plackett-Luce scheme, that is, with a sampling without replacement of the not-ranked items by using the positive values in the \code{probitems} argument as support parameters.
 }
 \examples{
-library(PLMIX)
+
+# Completion based on the top item frequencies
 data(d_dublinwest)
 head(d_dublinwest)
-K <- ncol(d_dublinwest)
-top_item_freq <- tabulate(d_dublinwest[,1], nbins=K)
-set.seed(57524)
-d_dublinwest_completed <- make_complete(data=d_dublinwest, format="ordering", 
-                                        probitems=top_item_freq)
-head(d_dublinwest_completed$completedata)
+top_item_freq <- rank_summaries(data=d_dublinwest, format="ordering", mean_rank=FALSE, 
+                                pc=FALSE)$marginals["Rank_1",]
+
+d_dublinwest_compl <- make_complete(data=d_dublinwest, format="ordering", 
+                                    probitems=top_item_freq)
+head(d_dublinwest_compl$completedata)
+
+}
+\references{
+Mollica, C. and Tardella, L. (2017). Bayesian Plackett-Luce mixture models for partially ranked data. \emph{Psychometrika}, \bold{82}(2), pages 442--458, ISSN: 0033-3123, DOI: 10.1007/s11336-016-9530-0.
 }
 \author{
 Cristina Mollica and Luca Tardella
 }
-\references{
-Mollica, C., Tardella, L. (2016). Bayesian Plackett-Luce mixture models for partially ranked data. \emph{Psychometrika} (published online), DOI: 10.1007/s11336-016-9530-0.
-}
-

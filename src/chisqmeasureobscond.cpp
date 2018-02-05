@@ -36,21 +36,21 @@ double chisqmeasureobscond(Rcpp::IntegerMatrix pi_inv, Rcpp::NumericMatrix p, Rc
        }
 
 
-       for(hmr=0; hmr<K; hmr++){      /**/
+       for(hmr=0; hmr<K; hmr++){      
 
          
     for(s=0; s<N; s++){
       temphmr=0 ;
       /* count how many ranked in each subject s */
        for(slot=0; slot<K; slot++){
-         temp_pi_inv(s,slot)=0;        /**/
+         temp_pi_inv(s,slot)=0;        
 	 if(pi_inv(s,slot)>0){
 	   temphmr=temphmr+1 ;
            temp_pi_inv(s,slot)=pi_inv(s,slot);
 	 }
        }
       /* if the items ranked by subject s are not hmr put all 0 */
-	 if(temphmr!=(hmr+1)){         /**/
+	 if(temphmr!=(hmr+1)){         
 	   for(slot=0; slot<K; slot++){
 	     temp_pi_inv(s,slot)=0;
 	   }
@@ -63,9 +63,9 @@ double chisqmeasureobscond(Rcpp::IntegerMatrix pi_inv, Rcpp::NumericMatrix p, Rc
 	   T_mat(slot,slot2) = tau_mat(slot,slot2) + tau_mat(slot2,slot);
 	   T_mat(slot2,slot) = T_mat(slot,slot2) ;
 	     tau_star_mat(slot,slot2) = ((double) T_mat(slot,slot2))*marg_p[slot]/(marg_p[slot]+marg_p[slot2]);
-	   if(tau_star_mat(slot,slot2)>0.0){    /**/
+	   if(tau_star_mat(slot,slot2)>0.0){    
 	   f = f + (((double) tau_mat(slot,slot2))-tau_star_mat(slot,slot2))*(((double) tau_mat(slot,slot2))-tau_star_mat(slot,slot2))/(tau_star_mat(slot,slot2));
-	   	 }                               /**/
+	   	 }                               
 
 	 }
        }

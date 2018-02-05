@@ -75,10 +75,7 @@ g = g + log(temp_den) ;
 temp_den = temp_den - p(j,tt) ;
 
 if(temp_den<0.0){
-/* printf(" SOMETHING IS WRONG WITH THE DENOMINATOR !!! \\n"); */
 }
-
-/*  printf(" DENOMINATOR %lf \\n ",temp_den); */
 
 slot = slot+1 ; 
           if(slot<K){

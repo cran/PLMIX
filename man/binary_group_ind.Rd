@@ -19,11 +19,9 @@ Construct the binary group membership matrix from the multinomial classification
 }
 \examples{
 
-library(PLMIX)
 binary_group_ind(c(3,1,5),6)
 
 }
 \author{
 Cristina Mollica and Luca Tardella
 }
-

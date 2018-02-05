@@ -26,8 +26,6 @@ double ll ;
 ll = 0.0 ;
 
 
-/* printf("K = %d \\n ",K); */
-
 for(s=0; s<N; s++){
 
 h = 0.0 ;
@@ -40,30 +38,23 @@ slot  = 0 ;
 tt    = 1 ; 
 
 
-/* NEW!! */
 /* FIRST compute the INITIAL denominator g */
 /* i.e. sum of all support parameters  */
 
 g = 0.0;
 
 for( slot3=0; slot3<K; slot3++){
-/* printf(" p %lf \\n ",p(j,slot3)); */
 g = g + p(j,slot3);
 }
-
-/*  printf(" DENOMINATOR %lf \\n ",g); */
 
 while(tt>-1 && slot<K){       
 
 tt = pi_inv(s,slot)-1 ;
 f = f + (log(p(j,tt)) - log(g)) ;
 
-/* NEW!! */
 /* UPDATE the denominator g removing the support for the current item */
 
 g = g - p(j,tt);
-
-/*  printf(" DENOMINATOR %lf \\n ",g); */
 
 if(g<0){
 /* printf(" SOMETHING IS WRONG WITH THE DENOMINATOR !!! \\n"); */
@@ -78,8 +69,6 @@ slot = slot+1 ;
 h = h + weights[j]*exp(f) ;
 
 }
-
-/* printf("LogLik %lf \\n",ll); */
 
 ll = ll + log(h) ;
 

@@ -1,32 +1,28 @@
 citHeader("To cite package 'PLMIX' in publications use:")
 
-# old
-# desc <- packageDescription("mclust")
-# year <- sub(".*(2[[:digit:]]{3})-.*", "\\1", desc$Date)
-# vers <- paste("R package version", desc$Version)
-# new
-year <- sub(".*(2[[:digit:]]{3})-.*", "\\1", meta$Date)
-vers <- paste("R package version", meta$Version)
-
-citEntry(entry="Article",
+bibentry(bibtype="Article",
 #         title = "PLMIX Version 2 for R: Bayesian analysis of finite mixtures 
 #                  of Plackett-Luce models for partially ranked data",
           title = "Bayesian Plackett-Luce mixture models for partially ranked data",
          author = personList(person(given="Cristina", family="Mollica"),
                              person(given="Luca", family="Tardella")),
-         year = "2016",
+         year = "2017",
          journal = "Psychometrika",     
-#         volume = ,
-#         pages = "",
-         note = "(published on line)",
+         volume = 82,
+         number = 2,
+         pages = "442--458",
+	 issn = "0033-3123",
          doi = "10.1007/s11336-016-9530-0",
-         textVersion = paste("Mollica, C., Tardella, L. (2016).", 
+         textVersion = paste("Mollica, C., Tardella, L. (2017).", 
                 "Bayesian Plackett-Luce mixture models for 
-                partially ranked data.", "Psychometrika (published online),", 
+                partially ranked data.", "Psychometrika,", 
+	       "Vol. 82(2),", 
+               "pages 442--458,",
+	       "ISSN: 0033-3123,", 
                 "DOI: 10.1007/s11336-016-9530-0."))
 
 
-citEntry(entry="Article",
+bibentry(bibtype="Article",
          title = "Epitope profiling via mixture modeling for ranked data",
          author = personList(person(given="Cristina", family="Mollica"),
                              person(given="Luca", family="Tardella")),

@@ -4,18 +4,18 @@
 \alias{bicPLMIX}
 \title{BIC for a mixture of Plackett-Luce models}
 \usage{
-bicPLMIX(max_log_lik, ref_known, weights, pi_inv, ref_vary)
+bicPLMIX(max_log_lik, pi_inv, G, ref_known = TRUE, ref_vary = FALSE)
 }
 \arguments{
 \item{max_log_lik}{Maximized log-likelihood value.}
 
-\item{ref_known}{Logical: whether the component-specific reference orders are known (not to be estimated).}
-
-\item{weights}{Numeric vector of \eqn{G} mixture weights.}
-
 \item{pi_inv}{Numeric \eqn{N}\eqn{\times}{x}\eqn{K} data matrix of partial orderings.}
 
-\item{ref_vary}{Logical: whether the reference orders vary across mixture components.}
+\item{G}{Number of mixture components.}
+
+\item{ref_known}{Logical: whether the component-specific reference orders are known (not to be estimated). Default is \code{TRUE}.}
+
+\item{ref_vary}{Logical: whether the reference orders vary across mixture components. Default is \code{FALSE}.}
 }
 \value{
 A list of two named objects:
@@ -27,31 +27,29 @@ A list of two named objects:
 Compute BIC value for a mixture of Plackett-Luce models fitted to partial orderings.
 }
 \details{
-The \code{max_log_lik} argument corresponding to the MLE solution can be obtained from the MAP estimation with flat priors by using the \code{\link{mapPLMIX}} function with the default prior setting.
+The \code{bicPLMIX} function allows to compute the BIC value from the output of alternative MLE methods for mixtures of Plackett-Luce models. The \code{max_log_lik} and the BIC values can be straightforwardly obtained from the output of the \code{\link{mapPLMIX}} and \code{\link{mapPLMIX_multistart}} functions when the default noninformative priors are adopted. The \code{ref_known} and \code{ref_vary} arguments accommodate for the more general mixture of Extended Plackett-Luce models (EPL), involving the additional reference order parameters (Mollica and Tardella 2014). Since the Plackett-Luce model is a special instance of the EPL with the reference order equal to the identity permutation \eqn{(1,\dots,K)}, the default values of \code{ref_known} and \code{ref_vary} are set equal, respectively, to \code{TRUE} and \code{FALSE}.
 }
 \examples{
-library(PLMIX)
+
 data(d_carconf)
 K <- ncol(d_carconf)
-G <- 3
-n.starting=2
-outputMAP_multistart <- mapPLMIX_multistart(pi_inv=d_carconf, K=K, G=G, 
-                                            n_start=n.starting, n_iter=400*G)
-outputMAP_multistart$mod$bic
-# Equivalently,
-bicPLMIX(max_log_lik=max(outputMAP_multistart$mod$log_lik), ref_known=TRUE, 
-         weights=outputMAP_multistart$mod$W_map, pi_inv=d_carconf, ref_vary=FALSE)$bic
+MAP_mult <- mapPLMIX_multistart(pi_inv=d_carconf, K=K, G=3, n_start=2, n_iter=400*3)
+bicPLMIX(max_log_lik=MAP_mult$mod$max_objective, pi_inv=d_carconf, G=3)$bic
 
+# Equivalently,
+MAP_mult$mod$bic
+
+}
+\references{
+Mollica, C. and Tardella, L. (2017). Bayesian Plackett-Luce mixture models for partially ranked data. \emph{Psychometrika}, \bold{82}(2), pages 442--458, ISSN: 0033-3123, DOI: 10.1007/s11336-016-9530-0.
+
+Mollica, C. and Tardella, L. (2014). Epitope profiling via mixture modeling for ranked data. \emph{Statistics in Medicine}, \bold{33}(21), pages 3738--3758, ISSN: 0277-6715, DOI: 10.1002/sim.6224.
+
+Schwarz, G. (1978). Estimating the dimension of a model. \emph{Ann. Statist.}, \bold{6}(2), pages 461--464, ISSN: 0090-5364, DOI: 10.1002/sim.6224.
+}
+\seealso{
+\code{\link{mapPLMIX}}, \code{\link{mapPLMIX_multistart}}
 }
 \author{
 Cristina Mollica and Luca Tardella
 }
-\references{
-Mollica, C., Tardella, L. (2016). Bayesian Plackett-Luce mixture models for partially ranked data. \emph{Psychometrika} (published online), DOI: 10.1007/s11336-016-9530-0.
-
-Mollica, C., Tardella, L. (2014). Epitope profiling via mixture modeling for ranked data. \emph{Statistics in Medicine}, \bold{33}(21), pages 3738--3758, ISSN: 0277-6715, DOI: 10.1002/sim.6224.
-}
-\seealso{
-\code{\link{mapPLMIX}}
-}
-
