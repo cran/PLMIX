@@ -4,12 +4,12 @@
 \alias{paired_comparisons}
 \title{Paired comparison matrix for a partial ordering/ranking dataset}
 \usage{
-paired_comparisons(data, format = c("ordering", "ranking"), nranked = NULL)
+paired_comparisons(data, format = "ordering", nranked = NULL)
 }
 \arguments{
 \item{data}{Numeric \eqn{N}\eqn{\times}{x}\eqn{K} data matrix of partial sequences.}
 
-\item{format}{Character string indicating the format of the \code{data} argument.}
+\item{format}{Character string indicating the format of the \code{data} argument (\code{"ordering"} or \code{"ranking"}).}
 
 \item{nranked}{Optional numeric vector of length \eqn{N} with the number of items ranked by each sample unit.}
 }

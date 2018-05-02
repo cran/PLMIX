@@ -1,7 +1,19 @@
 NEWS/ChangeLog for PLMIX
 --------------------------
 
-1.0.1   2018-31-01
+2.0.1   2018-04-26
+
+MINOR CHANGES
+    o   gibbsPLMIX(...):
+    o   [::] colnames added to output values labelled as `P` and `W`.
+    o   mapPLMIX(...):
+    o   [::] dimnames change for output value labelled as `P_map`.
+    o   [::] names added to output value labelled as `W_map`.
+    o   rank_summaries(...):
+    o   [::] format and label change for the former output value labelled as `missing_pos` now labelled as `na_or_not`.
+    o   [::] output values labelled as `mean_rank` and `marginals` now contain dimnames.
+
+2.0   2018-01-31
 
 BUG FIXES
     o   mapPLMIX(...)
@@ -9,39 +21,40 @@ BUG FIXES
     o   rank_summaries(...)
 
 MAJOR CHANGES
-    o   bicPLMIX(): 
-	-  replaced former argument `weights` as `G`.
-	-  added default values for the arguments `ref_known` and `ref_vary`.
-	-  added the reference Schwarz (1978).
-    o   gibbsPLMIX(): 
-	-  added the `centered_start` argument for the random generation of the starting values, similarly to the mapPLMIX()and         
-           mapPLMIX_multistart() functions. 
-    o   label_switchPLMIX():
-	-  added new function to perform label switching adjustment of the posterior MCMC samples, formerly implemented by both the ppcheckPLMIX() and the ppcheckPLMIX_cond() functions.
-    o   mapPLMIX(): 
-	-  modified the default value of the argument `eps` in accordance with that of the related mapPLMIX_multistart() function.
-	-  modified the default value of the argument `plot_objective`.
-	-  dropped object `Rho_map` from the output list.
-	-  renamed object `z` of the output list as `z_hat`.
-	-  renamed object `classification` of the output list as `class_map`.
-	-  `bic` value is computed only for the default flat priors case, otherwise NULL is returned.
-    o   mapPLMIX_multistart():
-	-  recoded default value of the argument `init`.
-    o   ppcheckPLMIX() and ppcheckPLMIX_cond(): 
-	-  removed former arguments `MAPestP`, `MAPestW`, `ls_adj` and `adj_post_sample` needed for the label switching adjustment, which is currently implemented by the novel label_switchPLMIX() function.
-	-  removed `final_sampleP` and `final_sampleW` objects from the output.
-    o   rank_summaries(): 
-	-  renamed the argument and output object `pairedcomparisons` as `pc`. 
-	-  renamed the output object `missing_positions` as `missing_pos`, 
-    o   rPLMIX(): renamed former `rankingoutput` argument with `format`.
+    o   bicPLMIX(...): 
+    o   [::] replaced former argument `weights` as `G`.
+    o   [::] added default values for the arguments `ref_known` and `ref_vary`.
+    o   [::] added the reference Schwarz (1978).
+    o   gibbsPLMIX(...): 
+	-  added the `centered_start` argument for the random generation of the starting values, similarly to the mapPLMIX(...) and mapPLMIX_multistart(...) functions. 
+    o   label_switchPLMIX(...):
+    o   [::] added new function to perform label switching adjustment of the posterior MCMC samples, formerly implemented by both the ppcheckPLMIX(...) and the ppcheckPLMIX_cond(...) functions.
+    o   mapPLMIX(...): 
+    o   [::] modified the default value of the argument `eps` in accordance with that of the related mapPLMIX_multistart(...) function.
+      	-  modified the default value of the argument `plot_objective`.
+      	-  dropped object `Rho_map` from the output list.
+      	-  renamed object `z` of the output list as `z_hat`.
+    o   [::] renamed object `classification` of the output list as `class_map`.
+    o   [::] `bic` value is computed only for the default flat priors case, otherwise NULL is returned.
+    o   mapPLMIX_multistart(...):
+    o   [::] recoded default value of the argument `init`.
+    o   ppcheckPLMIX(...) and ppcheckPLMIX_cond(...): 
+    o   [::] removed former arguments `MAPestP`, `MAPestW`, `ls_adj` and `adj_post_sample` needed for the label switching adjustment, which is currently implemented by the novel label_switchPLMIX(...) function.
+    o   [::] removed `final_sampleP` and `final_sampleW` objects from the output.
+    o   rank_summaries(...): 
+    o   [::] renamed the argument and output object `pairedcomparisons` as `pc`. 
+    o   [::] renamed the output object `missing_positions` as `missing_pos`, 
+    o   rPLMIX(...):
+    o   [::] renamed former `rankingoutput` argument with `format`.
     o   selectPLMIX:
-	-  removed argument `log_lik`.
+    o   [::] removed argument `log_lik`.
 
 MINOR CHANGES
-    o   ppcheckPLMIX() and ppcheckPLMIX_cond():
-	-  added some messages.
+    o   ppcheckPLMIX(...) and ppcheckPLMIX_cond(...):
+    o   [::] added some messages.
     o   "G=" replaced with "G_".
-    o   make_partial(): renamed argument `probcensoring` as `probcens`.
+    o   make_partial(...):
+    o   [::] renamed argument `probcensoring` as `probcens`.
 
 
 DOCUMENTATION
@@ -49,20 +62,18 @@ DOCUMENTATION
     o   Added new examples for the three data objects `d_apa`, `d_carconf` and `d_dublinwest` showing how to extract the subset of complete orderings from the whole dataset.
     o   Updated reference Mollica and Tardella (2016) as Mollica and Tardella (2017). 
     o   d_german dataset: modified the citation Croon (1989).
-    o   mapPLMIX() and mapPLMIX_multistart(): added the citation Gormley and Murphy (2006).
-    o   ppcheckPLMIX() and ppcheckPLMIX_cond(): removed example of label switching adjustment.
-    o   selectPLMIX(): 
-	-  added Details section.
-	-  renamed output objects `fitting_measures`, `effective_number_of_parameters` and `selection_criteria` as `fitting`, `penalties` and `select_criteria`.
+    o   mapPLMIX(...) and mapPLMIX_multistart(...):
+    o   [::] added the citation Gormley and Murphy (2006).
+    o   ppcheckPLMIX(...) and ppcheckPLMIX_cond(...):
+    o   [::] removed example of label switching adjustment.
+    o   selectPLMIX(...): 
+    o   [::] added Details section.
+    o   [::] renamed output objects `fitting_measures`, `effective_number_of_parameters` and `selection_criteria` as `fitting`, `penalties` and `select_criteria`.
 
 CITATION INFO
     o   Added bibTex entries in the file CITATION.
     o   Updated reference Mollica and Tardella (2016) as Mollica and Tardella (2017) in the CITATION info.
 
 NEW FEATURES
-    o   Removed package `combinat` from Imports 
+    o   Removed package `combinat` from Imports. 
     o   Changed order in the namespace list (former: foreach abind rcdd FSA).
-
-
-
-

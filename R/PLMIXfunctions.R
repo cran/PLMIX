@@ -100,7 +100,7 @@ myorder <- function(x){
 }
 
 
-rank_ord_switch <- function(data,format=c("ordering","ranking"),nranked=NULL){
+rank_ord_switch <- function(data,format="ordering",nranked=NULL){
 
 #' Switch from orderings to rankings and vice versa
 #' 
@@ -108,7 +108,7 @@ rank_ord_switch <- function(data,format=c("ordering","ranking"),nranked=NULL){
 #' 
 #' 
 #' @param data Numeric \eqn{N}\eqn{\times}{x}\eqn{K} data matrix of partial sequences whose format has to be converted.
-#' @param format Character string indicating the format of the \code{data} argument.
+#' @param format Character string indicating the format of the \code{data} argument (\code{"ordering"} or \code{"ranking"}).
 #' @param nranked Optional numeric vector of length \eqn{N} with the number of items ranked by each sample unit. 
 #' 
 #' @return Numeric \eqn{N}\eqn{\times}{x}\eqn{K} data matrix of partial sequences with inverse format.
@@ -158,14 +158,14 @@ rank_ord_switch <- function(data,format=c("ordering","ranking"),nranked=NULL){
 }
 
 
-rank_summaries <- function(data,format=c("ordering","ranking"),mean_rank=TRUE,marginals=TRUE,pc=TRUE){
+rank_summaries <- function(data,format="ordering",mean_rank=TRUE,marginals=TRUE,pc=TRUE){
 
 #' Descriptive summaries for a partial ordering/ranking dataset
 #' 
 #' Compute rank summaries and censoring patterns for a partial ordering/ranking dataset.
 #' 
 #' @param data Numeric \eqn{N}\eqn{\times}{x}\eqn{K} data matrix of partial sequences.
-#' @param format Character string indicating the format of the \code{data} argument.
+#' @param format Character string indicating the format of the \code{data} argument (\code{"ordering"} or \code{"ranking"}).
 #' @param mean_rank Logical: whether the mean rank vector has to be computed. Default is \code{TRUE}.
 #' @param marginals Logical: whether the marginal rank distributions have to be computed. Default is \code{TRUE}.
 #' @param pc Logical: whether the paired comparison matrix has to be computed. Default is \code{TRUE}.
@@ -174,7 +174,7 @@ rank_summaries <- function(data,format=c("ordering","ranking"),mean_rank=TRUE,ma
 #' 
 #'  \item{\code{nranked}}{ Numeric vector of length \eqn{N} with the number of items ranked by each sample unit.}
 #'  \item{\code{nranked_distr}}{ Frequency distribution of the \code{nranked} vector.}
-#'  \item{\code{missing_pos}}{ Numeric vector of length \eqn{K} with the number of missing positions for each item.}
+#'  \item{\code{na_or_not}}{ Numeric \eqn{3}\eqn{\times}{x}\eqn{K} matrix with the counts of sample units that ranked or not each item. The last row contains the total by column, corresponding to the sample size \eqn{N}.}
 #'  \item{\code{mean_rank}}{ Numeric vector of length \eqn{K} with the mean rank of each item.}
 #'  \item{\code{marginals}}{ Numeric \eqn{K}\eqn{\times}{x}\eqn{K} matrix of the marginal rank distributions: the \eqn{(i,j)}-th entry indicates the number of units that ranked item \eqn{i} in the \eqn{j}-th position.}
 #'  \item{\code{pc}}{ Numeric \eqn{K}\eqn{\times}{x}\eqn{K} paired comparison matrix: the \eqn{(i,i')}-th entry indicates the number of sample units that preferred item \eqn{i} to item \eqn{i'}.}
@@ -204,9 +204,12 @@ nranked <- rowSums(!isna.data)
 nranked_distr <- table(factor(nranked,levels=1:K)) 
 #names(nranked_distr) <- paste0("Top-",1:(K-1))
 names(nranked_distr) <- paste0("Top-",names(nranked_distr))
-missing_positions <- colSums(isna.data) 
+na <- colSums(isna.data) 
+na_or_not <- rbind(na, N-na, rep(N, K))
+dimnames(na_or_not) <- list(c("n.a.","not n.a.","total"),paste0("Item_",1:K))
 if(mean_rank){
     mean_rank <- colMeans(data,na.rm=TRUE)  
+    names(mean_rank) <- paste0("Item_",1:K)
 }else{
 	mean_rank <- NULL
 }	
@@ -224,19 +227,19 @@ if(pc){
 	pc <- NULL
 }	
 out <- list(nranked=nranked,nranked_distr=nranked_distr,
-         missing_positions=missing_positions,mean_rank=mean_rank,
+         na_or_not=na_or_not,mean_rank=mean_rank,
          marginals=marginals,pc=pc)
 return(out)
 }
 
-paired_comparisons <- function(data,format=c("ordering","ranking"),nranked=NULL){
+paired_comparisons <- function(data,format="ordering",nranked=NULL){
 
 #' Paired comparison matrix for a partial ordering/ranking dataset
 #' 
 #' Construct the paired comparison matrix for a partial ordering/ranking dataset.
 #' 
 #' @param data Numeric \eqn{N}\eqn{\times}{x}\eqn{K} data matrix of partial sequences.
-#' @param format Character string indicating the format of the \code{data} argument.
+#' @param format Character string indicating the format of the \code{data} argument (\code{"ordering"} or \code{"ranking"}).
 #' @param nranked Optional numeric vector of length \eqn{N} with the number of items ranked by each sample unit. 
 #' 
 #' @return Numeric \eqn{K}\eqn{\times}{x}\eqn{K} paired comparison matrix: the \eqn{(i,i')}-th entry indicates the number of sample units that preferred item \eqn{i} to item \eqn{i'}.
@@ -262,12 +265,13 @@ paired_comparisons <- function(data,format=c("ordering","ranking"),nranked=NULL)
     	if(is.null(nranked)) nranked <- rowSums(data!=0)
     	data <- rank_ord_switch(data,format=format,nranked=nranked)
     } 
-    paired_comparisons <- tau(pi_inv=data)
-    return(paired_comparisons)
-}   # K*K array
+    pc <- tau(pi_inv=data)
+    rownames(pc) <- colnames(pc) <- paste0("Item_",1:K)
+    return(pc)
+}   # K*K matrix
 
 
-make_partial <- function(data,format=c("ordering","ranking"),nranked=NULL,probcens=rep(1,ncol(data)-1)){
+make_partial <- function(data,format="ordering",nranked=NULL,probcens=rep(1,ncol(data)-1)){
 
 #' Censoring of complete rankings/orderings
 #' 
@@ -276,7 +280,7 @@ make_partial <- function(data,format=c("ordering","ranking"),nranked=NULL,probce
 #' The censoring of the complete sequences can be performed in: (i) a deterministic way, by specifying the number of top positions to be retained for each sample unit in the \code{nranked} argument; (ii) a random way, by sequentially specifying the probabilities of the top-1, top-2, \eqn{...}, top-\eqn{(K-1)} censoring patterns in the \code{probcens} argument. Recall that a top-\eqn{(K-1)} sequence corresponds to a complete ordering/ranking.
 #' 
 #' @param data Numeric \eqn{N}\eqn{\times}{x}\eqn{K} data matrix of complete sequences to be censored.
-#' @param format Character string indicating the format of the \code{data} argument.
+#' @param format Character string indicating the format of the \code{data} argument (\code{"ordering"} or \code{"ranking"}).
 #' @param nranked Numeric vector of length \eqn{N} with the desired number of items ranked by each sample unit after censoring. If not supplied (\code{NULL}), the censoring patterns are randomly generated according to the probabilities in the \code{probcens} argument. 
 #' @param probcens Numeric vector of length \eqn{(K-1)} with the probability of each censoring pattern to be employed for the random truncation of the complete sequences (normalization is not necessary). It works only if \code{nranked} argument is \code{NULL}. See Details for further explanation. Default is equal probabilities.
 #' 
@@ -322,7 +326,7 @@ make_partial <- function(data,format=c("ordering","ranking"),nranked=NULL,probce
   return(list(partialdata=out,nranked=nranked))	
 } # N*K censored data matrix
 
-make_complete <- function(data,format=c("ordering","ranking"),nranked=NULL,probitems=rep(1,ncol(data))){
+make_complete <- function(data,format="ordering",nranked=NULL,probitems=rep(1,ncol(data))){
 
 #' Completion of partial rankings/orderings
 #' 
@@ -331,7 +335,7 @@ make_complete <- function(data,format=c("ordering","ranking"),nranked=NULL,probi
 #' The completion of the partial top rankings/orderings is performed according to the Plackett-Luce scheme, that is, with a sampling without replacement of the not-ranked items by using the positive values in the \code{probitems} argument as support parameters.
 #' 
 #' @param data Numeric \eqn{N}\eqn{\times}{x}\eqn{K} data matrix of partial sequences to be completed.
-#' @param format Character string indicating the format of the \code{data} argument.
+#' @param format Character string indicating the format of the \code{data} argument (\code{"ordering"} or \code{"ranking"}).
 #' @param nranked Optional numeric vector of length \eqn{N} with the number of items ranked by each sample unit. 
 #' @param probitems Numeric vector with the \eqn{K} item-specific probabilities to be employed for the random generation of the missing positions/items (normalization is not necessary). See Details for further explanation. Default is equal probabilities.
 #' 
@@ -390,7 +394,7 @@ mysample <- function(support,pr){
 }
 
 
-rPLMIX <- function(n=1,K,G,p=t(matrix(1/K,nrow=K,ncol=G)),ref_order=t(matrix(1:K,nrow=K,ncol=G)),weights=rep(1/G,G),format=c("ordering","ranking")){
+rPLMIX <- function(n=1,K,G,p=t(matrix(1/K,nrow=K,ncol=G)),ref_order=t(matrix(1:K,nrow=K,ncol=G)),weights=rep(1/G,G),format="ordering"){
 
 #' Random sample from a mixture of Plackett-Luce models
 #' 
@@ -768,6 +772,11 @@ print(p)
     l <- l+1
     }
     
+    P_map=p/rowSums(p)
+    dimnames(P_map)=list(paste0("g_",1:G),paste0("p_",1:K))
+    
+    names(omega)=paste0("w_",1:G)
+    
     log_lik <- log_lik[!(is.na(log_lik))]
     max_log_lik <- max(log_lik)
 
@@ -785,9 +794,9 @@ print(p)
      	        main=paste("MAP estimation for PL mixture with",G,"components"),type="l")
      }
      
-return(list(P_map=p/rowSums(p),
+return(list(P_map=P_map,
                W_map=omega,z_hat=z_hat,class_map=apply(z_hat,1,which.max),
-               log_lik <- log_lik,objective=objective,max_objective=max_objective,bic=bic,conv=conv))
+               log_lik=log_lik,objective=objective,max_objective=max_objective,bic=bic,conv=conv))
                
                
 
@@ -998,13 +1007,6 @@ gibbsPLMIX <- function(pi_inv,K,G,
     n_rank <-  howmanyranked(pi_inv)
     rho <- matrix(1:K,nrow=G,ncol=K,byrow=TRUE)
 	
-	# OLD if(is.null(init$p)){
-	# OLD p <- matrix(rgamma(n=G*K,shape=1,rate=1),nrow=G,ncol=K)
-	# OLD }else{
-	# OLD p <- init$p
-	# OLD }
-	
-
 	if(is.null(init$z)){
 	z <- binary_group_ind(class=sample(1:G,size=N,replace=TRUE),G=G)
 	}else{
@@ -1079,13 +1081,13 @@ log_lik[l+1] <- loglikPLMIX(p=adrop(Pi[,,l+1,drop=FALSE],3),ref_order=rho,weight
 log_lik <- log_lik[-c(1:(n_burn+1))]
 
 Omega <- Omega[-c(1:(n_burn+1)),,drop=FALSE]
-colnames(Omega) <- paste("w",1:G,sep="")
+colnames(Omega) <- paste0("w_",1:G)
 
 
 Pi <- array(apply(Pi,3,FUN=function(x)x/rowSums(x)),c(G,K,n_iter+1))	
 
 Pi=t(apply(Pi,3,c))[-c(1:(n_burn+1)),]
-colnames(Pi) <- c(t(sapply(paste("p",1:G,sep=""),FUN=paste,1:K,sep=",")))
+colnames(Pi) <- paste0("p_",rep(1:G,K),rep(1:K,each=G))
 
 
 return(list(W=Omega,P=Pi,log_lik=log_lik,deviance=-2*log_lik))
@@ -1148,7 +1150,7 @@ selectPLMIX_single <- function(pi_inv,G,
 			      MAPestP,
 			      MAPestW,
             deviance,
-            post_summary=c("mean","median")){
+            post_summary="mean"){
 #/' Bayesian selection criteria for mixtures of Plackett-Luce models
 #/' 
 #/' Compute Bayesian comparison criteria for mixtures of Plackett-Luce models with a different number of components.
@@ -1162,7 +1164,7 @@ selectPLMIX_single <- function(pi_inv,G,
 #/' @param MAPestP Numeric \eqn{G}\eqn{\times}{x}\eqn{K} matrix of MAP component-specific support parameter estimates.
 #/' @param MAPestW Numeric vector of the \eqn{G} MAP estimates of the mixture weights.
 #/' @param deviance Numeric vector of posterior deviance values.
-#/' @param post_summary Character string indicating the summary statistic for computing the point estimates of the Plackett-Luce mixture parameters from the MCMC sample. This argument is ignored when MAP estimates are supplied in the \code{MAPestP} and \code{MAPestW} arguments. Default is \code{"mean"}.
+#/' @param post_summary Character string indicating the summary statistic for computing the point estimates of the Plackett-Luce mixture parameters from the MCMC sample. This argument is ignored when MAP estimates are supplied in the \code{MAPestP} and \code{MAPestW} arguments. Default is \code{"mean"}. Alternatively one can choose \code{"median"}.
 #/'
 #/' @return A list of named objects:
 #/' 
@@ -1227,7 +1229,7 @@ selectPLMIX <- function(pi_inv,seq_G,
 			      MAPestP,
 			      MAPestW,
             deviance,
-            post_summary=c("mean","median"),
+            post_summary="mean",
             parallel=FALSE){
 #' Bayesian selection criteria for mixtures of Plackett-Luce models
 #' 
@@ -1244,7 +1246,7 @@ selectPLMIX <- function(pi_inv,seq_G,
 #' @param MAPestP List of size \code{length(seq_G)}, whose generic element is a numeric \eqn{G}\eqn{\times}{x}\eqn{K} matrix with the MAP estimates of the component-specific support parameters.
 #' @param MAPestW List of size \code{length(seq_G)}, whose generic element is a numeric vector with the MAP estimates of the \eqn{G} mixture weights.
 #' @param deviance List of size \code{length(seq_G)}, whose generic element is a numeric vector of posterior deviance values.
-#' @param post_summary Character string indicating the posterior summary statistic computed on the MCMC sample and employed as the point estimates of the Plackett-Luce mixture parameters. Ignored when MAP estimates are supplied in the \code{MAPestP} and \code{MAPestW} arguments. Default is \code{"mean"}. See details for further explanation.
+#' @param post_summary Character string indicating the summary statistic for computing the point estimates of the Plackett-Luce mixture parameters from the MCMC sample. This argument is ignored when MAP estimates are supplied in the \code{MAPestP} and \code{MAPestW} arguments. Default is \code{"mean"}. Alternatively one can choose \code{"median"}. See details for further explanation.
 #' @param parallel Logical: whether parallelization should be used. Default is \code{FALSE}.
 #'
 #' @return A list of named objects:

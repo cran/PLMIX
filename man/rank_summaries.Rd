@@ -4,13 +4,13 @@
 \alias{rank_summaries}
 \title{Descriptive summaries for a partial ordering/ranking dataset}
 \usage{
-rank_summaries(data, format = c("ordering", "ranking"), mean_rank = TRUE,
+rank_summaries(data, format = "ordering", mean_rank = TRUE,
   marginals = TRUE, pc = TRUE)
 }
 \arguments{
 \item{data}{Numeric \eqn{N}\eqn{\times}{x}\eqn{K} data matrix of partial sequences.}
 
-\item{format}{Character string indicating the format of the \code{data} argument.}
+\item{format}{Character string indicating the format of the \code{data} argument (\code{"ordering"} or \code{"ranking"}).}
 
 \item{mean_rank}{Logical: whether the mean rank vector has to be computed. Default is \code{TRUE}.}
 
@@ -23,7 +23,7 @@ A list of named objects:
 
  \item{\code{nranked}}{ Numeric vector of length \eqn{N} with the number of items ranked by each sample unit.}
  \item{\code{nranked_distr}}{ Frequency distribution of the \code{nranked} vector.}
- \item{\code{missing_pos}}{ Numeric vector of length \eqn{K} with the number of missing positions for each item.}
+ \item{\code{na_or_not}}{ Numeric \eqn{3}\eqn{\times}{x}\eqn{K} matrix with the counts of sample units that ranked or not each item. The last row contains the total by column, corresponding to the sample size \eqn{N}.}
  \item{\code{mean_rank}}{ Numeric vector of length \eqn{K} with the mean rank of each item.}
  \item{\code{marginals}}{ Numeric \eqn{K}\eqn{\times}{x}\eqn{K} matrix of the marginal rank distributions: the \eqn{(i,j)}-th entry indicates the number of units that ranked item \eqn{i} in the \eqn{j}-th position.}
  \item{\code{pc}}{ Numeric \eqn{K}\eqn{\times}{x}\eqn{K} paired comparison matrix: the \eqn{(i,i')}-th entry indicates the number of sample units that preferred item \eqn{i} to item \eqn{i'}.}

@@ -6,8 +6,7 @@
 \usage{
 selectPLMIX(pi_inv, seq_G, MCMCsampleP = vector(mode = "list", length =
   length(seq_G)), MCMCsampleW = vector(mode = "list", length = length(seq_G)),
-  MAPestP, MAPestW, deviance, post_summary = c("mean", "median"),
-  parallel = FALSE)
+  MAPestP, MAPestW, deviance, post_summary = "mean", parallel = FALSE)
 }
 \arguments{
 \item{pi_inv}{Numeric \eqn{N}\eqn{\times}{x}\eqn{K} data matrix of partial orderings.}
@@ -24,7 +23,7 @@ selectPLMIX(pi_inv, seq_G, MCMCsampleP = vector(mode = "list", length =
 
 \item{deviance}{List of size \code{length(seq_G)}, whose generic element is a numeric vector of posterior deviance values.}
 
-\item{post_summary}{Character string indicating the posterior summary statistic computed on the MCMC sample and employed as the point estimates of the Plackett-Luce mixture parameters. Ignored when MAP estimates are supplied in the \code{MAPestP} and \code{MAPestW} arguments. Default is \code{"mean"}. See details for further explanation.}
+\item{post_summary}{Character string indicating the summary statistic for computing the point estimates of the Plackett-Luce mixture parameters from the MCMC sample. This argument is ignored when MAP estimates are supplied in the \code{MAPestP} and \code{MAPestW} arguments. Default is \code{"mean"}. Alternatively one can choose \code{"median"}. See details for further explanation.}
 
 \item{parallel}{Logical: whether parallelization should be used. Default is \code{FALSE}.}
 }

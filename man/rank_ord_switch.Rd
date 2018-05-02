@@ -4,12 +4,12 @@
 \alias{rank_ord_switch}
 \title{Switch from orderings to rankings and vice versa}
 \usage{
-rank_ord_switch(data, format = c("ordering", "ranking"), nranked = NULL)
+rank_ord_switch(data, format = "ordering", nranked = NULL)
 }
 \arguments{
 \item{data}{Numeric \eqn{N}\eqn{\times}{x}\eqn{K} data matrix of partial sequences whose format has to be converted.}
 
-\item{format}{Character string indicating the format of the \code{data} argument.}
+\item{format}{Character string indicating the format of the \code{data} argument (\code{"ordering"} or \code{"ranking"}).}
 
 \item{nranked}{Optional numeric vector of length \eqn{N} with the number of items ranked by each sample unit.}
 }

@@ -4,13 +4,13 @@
 \alias{make_complete}
 \title{Completion of partial rankings/orderings}
 \usage{
-make_complete(data, format = c("ordering", "ranking"), nranked = NULL,
+make_complete(data, format = "ordering", nranked = NULL,
   probitems = rep(1, ncol(data)))
 }
 \arguments{
 \item{data}{Numeric \eqn{N}\eqn{\times}{x}\eqn{K} data matrix of partial sequences to be completed.}
 
-\item{format}{Character string indicating the format of the \code{data} argument.}
+\item{format}{Character string indicating the format of the \code{data} argument (\code{"ordering"} or \code{"ranking"}).}
 
 \item{nranked}{Optional numeric vector of length \eqn{N} with the number of items ranked by each sample unit.}
 
