@@ -4,12 +4,12 @@
 \alias{rank_ord_switch}
 \title{Switch from orderings to rankings and vice versa}
 \usage{
-rank_ord_switch(data, format = "ordering", nranked = NULL)
+rank_ord_switch(data, format_input, nranked = NULL)
 }
 \arguments{
 \item{data}{Numeric \eqn{N}\eqn{\times}{x}\eqn{K} data matrix of partial sequences whose format has to be converted.}
 
-\item{format}{Character string indicating the format of the \code{data} argument (\code{"ordering"} or \code{"ranking"}).}
+\item{format_input}{Character string indicating the format of the \code{data} input (\code{"ordering"} or \code{"ranking"}).}
 
 \item{nranked}{Optional numeric vector of length \eqn{N} with the number of items ranked by each sample unit.}
 }
@@ -21,15 +21,10 @@ Convert the format of the input dataset from orderings to rankings and vice vers
 }
 \examples{
 
-# From orderings to rankings for the Dublin West dataset
+## From orderings to rankings for the Dublin West dataset
 data(d_dublinwest)
 head(d_dublinwest)
-rank_ord_switch(data=head(d_dublinwest), format="ordering")
-}
-\references{
-Mollica, C. and Tardella, L. (2017). Bayesian Plackett-Luce mixture models for partially ranked data. \emph{Psychometrika}, \bold{82}(2), pages 442--458, ISSN: 0033-3123, DOI: 10.1007/s11336-016-9530-0.
-
-Mollica, C. and Tardella, L. (2014). Epitope profiling via mixture modeling for ranked data. \emph{Statistics in Medicine}, \bold{33}(21), pages 3738--3758, ISSN: 0277-6715, DOI: 10.1002/sim.6224.
+rank_ord_switch(data=head(d_dublinwest), format_input="ordering")
 }
 \author{
 Cristina Mollica and Luca Tardella

@@ -5,8 +5,8 @@
 \title{Random sample from a mixture of Plackett-Luce models}
 \usage{
 rPLMIX(n = 1, K, G, p = t(matrix(1/K, nrow = K, ncol = G)),
-  ref_order = t(matrix(1:K, nrow = K, ncol = G)), weights = rep(1/G, G),
-  format = "ordering")
+  ref_order = t(matrix(1:K, nrow = K, ncol = G)), weights = rep(1/G,
+  G), format_output = "ordering")
 }
 \arguments{
 \item{n}{Number of observations to be sampled. Default is 1.}
@@ -17,23 +17,25 @@ rPLMIX(n = 1, K, G, p = t(matrix(1/K, nrow = K, ncol = G)),
 
 \item{p}{Numeric \eqn{G}\eqn{\times}{x}\eqn{K} matrix of component-specific support parameters. Default is equal support parameters (uniform mixture components).}
 
-\item{ref_order}{Numeric \eqn{G}\eqn{\times}{x}\eqn{K} matrix of component-specific reference orders. Default is forward orders (identity permutations) in each row, corresponding to Plackett-Luce mixture components. See deatils for further explanation.}
+\item{ref_order}{Numeric \eqn{G}\eqn{\times}{x}\eqn{K} matrix of component-specific reference orders. Default is forward orders (identity permutations) in each row, corresponding to Plackett-Luce mixture components (see 'Details').}
 
 \item{weights}{Numeric vector of \eqn{G} mixture weights. Default is equal weights.}
 
-\item{format}{Character string indicating the format of the simulated dataset.}
+\item{format_output}{Character string indicating the format of the returned simulated dataset (\code{"ordering"} or \code{"ranking"}). Default is \code{"ordering"}.}
 }
 \value{
 If \eqn{G=1}, a numeric \eqn{N}\eqn{\times}{x}\eqn{K} matrix of simulated complete sequences. If \eqn{G>1}, a list of two named objects:
 
- \item{\code{comp}}{ Numeric vector of \eqn{N} component memberships.}
+ \item{\code{comp}}{ Numeric vector of \eqn{N} mixture component memberships.}
  \item{\code{sim_data}}{ Numeric \eqn{N}\eqn{\times}{x}\eqn{K} matrix of simulated complete sequences.}
 }
 \description{
 Draw a random sample of complete orderings/rankings from a \eqn{G}-component mixture of Plackett-Luce models.
 }
 \details{
-Positive values are required for \code{p} and \code{weights} arguments (normalization is not necessary). The \code{ref_order} argument accommodates for the more general mixture of Extended Plackett-Luce models (EPL), involving the additional reference order parameters (Mollica and Tardella 2014). A permutation of the first \eqn{K} integers can be specified in each row of the \code{ref_order} argument to generate a sample from a \eqn{G}-component mixture of EPL. Since the Plackett-Luce model is a special instance of the EPL with the reference order equal to the identity permutation \eqn{(1,\dots,K)}, the default value of the \code{ref_order} argument is forward orders.
+Positive values are required for \code{p} and \code{weights} arguments (normalization is not necessary).
+
+The \code{ref_order} argument accommodates for the more general mixture of Extended Plackett-Luce models (EPL), involving the additional reference order parameters (Mollica and Tardella 2014). A permutation of the first \eqn{K} integers can be specified in each row of the \code{ref_order} argument to generate a sample from a \eqn{G}-component mixture of EPL. Since the Plackett-Luce model is a special instance of the EPL with the reference order equal to the identity permutation \eqn{(1,\dots,K)}, the default value of the \code{ref_order} argument is forward orders.
 }
 \examples{
 
@@ -47,11 +49,6 @@ simulated_data <- rPLMIX(n=5, K=K, G=G, p=support_par, weights=weights_par)
 simulated_data$comp
 simulated_data$sim_data
 
-}
-\references{
-Mollica, C. and Tardella, L. (2017). Bayesian Plackett-Luce mixture models for partially ranked data. \emph{Psychometrika}, \bold{82}(2), pages 442--458, ISSN: 0033-3123, DOI: 10.1007/s11336-016-9530-0.
-
-Mollica, C. and Tardella, L. (2014). Epitope profiling via mixture modeling for ranked data. \emph{Statistics in Medicine}, \bold{33}(21), pages 3738--3758, ISSN: 0277-6715, DOI: 10.1002/sim.6224.
 }
 \author{
 Cristina Mollica and Luca Tardella

@@ -4,13 +4,13 @@
 \alias{mapPLMIX}
 \title{MAP estimation for a Bayesian mixture of Plackett-Luce models}
 \usage{
-mapPLMIX(pi_inv, K, G, init = list(p = NULL, omega = NULL), n_iter = 1000,
-  hyper = list(shape0 = matrix(1, nrow = G, ncol = K), rate0 = rep(0, G),
-  alpha0 = rep(1, G)), eps = 10^(-6), centered_start = FALSE,
-  plot_objective = TRUE)
+mapPLMIX(pi_inv, K, G, init = list(p = NULL, omega = NULL),
+  n_iter = 1000, hyper = list(shape0 = matrix(1, nrow = G, ncol = K),
+  rate0 = rep(0, G), alpha0 = rep(1, G)), eps = 10^(-6),
+  centered_start = FALSE, plot_objective = FALSE)
 }
 \arguments{
-\item{pi_inv}{Numeric \eqn{N}\eqn{\times}{x}\eqn{K} data matrix of partial orderings.}
+\item{pi_inv}{An object of class \code{top_ordering}, collecting the numeric \eqn{N}\eqn{\times}{x}\eqn{K} data matrix of partial orderings, or an object that can be coerced with \code{\link{as.top_ordering}}.}
 
 \item{K}{Number of possible items.}
 
@@ -26,26 +26,29 @@ mapPLMIX(pi_inv, K, G, init = list(p = NULL, omega = NULL), n_iter = 1000,
 
 \item{centered_start}{Logical: whether a random start whose support parameters and weights should be centered around the observed relative frequency that each item has been ranked top. Default is \code{FALSE}. Ignored when \code{init} is not \code{NULL}.}
 
-\item{plot_objective}{Logical: whether the objective function should be plotted. Default is \code{FALSE}.}
+\item{plot_objective}{Logical: whether the objective function (that is the kernel of the log-posterior distribution) should be plotted. Default is \code{FALSE}.}
 }
 \value{
-A list of named objects:
+A list of S3 class \code{mpPLMIX} with named elements:
 
- \item{\code{P_map}}{ Numeric \eqn{G}\eqn{\times}{x}\eqn{K} matrix with the MAP estimates of the component-specific support parameters.}
  \item{\code{W_map}}{ Numeric vector with the MAP estimates of the \eqn{G} mixture weights.}
+ \item{\code{P_map}}{ Numeric \eqn{G}\eqn{\times}{x}\eqn{K} matrix with the MAP estimates of the component-specific support parameters.}
  \item{\code{z_hat}}{ Numeric \eqn{N}\eqn{\times}{x}\eqn{G} matrix of estimated posterior component membership probabilities.}
- \item{\code{class_map}}{ Numeric vector of \eqn{N} component memberships based on MAP allocation from the \code{z_hat} matrix.}
- \item{\code{log_lik}}{ Numeric vector of log-likelihood values at each iteration.}
- \item{\code{objective}}{ Numeric vector of objective function values at each iteration.}
+ \item{\code{class_map}}{ Numeric vector of \eqn{N} mixture component memberships based on MAP allocation from the \code{z_hat} matrix.}
+ \item{\code{log_lik}}{ Numeric vector of the log-likelihood values at each iteration.}
+ \item{\code{objective}}{ Numeric vector of the objective function values (that is the kernel of the log-posterior distribution) at each iteration.}
  \item{\code{max_objective}}{ Maximized objective function value.}
  \item{\code{bic}}{ BIC value (only for the default flat priors, otherwise \code{NULL}).}
  \item{\code{conv}}{ Binary convergence indicator: 1 = convergence has been achieved, 0 = otherwise.}
+ \item{\code{call}}{ The matched call.}
 }
 \description{
 Perform MAP estimation via EM algorithm for a Bayesian mixture of Plackett-Luce models fitted to partial orderings.
 }
 \details{
-Under noninformative (flat) prior setting, the EM algorithm for MAP estimation corresponds to the EMM algorithm described by Gormley and Murphy (2006) to perform frequentist inference. In this case, the MAP solution coincides with the MLE and the output vectors \code{log_lik} and \code{objective} coincide as well. The \code{\link{mapPLMIX}} function performs the MAP procedure with a single starting value. To address the issue of local maxima in the posterior distribution, see the \code{\link{mapPLMIX_multistart}} function.
+Under noninformative (flat) prior setting, the EM algorithm for MAP estimation corresponds to the EMM algorithm described by Gormley and Murphy (2006) to perform frequentist inference. In this case, the MAP solution coincides with the MLE and the output vectors \code{log_lik} and \code{objective} coincide as well.
+
+The \code{\link{mapPLMIX}} function performs the MAP procedure with a single starting value. To address the issue of local maxima in the posterior distribution, see the \code{\link{mapPLMIX_multistart}} function.
 }
 \examples{
 
@@ -59,8 +62,6 @@ MAP$W_map
 }
 \references{
 Mollica, C. and Tardella, L. (2017). Bayesian Plackett-Luce mixture models for partially ranked data. \emph{Psychometrika}, \bold{82}(2), pages 442--458, ISSN: 0033-3123, DOI: 10.1007/s11336-016-9530-0.
-
-Mollica, C. and Tardella, L. (2014). Epitope profiling via mixture modeling for ranked data. \emph{Statistics in Medicine}, \bold{33}(21), pages 3738--3758, ISSN: 0277-6715, DOI: 10.1002/sim.6224.
 
 Gormley, I. C. and Murphy, T. B. (2006). Analysis of Irish third-level college applications data. \emph{Journal of the Royal Statistical Society: Series A}, \bold{169}(2), pages 361--379, ISSN: 0964-1998, DOI: 10.1111/j.1467-985X.2006.00412.x.
 }

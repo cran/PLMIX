@@ -5,11 +5,12 @@
 \title{Bayesian selection criteria for mixtures of Plackett-Luce models}
 \usage{
 selectPLMIX(pi_inv, seq_G, MCMCsampleP = vector(mode = "list", length =
-  length(seq_G)), MCMCsampleW = vector(mode = "list", length = length(seq_G)),
-  MAPestP, MAPestW, deviance, post_summary = "mean", parallel = FALSE)
+  length(seq_G)), MCMCsampleW = vector(mode = "list", length =
+  length(seq_G)), MAPestP, MAPestW, deviance, post_est = "mean",
+  parallel = FALSE)
 }
 \arguments{
-\item{pi_inv}{Numeric \eqn{N}\eqn{\times}{x}\eqn{K} data matrix of partial orderings.}
+\item{pi_inv}{An object of class \code{top_ordering}, collecting the numeric \eqn{N}\eqn{\times}{x}\eqn{K} data matrix of partial orderings, or an object that can be coerced with \code{\link{as.top_ordering}}.}
 
 \item{seq_G}{Numeric vector with the number of components of the Plackett-Luce mixtures to be compared.}
 
@@ -23,7 +24,7 @@ selectPLMIX(pi_inv, seq_G, MCMCsampleP = vector(mode = "list", length =
 
 \item{deviance}{List of size \code{length(seq_G)}, whose generic element is a numeric vector of posterior deviance values.}
 
-\item{post_summary}{Character string indicating the summary statistic for computing the point estimates of the Plackett-Luce mixture parameters from the MCMC sample. This argument is ignored when MAP estimates are supplied in the \code{MAPestP} and \code{MAPestW} arguments. Default is \code{"mean"}. Alternatively one can choose \code{"median"}. See details for further explanation.}
+\item{post_est}{Character string indicating the  point estimates of the Plackett-Luce mixture parameters to be computed from the MCMC sample. This argument is ignored when MAP estimates are supplied in the \code{MAPestP} and \code{MAPestW} arguments. Default is \code{"mean"}. Alternatively, one can choose \code{"median"} (see 'Details').}
 
 \item{parallel}{Logical: whether parallelization should be used. Default is \code{FALSE}.}
 }
@@ -34,13 +35,13 @@ A list of named objects:
  \item{\code{point_estW}}{ List of size \code{length(seq_G)}, whose generic element is a numeric vector with the \eqn{G} point estimates of the mixture weights employed for the computation of the criteria.}
  \item{\code{fitting}}{ Numeric \code{length(seq_G)}\eqn{\times}{x}\eqn{2} matrix with the fitting terms of the comparison measures, given by the posterior expected deviance \code{D_bar} and the deviance \code{D_hat} evaluated at the point estimate.}
  \item{\code{penalties}}{ Numeric \code{length(seq_G)}\eqn{\times}{x}\eqn{2} matrix with the penalty terms \code{pD} and \code{pV} (effective number of parameters).}
- \item{\code{criteria}}{ Numeric \code{length(seq_G)}\eqn{\times}{x}\eqn{6} matrix of Bayesian model selection criteria: \code{DIC1}, \code{DIC2}, \code{BPIC1}, \code{BPIC2}, \code{BICM1} and \code{BICM2}. See Details for further explanation.}
+ \item{\code{criteria}}{ Numeric \code{length(seq_G)}\eqn{\times}{x}\eqn{6} matrix of Bayesian model selection criteria: \code{DIC1}, \code{DIC2}, \code{BPIC1}, \code{BPIC2}, \code{BICM1} and \code{BICM2} (see 'Details').}
 }
 \description{
 Compute Bayesian comparison criteria for mixtures of Plackett-Luce models with a different number of components.
 }
 \details{
-The \code{selectPLMIX} function privileges the use of the MAP point estimates to compute the Bayesian model comparison criteria, since they are not affected by the label switching issue. By setting both the \code{MAPestP} and \code{MAPestW} arguments equal to NULL, the user can alternatively compute the selection measures by relying on a different posterior summary (\code{"mean"} or \code{"median"}) specified in the \code{post_summary} argument. In the latter case, the MCMC samples for each Plackett-Luce mixture must be supplied in the lists \code{MCMCsampleP} and \code{MCMCsampleW}. The drawback when working with point estimates other than the MAP is that the possible presence of label switching has to be previously removed from the traces to obtain meaningful results. See \code{\link{ppcheckPLMIX}} and \code{\link{ppcheckPLMIX_cond}} functions to perfom label switching adjustment.
+The \code{selectPLMIX} function privileges the use of the MAP point estimates to compute the Bayesian model comparison criteria, since they are not affected by the label switching issue. By setting both the \code{MAPestP} and \code{MAPestW} arguments equal to NULL, the user can alternatively compute the selection measures by relying on a different posterior summary (\code{"mean"} or \code{"median"}) specified in the \code{post_est} argument. In the latter case, the MCMC samples for each Plackett-Luce mixture must be supplied in the lists \code{MCMCsampleP} and \code{MCMCsampleW}. The drawback when working with point estimates other than the MAP is that the possible presence of label switching has to be previously removed from the traces to obtain meaningful results. See the \code{\link{label_switchPLMIX}} function to perfom label switching adjustment of the MCMC samples.
 
 Several model selection criteria are returned. The two versions of DIC correspond to alternative ways of computing the effective number of parameters: DIC1 was proposed by Spiegelhalter et al. (2002) with penalty named \code{pD}, whereas DIC2 was proposed by Gelman et al. (2004) with penalty named \code{pV}. The latter coincides with the AICM introduced by Raftery et al. (2007), that is, the Bayesian counterpart of AIC. BPIC1 and BPIC2 are obtained from the two DIC by simply doubling the penalty term, as suggested by Ando (2007) to contrast DIC's tendency to overfitting. BICM1 is the Bayesian variant of the BIC, originally presented by Raftery et al. (2007) and entirely based on the MCMC sample. The BICM2, instead, involved the MAP estimate without the need of its approximation from the MCMC sample as for the BICM1.
 }
@@ -49,24 +50,25 @@ Several model selection criteria are returned. The two versions of DIC correspon
 data(d_carconf)
 
 K <- ncol(d_carconf)
-n.start <- 2
 
+## Fit 1- and 2-component PL mixtures via MAP estimation 
 MAP_1 <- mapPLMIX_multistart(pi_inv=d_carconf, K=K, G=1, 
-                                   n_start=n.start, n_iter=400*1)
+                                   n_start=2, n_iter=400*1)
 
 MAP_2 <- mapPLMIX_multistart(pi_inv=d_carconf, K=K, G=2, 
-                                   n_start=n.start, n_iter=400*2)
+                                   n_start=2, n_iter=400*2)
 
 mcmc_iter <- 30
 burnin <- 10
 
+## Fit 1- and 2-component PL mixtures via Gibbs sampling procedure
 GIBBS_1 <- gibbsPLMIX(pi_inv=d_carconf, K=K, G=1, n_iter=mcmc_iter, 
                       n_burn=burnin, init=list(p=MAP_1$mod$P_map,
                       z=binary_group_ind(MAP_1$mod$class_map,G=1)))
 GIBBS_2 <- gibbsPLMIX(pi_inv=d_carconf, K=K, G=2, n_iter=mcmc_iter, 
                       n_burn=burnin, init=list(p=MAP_2$mod$P_map,
                       z=binary_group_ind(MAP_2$mod$class_map,G=2)))
-
+## Select the optimal number of components 
 SELECT <- selectPLMIX(pi_inv=d_carconf, seq_G=1:2, 
                       MAPestP=list(MAP_1$mod$P_map, MAP_2$mod$P_map), 
                       MAPestW=list(MAP_1$mod$W_map, MAP_2$mod$W_map), 
@@ -81,7 +83,7 @@ Ando, T. (2007). Bayesian predictive information criterion for the evaluation of
 
 Raftery, A. E, Satagopan, J. M., Newton M. A. and Krivitsky, P. N. (2007). BAYESIAN STATISTICS 8. \emph{Proceedings of the eighth Valencia International Meeting 2006}, pages 371--416. Oxford University Press.
 
-Gelman, A, Carlin, J. B., Stern, H. S. and Rubin, D. B. (2004). Bayesian data analysis. Chapman \& Hall/CRC, Second Edition, ISBN: 1-58488-388-X. New York.
+Gelman, A., Carlin, J. B., Stern, H. S. and Rubin, D. B. (2004). Bayesian data analysis. Chapman & Hall/CRC, Second Edition, ISBN: 1-58488-388-X. New York.
 
 Spiegelhalter, D. J., Best, N. G., Carlin, B. P. and Van Der Linde, A. (2002). Bayesian measures of model complexity and fit. \emph{Journal of the Royal Statistical Society: Series B (Statistical Methodology)}, \bold{64}(4), pages 583--639.
 }

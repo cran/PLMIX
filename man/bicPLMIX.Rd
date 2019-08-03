@@ -2,14 +2,14 @@
 % Please edit documentation in R/PLMIXfunctions.R
 \name{bicPLMIX}
 \alias{bicPLMIX}
-\title{BIC for a mixture of Plackett-Luce models}
+\title{BIC for the MLE of a mixture of Plackett-Luce models}
 \usage{
 bicPLMIX(max_log_lik, pi_inv, G, ref_known = TRUE, ref_vary = FALSE)
 }
 \arguments{
 \item{max_log_lik}{Maximized log-likelihood value.}
 
-\item{pi_inv}{Numeric \eqn{N}\eqn{\times}{x}\eqn{K} data matrix of partial orderings.}
+\item{pi_inv}{An object of class \code{top_ordering}, collecting the numeric \eqn{N}\eqn{\times}{x}\eqn{K} data matrix of partial orderings, or an object that can be coerced with \code{\link{as.top_ordering}}.}
 
 \item{G}{Number of mixture components.}
 
@@ -24,10 +24,12 @@ A list of two named objects:
  \item{\code{bic}}{ BIC value.}
 }
 \description{
-Compute BIC value for a mixture of Plackett-Luce models fitted to partial orderings.
+Compute BIC value for the MLE of a mixture of Plackett-Luce models fitted to partial orderings.
 }
 \details{
-The \code{bicPLMIX} function allows to compute the BIC value from the output of alternative MLE methods for mixtures of Plackett-Luce models. The \code{max_log_lik} and the BIC values can be straightforwardly obtained from the output of the \code{\link{mapPLMIX}} and \code{\link{mapPLMIX_multistart}} functions when the default noninformative priors are adopted. The \code{ref_known} and \code{ref_vary} arguments accommodate for the more general mixture of Extended Plackett-Luce models (EPL), involving the additional reference order parameters (Mollica and Tardella 2014). Since the Plackett-Luce model is a special instance of the EPL with the reference order equal to the identity permutation \eqn{(1,\dots,K)}, the default values of \code{ref_known} and \code{ref_vary} are set equal, respectively, to \code{TRUE} and \code{FALSE}.
+The \code{max_log_lik} and the BIC values can be straightforwardly obtained from the output of the \code{\link{mapPLMIX}} and \code{\link{mapPLMIX_multistart}} functions when the default noninformative priors are adopted in the MAP procedure. So, the \code{bicPLMIX} function is especially useful to compute the BIC value from the output of alternative MLE methods for mixtures of Plackett-Luce models implemented, for example, with other softwares.
+
+The \code{ref_known} and \code{ref_vary} arguments accommodate for the more general mixture of Extended Plackett-Luce models (EPL), involving the additional reference order parameters (Mollica and Tardella 2014). Since the Plackett-Luce model is a special instance of the EPL with the reference order equal to the identity permutation \eqn{(1,\dots,K)}, the default values of \code{ref_known} and \code{ref_vary} are set equal, respectively, to \code{TRUE} and \code{FALSE}.
 }
 \examples{
 
@@ -36,7 +38,7 @@ K <- ncol(d_carconf)
 MAP_mult <- mapPLMIX_multistart(pi_inv=d_carconf, K=K, G=3, n_start=2, n_iter=400*3)
 bicPLMIX(max_log_lik=MAP_mult$mod$max_objective, pi_inv=d_carconf, G=3)$bic
 
-# Equivalently,
+## Equivalently
 MAP_mult$mod$bic
 
 }
@@ -48,7 +50,7 @@ Mollica, C. and Tardella, L. (2014). Epitope profiling via mixture modeling for 
 Schwarz, G. (1978). Estimating the dimension of a model. \emph{Ann. Statist.}, \bold{6}(2), pages 461--464, ISSN: 0090-5364, DOI: 10.1002/sim.6224.
 }
 \seealso{
-\code{\link{mapPLMIX}}, \code{\link{mapPLMIX_multistart}}
+\code{\link{mapPLMIX}} and \code{\link{mapPLMIX_multistart}}
 }
 \author{
 Cristina Mollica and Luca Tardella

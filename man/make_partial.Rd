@@ -4,17 +4,17 @@
 \alias{make_partial}
 \title{Censoring of complete rankings/orderings}
 \usage{
-make_partial(data, format = "ordering", nranked = NULL, probcens = rep(1,
+make_partial(data, format_input, nranked = NULL, probcens = rep(1,
   ncol(data) - 1))
 }
 \arguments{
 \item{data}{Numeric \eqn{N}\eqn{\times}{x}\eqn{K} data matrix of complete sequences to be censored.}
 
-\item{format}{Character string indicating the format of the \code{data} argument (\code{"ordering"} or \code{"ranking"}).}
+\item{format_input}{Character string indicating the format of the \code{data} input (\code{"ordering"} or \code{"ranking"}).}
 
 \item{nranked}{Numeric vector of length \eqn{N} with the desired number of items ranked by each sample unit after censoring. If not supplied (\code{NULL}), the censoring patterns are randomly generated according to the probabilities in the \code{probcens} argument.}
 
-\item{probcens}{Numeric vector of length \eqn{(K-1)} with the probability of each censoring pattern to be employed for the random truncation of the complete sequences (normalization is not necessary). It works only if \code{nranked} argument is \code{NULL}. See Details for further explanation. Default is equal probabilities.}
+\item{probcens}{Numeric vector of length \eqn{(K-1)} with the probability of each censoring pattern to be employed for the random truncation of the complete sequences (normalization is not necessary). It works only if \code{nranked} argument is \code{NULL} (see 'Details'). Default is equal probabilities.}
 }
 \value{
 A list of two named objects:
@@ -32,16 +32,13 @@ The censoring of the complete sequences can be performed in: (i) a deterministic
 
 data(d_german)
 head(d_german)
-d_german_cens <- make_partial(data=d_german, format="ordering", 
+d_german_cens <- make_partial(data=d_german, format_input="ordering", 
                               probcens=c(0.3, 0.3, 0.4))  
 head(d_german_cens$partialdata)
 
-# Check consistency with the nominal censoring probabilities
+## Check consistency with the nominal censoring probabilities
 round(prop.table(table(d_german_cens$nranked)), 2)
 
-}
-\references{
-Mollica, C. and Tardella, L. (2017). Bayesian Plackett-Luce mixture models for partially ranked data. \emph{Psychometrika}, \bold{82}(2), pages 442--458, ISSN: 0033-3123, DOI: 10.1007/s11336-016-9530-0.
 }
 \author{
 Cristina Mollica and Luca Tardella

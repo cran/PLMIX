@@ -8,7 +8,7 @@ ppcheckPLMIX(pi_inv, seq_G, MCMCsampleP, MCMCsampleW, top1 = TRUE,
   paired = TRUE, parallel = FALSE)
 }
 \arguments{
-\item{pi_inv}{Numeric \eqn{N}\eqn{\times}{x}\eqn{K} data matrix of partial orderings.}
+\item{pi_inv}{An object of class \code{top_ordering}, collecting the numeric \eqn{N}\eqn{\times}{x}\eqn{K} data matrix of partial orderings, or an object that can be coerced with \code{\link{as.top_ordering}}.}
 
 \item{seq_G}{Numeric vector with the number of components of the Plackett-Luce mixtures to be assessed.}
 
@@ -23,9 +23,9 @@ ppcheckPLMIX(pi_inv, seq_G, MCMCsampleP, MCMCsampleW, top1 = TRUE,
 \item{parallel}{Logical: whether parallelization should be used. Default is \code{FALSE}.}
 }
 \value{
-A list of named objects:
+A list with a named element:
 
- \item{\code{post_pred_pvalue}}{ Numeric \code{length(seq_G)}\eqn{\times}{x}\eqn{2} matrix of posterior predictive \eqn{p}-values based on the top item and paired comparison frequencies. If \code{top1} or \code{paired} argument is \code{FALSE}, the corresponding matrix entries are \code{NA}.}
+ \item{\code{post_pred_pvalue}}{ Numeric \code{length(seq_G)}\eqn{\times}{x}\eqn{2} matrix of posterior predictive \eqn{p}-values based on the top item and paired comparison frequencies. If either \code{top1} or \code{paired} argument is \code{FALSE}, the corresponding matrix entries are \code{NA}.}
 }
 \description{
 Perform posterior predictive check to assess the goodness-of-fit of Bayesian mixtures of Plackett-Luce models with a different number of components.
@@ -38,20 +38,21 @@ The \code{ppcheckPLMIX} function returns two posterior predictive \eqn{p}-values
 data(d_carconf)
 
 K <- ncol(d_carconf)
-n.start <- 2
 
+## Fit 1- and 2-component PL mixtures via MAP estimation
 MAP_1 <- mapPLMIX_multistart(pi_inv=d_carconf, K=K, G=1, 
-                             n_start=n.start, n_iter=400*1)
+                             n_start=2, n_iter=400*1)
 
 MAP_2 <- mapPLMIX_multistart(pi_inv=d_carconf, K=K, G=2, 
-                             n_start=n.start, n_iter=400*2)
+                             n_start=2, n_iter=400*2)
                                    
 MAP_3 <- mapPLMIX_multistart(pi_inv=d_carconf, K=K, G=3, 
-                             n_start=n.start, n_iter=400*3)
+                             n_start=2, n_iter=400*3)
                                    
 mcmc_iter <- 30
 burnin <- 10
 
+## Fit 1- and 2-component PL mixtures via Gibbs sampling procedure
 GIBBS_1 <- gibbsPLMIX(pi_inv=d_carconf, K=K, G=1, n_iter=mcmc_iter, 
                       n_burn=burnin, init=list(p=MAP_1$mod$P_map,
                       z=binary_group_ind(MAP_1$mod$class_map,G=1)))
@@ -62,6 +63,7 @@ GIBBS_3 <- gibbsPLMIX(pi_inv=d_carconf, K=K, G=3, n_iter=mcmc_iter,
                       n_burn=burnin, init=list(p=MAP_3$mod$P_map,
                       z=binary_group_ind(MAP_3$mod$class_map,G=3)))
                             
+## Checking goodness-of-fit of the estimated mixtures
 CHECK <- ppcheckPLMIX(pi_inv=d_carconf, seq_G=1:3, 
                       MCMCsampleP=list(GIBBS_1$P, GIBBS_2$P, GIBBS_3$P), 
                       MCMCsampleW=list(GIBBS_1$W, GIBBS_2$W, GIBBS_3$W))

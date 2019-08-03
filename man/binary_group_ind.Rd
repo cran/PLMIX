@@ -19,7 +19,7 @@ Construct the binary group membership matrix from the multinomial classification
 }
 \examples{
 
-binary_group_ind(c(3,1,5),6)
+binary_group_ind(class=c(3,1,5), G=6)
 
 }
 \author{

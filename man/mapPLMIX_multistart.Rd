@@ -5,13 +5,13 @@
 \title{MAP estimation for a Bayesian mixture of Plackett-Luce models with multiple starting values}
 \usage{
 mapPLMIX_multistart(pi_inv, K, G, n_start = 1, init = rep(list(list(p =
-  NULL, omega = NULL)), times = n_start), n_iter = 200, hyper = list(shape0
-  = matrix(1, nrow = G, ncol = K), rate0 = rep(0, G), alpha0 = rep(1, G)),
-  eps = 10^(-6), plot_objective = FALSE, init_index = 1:n_start,
-  parallel = FALSE, centered_start = FALSE)
+  NULL, omega = NULL)), times = n_start), n_iter = 200,
+  hyper = list(shape0 = matrix(1, nrow = G, ncol = K), rate0 = rep(0, G),
+  alpha0 = rep(1, G)), eps = 10^(-6), plot_objective = FALSE,
+  init_index = 1:n_start, parallel = FALSE, centered_start = FALSE)
 }
 \arguments{
-\item{pi_inv}{Numeric \eqn{N}\eqn{\times}{x}\eqn{K} data matrix of partial orderings.}
+\item{pi_inv}{An object of class \code{top_ordering}, collecting the numeric \eqn{N}\eqn{\times}{x}\eqn{K} data matrix of partial orderings, or an object that can be coerced with \code{\link{as.top_ordering}}.}
 
 \item{K}{Number of possible items.}
 
@@ -27,7 +27,7 @@ mapPLMIX_multistart(pi_inv, K, G, n_start = 1, init = rep(list(list(p =
 
 \item{eps}{Tolerance value for the convergence criterion.}
 
-\item{plot_objective}{Logical: whether the objective function should be plotted. Default is \code{FALSE}.}
+\item{plot_objective}{Logical: whether the objective function (that is the kernel of the log-posterior distribution) should be plotted. Default is \code{FALSE}.}
 
 \item{init_index}{Numeric vector indicating the positions of the starting values in the \code{init} list to be actually launched. Useful to launch the most promising starting values identified after a preliminary run. Default is run all the starting points in the \code{init} list.}
 
@@ -36,11 +36,12 @@ mapPLMIX_multistart(pi_inv, K, G, n_start = 1, init = rep(list(list(p =
 \item{centered_start}{Logical: whether a random start whose support parameters and weights should be centered around the observed relative frequency that each item has been ranked top. Default is \code{FALSE}. Ignored when \code{init} is not \code{NULL}.}
 }
 \value{
-A list of named objects:
+A list of S3 class \code{mpPLMIX} with named elements:
 
  \item{\code{mod}}{ List of named objects describing the best model in terms of maximized posterior distribution. See output values of the single-run \code{\link{mapPLMIX}} function for a detailed explanation of the list elements.}
  \item{\code{max_objective}}{ Numeric vector of the maximized objective function values for each initialization.}
  \item{\code{convergence}}{ Binary vector with \code{length(init_index)} convergence indicators for each initialization: 1 = convergence has been achieved, 0 = otherwise.}
+ \item{\code{call}}{ The matched call.}
 }
 \description{
 Perform MAP estimation via EM algorithm with multiple starting values for a Bayesian mixture of Plackett-Luce models fitted to partial orderings.
@@ -49,8 +50,6 @@ Perform MAP estimation via EM algorithm with multiple starting values for a Baye
 Under noninformative (flat) prior setting, the EM algorithm for MAP estimation corresponds to the EMM algorithm described by Gormley and Murphy (2006) to perform frequentist inference. In this case the MAP solution coincides with the MLE. The best model in terms of maximized posterior distribution is returned.
 }
 \examples{
-
-require(MCMCpack)
 
 data(d_carconf)
 
@@ -63,8 +62,6 @@ MAP_mult$mod$W_map
 }
 \references{
 Mollica, C. and Tardella, L. (2017). Bayesian Plackett-Luce mixture models for partially ranked data. \emph{Psychometrika}, \bold{82}(2), pages 442--458, ISSN: 0033-3123, DOI: 10.1007/s11336-016-9530-0.
-
-Mollica, C. and Tardella, L. (2014). Epitope profiling via mixture modeling for ranked data. \emph{Statistics in Medicine}, \bold{33}(21), pages 3738--3758, ISSN: 0277-6715, DOI: 10.1002/sim.6224.
 
 Gormley, I. C. and Murphy, T. B. (2006). Analysis of Irish third-level college applications data. \emph{Journal of the Royal Statistical Society: Series A}, \bold{169}(2), pages 361--379, ISSN: 0964-1998, DOI: 10.1111/j.1467-985X.2006.00412.x.
 }

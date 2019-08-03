@@ -6,15 +6,14 @@
 The dataset is composed of partial top orderings of varying lengths. Missing positions are denoted with zero entries.}
 \usage{data(d_dublinwest)}
 \format{
-Data matrix of partial orderings with \eqn{N=29988} rows and \eqn{K=9} columns. Each row lists the candidates from the most-liked (\code{rank1}) to the least-liked (\code{rank9}) in a given voting ballot. 
+Data matrix of partial orderings with \eqn{N=29988} rows and \eqn{K=9} columns. Each row lists the candidates from the most-liked (\code{Rank_1}) to the least-liked (\code{Rank_9}) in a given voting ballot. 
 }
 \references{
-Gormley, I. C. and Murphy, T. B. (2008). Exploring Voting Blocs Within the Irish Electorate: A Mixture Modeling Approach. \emph{Journal of the America Statistical Association}, \bold{103}(483), pages 1014--1027.
+Mattei, N. and Walsh, T. (2013) PrefLib: A Library of Preference Data. \emph{Proceedings of Third International Conference on Algorithmic Decision Theory} (ADT 2013). Springer, Lecture Notes in Artificial Intelligence, November 13-15, 2013.
 
 Gormley, I. C. and Murphy, T. B. (2009). A grade of membership model for rank data. \emph{Bayesian Analysis}, \bold{4}(2),  pages 65--295.
 
-Mattei, N. and Walsh, T. (2013) PrefLib: A Library of Preference Data. \emph{Proceedings of Third International Conference on Algorithmic Decision Theory} (ADT 2013). Springer, Lecture Notes in Artificial Intelligence, November 13-15, 2013.
-
+Gormley, I. C. and Murphy, T. B. (2008). Exploring Voting Blocs Within the Irish Electorate: A Mixture Modeling Approach. \emph{Journal of the America Statistical Association}, \bold{103}(483), pages 1014--1027.
 }
 \source{
 The 2002 Dublin West data have been downloaded from \url{http://www.preflib.org/} PrefLib: A Library for Preferences. In that repository, preferences with ties are also included. The original source was publicly available from the Dublin County Returning Officer
@@ -23,8 +22,7 @@ at the following URL: \url{https://dublincountyreturningofficer.com/}.}
 data(d_dublinwest)
 head(d_dublinwest)
 
-# Subset of complete sequences
-
+## Subset of complete sequences
 d_dublinwest_compl=d_dublinwest[rowSums(d_dublinwest!=0)>=(ncol(d_dublinwest)-1),]
 head(d_dublinwest_compl)
 }

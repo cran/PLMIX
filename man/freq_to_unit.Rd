@@ -20,8 +20,8 @@ Construct the dataset of individual rankings/orderings from the frequency distri
 library(gtools)
 
 K <- 4
-perm_matrix <- permutations(n=K,r=K)
-freq_data <- cbind(perm_matrix,sample(1:factorial(K)))
+perm_matrix <- permutations(n=K, r=K)
+freq_data <- cbind(perm_matrix, sample(1:factorial(K)))
 freq_data
 
 freq_to_unit(freq_distr=freq_data)

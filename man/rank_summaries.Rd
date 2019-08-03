@@ -4,13 +4,13 @@
 \alias{rank_summaries}
 \title{Descriptive summaries for a partial ordering/ranking dataset}
 \usage{
-rank_summaries(data, format = "ordering", mean_rank = TRUE,
-  marginals = TRUE, pc = TRUE)
+rank_summaries(data, format_input, mean_rank = TRUE, marginals = TRUE,
+  pc = TRUE)
 }
 \arguments{
 \item{data}{Numeric \eqn{N}\eqn{\times}{x}\eqn{K} data matrix of partial sequences.}
 
-\item{format}{Character string indicating the format of the \code{data} argument (\code{"ordering"} or \code{"ranking"}).}
+\item{format_input}{Character string indicating the format of the \code{data} input (\code{"ordering"} or \code{"ranking"}).}
 
 \item{mean_rank}{Logical: whether the mean rank vector has to be computed. Default is \code{TRUE}.}
 
@@ -34,10 +34,10 @@ Compute rank summaries and censoring patterns for a partial ordering/ranking dat
 \examples{
 
 data(d_carconf)
-rank_summaries(data=d_carconf, format="ordering")
+rank_summaries(data=d_carconf, format_input="ordering")
 }
 \references{
-Mollica, C. and Tardella, L. (2017). Bayesian Plackett-Luce mixture models for partially ranked data. \emph{Psychometrika}, \bold{82}(2), pages 442--458, ISSN: 0033-3123, DOI: 10.1007/s11336-016-9530-0.
+Marden, J. I. (1995). Analyzing and modeling rank data. \emph{Monographs on Statistics and Applied Probability} (64). Chapman & Hall, ISSN: 0-412-99521-2. London.
 }
 \author{
 Cristina Mollica and Luca Tardella

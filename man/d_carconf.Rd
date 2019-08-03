@@ -3,20 +3,12 @@
 \docType{data}
 \title{Car Configurator Data (partial orderings)}
 \description{The Car Configurator dataset (\code{d_carconf}) came up from a marketing study aimed at investigating customer preferences toward different car features.
-A sample of \eqn{N=435} customers were asked to construct their car by using an online configurator system and to choose among \eqn{K=6} car modules in order of preference. The car features are labeled as:
+A sample of \eqn{N=435} customers were asked to construct their car by using an online configurator system and choose among \eqn{K=6} car modules in order of preference. The car features are labeled as:
  1 = price, 2 = exterior design, 3 = brand, 4 = technical equipment, 5 = producing country and 6 = interior design.
 The survey did not require a complete ranking elicitation, therefore the dataset is composed of partial top orderings of varying lengths. Missing positions are denoted with zero entries.}
 \usage{data(d_carconf)}
 \format{
-  Data matrix of partial orderings with \eqn{N=435} rows and \eqn{K=6} columns, named as:
-  \describe{
-    \item{\code{rank1}}{Item occupying position 1 (most-liked).}
-    \item{\code{rank2}}{Item occupying position 2.}
-    \item{\code{rank3}}{Item occupying position 3.}
-    \item{\code{rank4}}{Item occupying position 4.}
-    \item{\code{rank5}}{Item occupying position 5.}
-    \item{\code{rank6}}{Item occupying position 6 (least-liked).}
-  }
+  Data matrix of partial orderings with \eqn{N=435} rows and \eqn{K=6} columns. Each row lists the car features from the most important (\code{Rank_1}) to the least important (\code{Rank_6}) for a given customer.
 }
 \references{
 Mollica, C. and Tardella, L. (2017). Bayesian Plackett-Luce mixture models for partially ranked data. \emph{Psychometrika}, \bold{82}(2), pages 442--458, ISSN: 0033-3123, DOI: 10.1007/s11336-016-9530-0.
@@ -31,8 +23,7 @@ Finance und Human Resource Management}. Wien: Facultas.
 data(d_carconf)
 head(d_carconf)
 
-# Subset of complete sequences
-
+## Subset of complete sequences
 d_carconf_compl=d_carconf[rowSums(d_carconf!=0)>=(ncol(d_carconf)-1),]
 head(d_carconf_compl)
 }

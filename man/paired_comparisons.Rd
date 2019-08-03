@@ -4,12 +4,12 @@
 \alias{paired_comparisons}
 \title{Paired comparison matrix for a partial ordering/ranking dataset}
 \usage{
-paired_comparisons(data, format = "ordering", nranked = NULL)
+paired_comparisons(data, format_input, nranked = NULL)
 }
 \arguments{
 \item{data}{Numeric \eqn{N}\eqn{\times}{x}\eqn{K} data matrix of partial sequences.}
 
-\item{format}{Character string indicating the format of the \code{data} argument (\code{"ordering"} or \code{"ranking"}).}
+\item{format_input}{Character string indicating the format of the \code{data} input (\code{"ordering"} or \code{"ranking"}).}
 
 \item{nranked}{Optional numeric vector of length \eqn{N} with the number of items ranked by each sample unit.}
 }
@@ -22,7 +22,7 @@ Construct the paired comparison matrix for a partial ordering/ranking dataset.
 \examples{
 
 data(d_dublinwest)
-paired_comparisons(data=d_dublinwest, format="ordering")
+paired_comparisons(data=d_dublinwest, format_input="ordering")
 }
 \references{
 Mollica, C. and Tardella, L. (2017). Bayesian Plackett-Luce mixture models for partially ranked data. \emph{Psychometrika}, \bold{82}(2), pages 442--458, ISSN: 0033-3123, DOI: 10.1007/s11336-016-9530-0.

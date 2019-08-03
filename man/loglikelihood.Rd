@@ -7,8 +7,7 @@
 \alias{loglikelihood}
 \alias{Likelihood}
 \alias{likelihood}
-\alias{loglikPLMIX}
-\title{Likelihood and Log-likelihood evaluation for a mixture of Plackett-Luce models}
+\title{Likelihood and log-likelihood evaluation for a mixture of Plackett-Luce models}
 \usage{
 likPLMIX(p, ref_order, weights, pi_inv)
 
@@ -21,7 +20,7 @@ loglikPLMIX(p, ref_order, weights, pi_inv)
 
 \item{weights}{Numeric vector of \eqn{G} mixture weights.}
 
-\item{pi_inv}{Numeric \eqn{N}\eqn{\times}{x}\eqn{K} data matrix of partial orderings.}
+\item{pi_inv}{An object of class \code{top_ordering}, collecting the numeric \eqn{N}\eqn{\times}{x}\eqn{K} data matrix of partial orderings, or an object that can be coerced with \code{\link{as.top_ordering}}.}
 }
 \value{
 Either the likelihood or the log-likelihood value of the Plackett-Luce mixture model parameters for a partial ordering dataset.

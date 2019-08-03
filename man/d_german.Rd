@@ -6,18 +6,12 @@
 }
 \usage{data(d_german)}
 \format{
-Data matrix of complete orderings with \eqn{N=2262} rows and \eqn{K=4} columns, named as:
-  \describe{
-    \item{\code{rank1}}{Political goal occupying position 1 (most desirable).}
-    \item{\code{rank2}}{Political goal occupying position 2.}
-    \item{\code{rank3}}{Political goal occupying position 3.}
-    \item{\code{rank4}}{Political goal occupying position 4 (least desirable).}
-  }
+Data matrix of complete orderings with \eqn{N=2262} rows and \eqn{K=4} columns. Each row lists the political goals from the most desiderable (\code{Rank_1}) to the least desiderable (\code{Rank_4}) for a given respondent.
 }
 \references{
-Barnes, S. H. et al. (1979). Political action. Mass participation in five Western democracies. London: Sage.
-
 Croon, M. A. (1989). Latent class models for the analysis of rankings. In De Soete, G., Feger, H. and Klauer, K. C. (eds), \emph{New Developments in Psychological Choice Modeling}, pages 99--121. North-Holland: Amsterdam.
+
+Barnes, S. H. et al. (1979). Political action. Mass participation in five Western democracies. London: Sage.
 }
 \examples{
 data(d_german)

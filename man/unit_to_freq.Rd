@@ -2,7 +2,7 @@
 % Please edit documentation in R/PLMIXfunctions.R
 \name{unit_to_freq}
 \alias{unit_to_freq}
-\title{Frequency distribution from the individual rankings/orderings.}
+\title{Frequency distribution from the individual rankings/orderings}
 \usage{
 unit_to_freq(data)
 }
@@ -17,11 +17,7 @@ Construct the frequency distribution of the distinct observed sequences from the
 }
 \examples{
 
-# Frequency distribution of complete orderings 
-data(d_german)
-unit_to_freq(data=d_german)
-
-# Frequency distribution of partial orderings
+## Frequency distribution for the APA top-ordering dataset
 data(d_apa)
 unit_to_freq(data=d_apa)
 }

@@ -5,6 +5,127 @@
 
 using namespace Rcpp;
 
+// CompProbZpartial
+NumericMatrix CompProbZpartial(NumericMatrix p, NumericMatrix pi_inv, NumericMatrix Y, NumericMatrix u_bin, IntegerVector n_rank, NumericVector omega);
+RcppExport SEXP _PLMIX_CompProbZpartial(SEXP pSEXP, SEXP pi_invSEXP, SEXP YSEXP, SEXP u_binSEXP, SEXP n_rankSEXP, SEXP omegaSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< NumericMatrix >::type p(pSEXP);
+    Rcpp::traits::input_parameter< NumericMatrix >::type pi_inv(pi_invSEXP);
+    Rcpp::traits::input_parameter< NumericMatrix >::type Y(YSEXP);
+    Rcpp::traits::input_parameter< NumericMatrix >::type u_bin(u_binSEXP);
+    Rcpp::traits::input_parameter< IntegerVector >::type n_rank(n_rankSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type omega(omegaSEXP);
+    rcpp_result_gen = Rcpp::wrap(CompProbZpartial(p, pi_inv, Y, u_bin, n_rank, omega));
+    return rcpp_result_gen;
+END_RCPP
+}
+// CompRateP
+NumericMatrix CompRateP(NumericMatrix pi_inv, NumericMatrix Y, NumericMatrix z, NumericMatrix u_bin, IntegerVector n_rank, NumericVector rate0);
+RcppExport SEXP _PLMIX_CompRateP(SEXP pi_invSEXP, SEXP YSEXP, SEXP zSEXP, SEXP u_binSEXP, SEXP n_rankSEXP, SEXP rate0SEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< NumericMatrix >::type pi_inv(pi_invSEXP);
+    Rcpp::traits::input_parameter< NumericMatrix >::type Y(YSEXP);
+    Rcpp::traits::input_parameter< NumericMatrix >::type z(zSEXP);
+    Rcpp::traits::input_parameter< NumericMatrix >::type u_bin(u_binSEXP);
+    Rcpp::traits::input_parameter< IntegerVector >::type n_rank(n_rankSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type rate0(rate0SEXP);
+    rcpp_result_gen = Rcpp::wrap(CompRateP(pi_inv, Y, z, u_bin, n_rank, rate0));
+    return rcpp_result_gen;
+END_RCPP
+}
+// CompRateYpartial
+NumericMatrix CompRateYpartial(NumericMatrix p, NumericMatrix pi_inv, NumericVector ref_order, NumericMatrix z, NumericVector n_rank);
+RcppExport SEXP _PLMIX_CompRateYpartial(SEXP pSEXP, SEXP pi_invSEXP, SEXP ref_orderSEXP, SEXP zSEXP, SEXP n_rankSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< NumericMatrix >::type p(pSEXP);
+    Rcpp::traits::input_parameter< NumericMatrix >::type pi_inv(pi_invSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type ref_order(ref_orderSEXP);
+    Rcpp::traits::input_parameter< NumericMatrix >::type z(zSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type n_rank(n_rankSEXP);
+    rcpp_result_gen = Rcpp::wrap(CompRateYpartial(p, pi_inv, ref_order, z, n_rank));
+    return rcpp_result_gen;
+END_RCPP
+}
+// Estep
+NumericMatrix Estep(NumericMatrix p, NumericMatrix ref_order, NumericVector weights, NumericMatrix pi_inv);
+RcppExport SEXP _PLMIX_Estep(SEXP pSEXP, SEXP ref_orderSEXP, SEXP weightsSEXP, SEXP pi_invSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< NumericMatrix >::type p(pSEXP);
+    Rcpp::traits::input_parameter< NumericMatrix >::type ref_order(ref_orderSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type weights(weightsSEXP);
+    Rcpp::traits::input_parameter< NumericMatrix >::type pi_inv(pi_invSEXP);
+    rcpp_result_gen = Rcpp::wrap(Estep(p, ref_order, weights, pi_inv));
+    return rcpp_result_gen;
+END_RCPP
+}
+// PLMIXsim
+Rcpp::IntegerMatrix PLMIXsim(int N, int K, int G, Rcpp::NumericMatrix p, Rcpp::NumericMatrix ref_order, Rcpp::NumericVector weights, bool rankingFormat, Rcpp::IntegerMatrix pi_inv);
+RcppExport SEXP _PLMIX_PLMIXsim(SEXP NSEXP, SEXP KSEXP, SEXP GSEXP, SEXP pSEXP, SEXP ref_orderSEXP, SEXP weightsSEXP, SEXP rankingFormatSEXP, SEXP pi_invSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< int >::type N(NSEXP);
+    Rcpp::traits::input_parameter< int >::type K(KSEXP);
+    Rcpp::traits::input_parameter< int >::type G(GSEXP);
+    Rcpp::traits::input_parameter< Rcpp::NumericMatrix >::type p(pSEXP);
+    Rcpp::traits::input_parameter< Rcpp::NumericMatrix >::type ref_order(ref_orderSEXP);
+    Rcpp::traits::input_parameter< Rcpp::NumericVector >::type weights(weightsSEXP);
+    Rcpp::traits::input_parameter< bool >::type rankingFormat(rankingFormatSEXP);
+    Rcpp::traits::input_parameter< Rcpp::IntegerMatrix >::type pi_inv(pi_invSEXP);
+    rcpp_result_gen = Rcpp::wrap(PLMIXsim(N, K, G, p, ref_order, weights, rankingFormat, pi_inv));
+    return rcpp_result_gen;
+END_RCPP
+}
+// SimYpsilon
+NumericMatrix SimYpsilon(NumericMatrix rate, NumericVector n_rank);
+RcppExport SEXP _PLMIX_SimYpsilon(SEXP rateSEXP, SEXP n_rankSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< NumericMatrix >::type rate(rateSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type n_rank(n_rankSEXP);
+    rcpp_result_gen = Rcpp::wrap(SimYpsilon(rate, n_rank));
+    return rcpp_result_gen;
+END_RCPP
+}
+// UpPhetpartial
+NumericMatrix UpPhetpartial(NumericMatrix p, NumericMatrix ref_order, NumericMatrix pi_inv, NumericMatrix u_bin, NumericMatrix z_hat, NumericMatrix shape0, NumericVector rate0, IntegerVector n_rank);
+RcppExport SEXP _PLMIX_UpPhetpartial(SEXP pSEXP, SEXP ref_orderSEXP, SEXP pi_invSEXP, SEXP u_binSEXP, SEXP z_hatSEXP, SEXP shape0SEXP, SEXP rate0SEXP, SEXP n_rankSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< NumericMatrix >::type p(pSEXP);
+    Rcpp::traits::input_parameter< NumericMatrix >::type ref_order(ref_orderSEXP);
+    Rcpp::traits::input_parameter< NumericMatrix >::type pi_inv(pi_invSEXP);
+    Rcpp::traits::input_parameter< NumericMatrix >::type u_bin(u_binSEXP);
+    Rcpp::traits::input_parameter< NumericMatrix >::type z_hat(z_hatSEXP);
+    Rcpp::traits::input_parameter< NumericMatrix >::type shape0(shape0SEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type rate0(rate0SEXP);
+    Rcpp::traits::input_parameter< IntegerVector >::type n_rank(n_rankSEXP);
+    rcpp_result_gen = Rcpp::wrap(UpPhetpartial(p, ref_order, pi_inv, u_bin, z_hat, shape0, rate0, n_rank));
+    return rcpp_result_gen;
+END_RCPP
+}
+// UpWhet
+NumericVector UpWhet(NumericMatrix z_hat, NumericVector alpha0);
+RcppExport SEXP _PLMIX_UpWhet(SEXP z_hatSEXP, SEXP alpha0SEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< NumericMatrix >::type z_hat(z_hatSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type alpha0(alpha0SEXP);
+    rcpp_result_gen = Rcpp::wrap(UpWhet(z_hat, alpha0));
+    return rcpp_result_gen;
+END_RCPP
+}
 // chisqmeasureobs
 double chisqmeasureobs(Rcpp::IntegerMatrix pi_inv, Rcpp::NumericMatrix p, Rcpp::NumericVector weights);
 RcppExport SEXP _PLMIX_chisqmeasureobs(SEXP pi_invSEXP, SEXP pSEXP, SEXP weightsSEXP) {
@@ -117,67 +238,6 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
-// CompProbZpartial
-NumericMatrix CompProbZpartial(NumericMatrix p, NumericMatrix pi_inv, NumericMatrix Y, NumericMatrix u_bin, IntegerVector n_rank, NumericVector omega);
-RcppExport SEXP _PLMIX_CompProbZpartial(SEXP pSEXP, SEXP pi_invSEXP, SEXP YSEXP, SEXP u_binSEXP, SEXP n_rankSEXP, SEXP omegaSEXP) {
-BEGIN_RCPP
-    Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< NumericMatrix >::type p(pSEXP);
-    Rcpp::traits::input_parameter< NumericMatrix >::type pi_inv(pi_invSEXP);
-    Rcpp::traits::input_parameter< NumericMatrix >::type Y(YSEXP);
-    Rcpp::traits::input_parameter< NumericMatrix >::type u_bin(u_binSEXP);
-    Rcpp::traits::input_parameter< IntegerVector >::type n_rank(n_rankSEXP);
-    Rcpp::traits::input_parameter< NumericVector >::type omega(omegaSEXP);
-    rcpp_result_gen = Rcpp::wrap(CompProbZpartial(p, pi_inv, Y, u_bin, n_rank, omega));
-    return rcpp_result_gen;
-END_RCPP
-}
-// CompRateP
-NumericMatrix CompRateP(NumericMatrix pi_inv, NumericMatrix Y, NumericMatrix z, NumericMatrix u_bin, IntegerVector n_rank, NumericVector rate0);
-RcppExport SEXP _PLMIX_CompRateP(SEXP pi_invSEXP, SEXP YSEXP, SEXP zSEXP, SEXP u_binSEXP, SEXP n_rankSEXP, SEXP rate0SEXP) {
-BEGIN_RCPP
-    Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< NumericMatrix >::type pi_inv(pi_invSEXP);
-    Rcpp::traits::input_parameter< NumericMatrix >::type Y(YSEXP);
-    Rcpp::traits::input_parameter< NumericMatrix >::type z(zSEXP);
-    Rcpp::traits::input_parameter< NumericMatrix >::type u_bin(u_binSEXP);
-    Rcpp::traits::input_parameter< IntegerVector >::type n_rank(n_rankSEXP);
-    Rcpp::traits::input_parameter< NumericVector >::type rate0(rate0SEXP);
-    rcpp_result_gen = Rcpp::wrap(CompRateP(pi_inv, Y, z, u_bin, n_rank, rate0));
-    return rcpp_result_gen;
-END_RCPP
-}
-// CompRateYpartial
-NumericMatrix CompRateYpartial(NumericMatrix p, NumericMatrix pi_inv, NumericVector ref_order, NumericMatrix z, NumericVector n_rank);
-RcppExport SEXP _PLMIX_CompRateYpartial(SEXP pSEXP, SEXP pi_invSEXP, SEXP ref_orderSEXP, SEXP zSEXP, SEXP n_rankSEXP) {
-BEGIN_RCPP
-    Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< NumericMatrix >::type p(pSEXP);
-    Rcpp::traits::input_parameter< NumericMatrix >::type pi_inv(pi_invSEXP);
-    Rcpp::traits::input_parameter< NumericVector >::type ref_order(ref_orderSEXP);
-    Rcpp::traits::input_parameter< NumericMatrix >::type z(zSEXP);
-    Rcpp::traits::input_parameter< NumericVector >::type n_rank(n_rankSEXP);
-    rcpp_result_gen = Rcpp::wrap(CompRateYpartial(p, pi_inv, ref_order, z, n_rank));
-    return rcpp_result_gen;
-END_RCPP
-}
-// Estep
-NumericMatrix Estep(NumericMatrix p, NumericMatrix ref_order, NumericVector weights, NumericMatrix pi_inv);
-RcppExport SEXP _PLMIX_Estep(SEXP pSEXP, SEXP ref_orderSEXP, SEXP weightsSEXP, SEXP pi_invSEXP) {
-BEGIN_RCPP
-    Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< NumericMatrix >::type p(pSEXP);
-    Rcpp::traits::input_parameter< NumericMatrix >::type ref_order(ref_orderSEXP);
-    Rcpp::traits::input_parameter< NumericVector >::type weights(weightsSEXP);
-    Rcpp::traits::input_parameter< NumericMatrix >::type pi_inv(pi_invSEXP);
-    rcpp_result_gen = Rcpp::wrap(Estep(p, ref_order, weights, pi_inv));
-    return rcpp_result_gen;
-END_RCPP
-}
 // howmanyranked
 IntegerVector howmanyranked(NumericMatrix pi_inv);
 RcppExport SEXP _PLMIX_howmanyranked(SEXP pi_invSEXP) {
@@ -203,24 +263,6 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
-// PLMIXsim
-Rcpp::IntegerMatrix PLMIXsim(int N, int K, int G, Rcpp::NumericMatrix p, Rcpp::NumericMatrix ref_order, Rcpp::NumericVector weights, bool rankingFormat, Rcpp::IntegerMatrix pi_inv);
-RcppExport SEXP _PLMIX_PLMIXsim(SEXP NSEXP, SEXP KSEXP, SEXP GSEXP, SEXP pSEXP, SEXP ref_orderSEXP, SEXP weightsSEXP, SEXP rankingFormatSEXP, SEXP pi_invSEXP) {
-BEGIN_RCPP
-    Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< int >::type N(NSEXP);
-    Rcpp::traits::input_parameter< int >::type K(KSEXP);
-    Rcpp::traits::input_parameter< int >::type G(GSEXP);
-    Rcpp::traits::input_parameter< Rcpp::NumericMatrix >::type p(pSEXP);
-    Rcpp::traits::input_parameter< Rcpp::NumericMatrix >::type ref_order(ref_orderSEXP);
-    Rcpp::traits::input_parameter< Rcpp::NumericVector >::type weights(weightsSEXP);
-    Rcpp::traits::input_parameter< bool >::type rankingFormat(rankingFormatSEXP);
-    Rcpp::traits::input_parameter< Rcpp::IntegerMatrix >::type pi_inv(pi_invSEXP);
-    rcpp_result_gen = Rcpp::wrap(PLMIXsim(N, K, G, p, ref_order, weights, rankingFormat, pi_inv));
-    return rcpp_result_gen;
-END_RCPP
-}
 // quickintsample
 Rcpp::IntegerVector quickintsample(int n, int size, Rcpp::NumericVector prob);
 RcppExport SEXP _PLMIX_quickintsample(SEXP nSEXP, SEXP sizeSEXP, SEXP probSEXP) {
@@ -231,18 +273,6 @@ BEGIN_RCPP
     Rcpp::traits::input_parameter< int >::type size(sizeSEXP);
     Rcpp::traits::input_parameter< Rcpp::NumericVector >::type prob(probSEXP);
     rcpp_result_gen = Rcpp::wrap(quickintsample(n, size, prob));
-    return rcpp_result_gen;
-END_RCPP
-}
-// SimYpsilon
-NumericMatrix SimYpsilon(NumericMatrix rate, NumericVector n_rank);
-RcppExport SEXP _PLMIX_SimYpsilon(SEXP rateSEXP, SEXP n_rankSEXP) {
-BEGIN_RCPP
-    Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< NumericMatrix >::type rate(rateSEXP);
-    Rcpp::traits::input_parameter< NumericVector >::type n_rank(n_rankSEXP);
-    rcpp_result_gen = Rcpp::wrap(SimYpsilon(rate, n_rank));
     return rcpp_result_gen;
 END_RCPP
 }
@@ -279,38 +309,16 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
-// UpPhetpartial
-NumericMatrix UpPhetpartial(NumericMatrix p, NumericMatrix ref_order, NumericMatrix pi_inv, NumericMatrix u_bin, NumericMatrix z_hat, NumericMatrix shape0, NumericVector rate0, IntegerVector n_rank);
-RcppExport SEXP _PLMIX_UpPhetpartial(SEXP pSEXP, SEXP ref_orderSEXP, SEXP pi_invSEXP, SEXP u_binSEXP, SEXP z_hatSEXP, SEXP shape0SEXP, SEXP rate0SEXP, SEXP n_rankSEXP) {
-BEGIN_RCPP
-    Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< NumericMatrix >::type p(pSEXP);
-    Rcpp::traits::input_parameter< NumericMatrix >::type ref_order(ref_orderSEXP);
-    Rcpp::traits::input_parameter< NumericMatrix >::type pi_inv(pi_invSEXP);
-    Rcpp::traits::input_parameter< NumericMatrix >::type u_bin(u_binSEXP);
-    Rcpp::traits::input_parameter< NumericMatrix >::type z_hat(z_hatSEXP);
-    Rcpp::traits::input_parameter< NumericMatrix >::type shape0(shape0SEXP);
-    Rcpp::traits::input_parameter< NumericVector >::type rate0(rate0SEXP);
-    Rcpp::traits::input_parameter< IntegerVector >::type n_rank(n_rankSEXP);
-    rcpp_result_gen = Rcpp::wrap(UpPhetpartial(p, ref_order, pi_inv, u_bin, z_hat, shape0, rate0, n_rank));
-    return rcpp_result_gen;
-END_RCPP
-}
-// UpWhet
-NumericVector UpWhet(NumericMatrix z_hat, NumericVector alpha0);
-RcppExport SEXP _PLMIX_UpWhet(SEXP z_hatSEXP, SEXP alpha0SEXP) {
-BEGIN_RCPP
-    Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< NumericMatrix >::type z_hat(z_hatSEXP);
-    Rcpp::traits::input_parameter< NumericVector >::type alpha0(alpha0SEXP);
-    rcpp_result_gen = Rcpp::wrap(UpWhet(z_hat, alpha0));
-    return rcpp_result_gen;
-END_RCPP
-}
 
 static const R_CallMethodDef CallEntries[] = {
+    {"_PLMIX_CompProbZpartial", (DL_FUNC) &_PLMIX_CompProbZpartial, 6},
+    {"_PLMIX_CompRateP", (DL_FUNC) &_PLMIX_CompRateP, 6},
+    {"_PLMIX_CompRateYpartial", (DL_FUNC) &_PLMIX_CompRateYpartial, 5},
+    {"_PLMIX_Estep", (DL_FUNC) &_PLMIX_Estep, 4},
+    {"_PLMIX_PLMIXsim", (DL_FUNC) &_PLMIX_PLMIXsim, 8},
+    {"_PLMIX_SimYpsilon", (DL_FUNC) &_PLMIX_SimYpsilon, 2},
+    {"_PLMIX_UpPhetpartial", (DL_FUNC) &_PLMIX_UpPhetpartial, 8},
+    {"_PLMIX_UpWhet", (DL_FUNC) &_PLMIX_UpWhet, 2},
     {"_PLMIX_chisqmeasureobs", (DL_FUNC) &_PLMIX_chisqmeasureobs, 3},
     {"_PLMIX_chisqmeasureobs1dim", (DL_FUNC) &_PLMIX_chisqmeasureobs1dim, 3},
     {"_PLMIX_chisqmeasureobscond", (DL_FUNC) &_PLMIX_chisqmeasureobscond, 3},
@@ -319,20 +327,12 @@ static const R_CallMethodDef CallEntries[] = {
     {"_PLMIX_chisqmeasuretheo1dim", (DL_FUNC) &_PLMIX_chisqmeasuretheo1dim, 5},
     {"_PLMIX_chisqmeasuretheocond", (DL_FUNC) &_PLMIX_chisqmeasuretheocond, 5},
     {"_PLMIX_chisqmeasuretheomatrix1dim", (DL_FUNC) &_PLMIX_chisqmeasuretheomatrix1dim, 5},
-    {"_PLMIX_CompProbZpartial", (DL_FUNC) &_PLMIX_CompProbZpartial, 6},
-    {"_PLMIX_CompRateP", (DL_FUNC) &_PLMIX_CompRateP, 6},
-    {"_PLMIX_CompRateYpartial", (DL_FUNC) &_PLMIX_CompRateYpartial, 5},
-    {"_PLMIX_Estep", (DL_FUNC) &_PLMIX_Estep, 4},
     {"_PLMIX_howmanyranked", (DL_FUNC) &_PLMIX_howmanyranked, 1},
     {"_PLMIX_loglikPLMIX", (DL_FUNC) &_PLMIX_loglikPLMIX, 4},
-    {"_PLMIX_PLMIXsim", (DL_FUNC) &_PLMIX_PLMIXsim, 8},
     {"_PLMIX_quickintsample", (DL_FUNC) &_PLMIX_quickintsample, 3},
-    {"_PLMIX_SimYpsilon", (DL_FUNC) &_PLMIX_SimYpsilon, 2},
     {"_PLMIX_tau", (DL_FUNC) &_PLMIX_tau, 1},
     {"_PLMIX_top1freq1dim", (DL_FUNC) &_PLMIX_top1freq1dim, 1},
     {"_PLMIX_umat", (DL_FUNC) &_PLMIX_umat, 1},
-    {"_PLMIX_UpPhetpartial", (DL_FUNC) &_PLMIX_UpPhetpartial, 8},
-    {"_PLMIX_UpWhet", (DL_FUNC) &_PLMIX_UpWhet, 2},
     {NULL, NULL, 0}
 };
 

@@ -7,14 +7,7 @@
 \description{The popular American Psychological Association dataset (\code{d_apa}) contains the results of the voting ballots of the 1980 presidential election. A total of \eqn{N=15449} voters ranked a maximum of \eqn{K=5} candidates, conventionally classified as research psychologists (candidate 1 and 3), clinical psychologists (candidate 4 and 5) and community psychologists (candidate 2). The winner of the election was candidate 3. The dataset is composed of partial top orderings of varying lengths. Missing positions are denoted with zero entries.}
 \usage{data(d_apa)}
 \format{
-  Data matrix of partial orderings with \eqn{N=15449} rows and \eqn{K=5} columns, named as:
-  \describe{
-    \item{\code{rank1}}{Candidate occupying position 1 (most-liked).}
-    \item{\code{rank2}}{Candidate occupying position 2.}
-    \item{\code{rank3}}{Candidate occupying position 3.}
-    \item{\code{rank4}}{Candidate occupying position 4.}
-    \item{\code{rank6}}{Candidate occupying position 5 (least-liked).}
-  }
+  Data matrix of partial orderings with \eqn{N=15449} rows and \eqn{K=5} columns Each row lists the candidates from the most-liked (\code{Rank_1}) to the least-liked (\code{Rank_5}) in a given voting ballot. 
 }
 \references{
 Mollica, C. and Tardella, L. (2017). Bayesian Plackett-Luce mixture models for partially ranked data. \emph{Psychometrika}, \bold{82}(2), pages 442--258, ISSN: 0033-3123, DOI: 10.1007/s11336-016-9530-0.
@@ -27,8 +20,7 @@ Diaconis, P. W. (1987). Spectral analysis for ranked data. Technical Report 282,
 data(d_apa)
 head(d_apa)
 
-# Subset of complete sequences
-
+## Subset of complete sequences
 d_apa_compl=d_apa[rowSums(d_apa!=0)>=(ncol(d_apa)-1),]
 head(d_apa_compl)
 }
