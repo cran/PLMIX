@@ -37,7 +37,6 @@ The \code{label_switchPLMIX} function performs the label switching adjustment of
 \examples{
 
 data(d_carconf)
-
 K <- ncol(d_carconf)
 
 ## Fit 1- and 2-component PL mixtures via MAP estimation

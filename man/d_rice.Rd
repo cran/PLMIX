@@ -6,7 +6,7 @@
 A total of \eqn{N=300} people casted their vote in the ballots by ranking the \eqn{K=5} candidates in the short list in a preferential manner. The dataset is composed of partial top orderings of varying lengths. Missing positions are denoted with zero entries.}
 \usage{data(d_rice)}
 \format{
-  Data matrix of partial orderings with \eqn{N=300} rows and \eqn{K=5} columns. Each row lists the faculty members from the most-liked (\code{Rank_1}) to the least-liked (\code{Rank_5}) in a given voting ballot. 
+Object of S3 class \code{c("top_ordering","matrix")} gathering a matrix of partial orderings with \eqn{N=300} rows and \eqn{K=5} columns. Each row lists the faculty members from the most-liked (\code{Rank_1}) to the least-liked (\code{Rank_5}) in a given voting ballot. 
 }
 \references{
 Marcus, P., Heiser, W. J. and  D'Ambrosio, A. (2013). Comparison of heterogeneous probability models for ranking data, Master Thesis, Leiden University.

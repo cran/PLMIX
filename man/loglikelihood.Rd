@@ -34,12 +34,10 @@ The \code{ref_order} argument accommodates for the more general mixture of Exten
 \examples{
 
 data(d_apa)
-
 K <- ncol(d_apa)
 G <- 3
 support_par <- matrix(1:(G*K), nrow=G, ncol=K)
 weights_par <- c(0.50, 0.25, 0.25)
-
 loglikPLMIX(p=support_par, ref_order=matrix(1:K, nrow=G, ncol=K, byrow=TRUE), 
             weights=weights_par, pi_inv=d_apa)
 

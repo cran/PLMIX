@@ -43,15 +43,11 @@ The Plackett-Luce model is one of the most popular and frequently applied parame
    \item{\code{\link{mapPLMIX}}}{MAP estimation via EM algorithm.}
    \item{\code{\link{mapPLMIX_multistart}}}{MAP estimation via EM algorithm with multiple starting values.}
     }
-\strong{Model selection}
+\strong{Class coercion and membership}
   \describe{
-   \item{\code{\link{bicPLMIX}}}{BIC value for the MLE of a mixture of Plackett-Luce models.}
-   \item{\code{\link{selectPLMIX}}}{Bayesian model selection criteria.}
-    }
-\strong{Model assessment}
-  \describe{
-   \item{\code{\link{ppcheckPLMIX}}}{Posterior predictive diagnostics.}
-   \item{\code{\link{ppcheckPLMIX_cond}}}{Posterior predictive diagnostics conditionally on the number of ranked items.}
+   \item{\code{\link{as.top_ordering}}}{Coercion into top-ordering datasets.}
+   \item{\code{\link{gsPLMIX_to_mcmc}}}{From the Gibbs sampling simulation to an MCMC class object.}
+   \item{\code{\link{is.top_ordering}}}{Test for the consistency of input data with a top-ordering dataset.}
     }
 \strong{S3 class methods}
   \describe{
@@ -62,16 +58,22 @@ The Plackett-Luce model is one of the most popular and frequently applied parame
    \item{\code{\link{summary.gsPLMIX}}}{Summary of the Gibbs sampling procedure.}
    \item{\code{\link{summary.mpPLMIX}}}{Summary of the MAP estimation.} 
     }
-\strong{Class coercion and membership}
+\strong{Model selection}
   \describe{
-   \item{\code{\link{gsPLMIX_to_mcmc}}}{From the Gibbs sampling simulation to an MCMC class object.}
-   \item{\code{\link{is.top_ordering}}}{Test for the consistency of data input with a top-ordering dataset.}
+   \item{\code{\link{bicPLMIX}}}{BIC value for the MLE of a mixture of Plackett-Luce models.}
+   \item{\code{\link{selectPLMIX}}}{Bayesian model selection criteria.}
+    }
+\strong{Model assessment}
+  \describe{
+   \item{\code{\link{ppcheckPLMIX}}}{Posterior predictive diagnostics.}
+   \item{\code{\link{ppcheckPLMIX_cond}}}{Posterior predictive diagnostics conditionally on the number of ranked items.}
     }
 \strong{Datasets}
   \describe{
    \item{\code{\link{d_apa}}}{American Psychological Association Data (partial orderings).}
    \item{\code{\link{d_carconf}}}{Car Configurator Data (partial orderings).}
    \item{\code{\link{d_dublinwest}}}{Dublin West Data (partial orderings).}
+   \item{\code{\link{d_gaming}}}{Gaming Platforms Data (complete orderings).}
    \item{\code{\link{d_german}}}{German Sample Data (complete orderings).}
    \item{\code{\link{d_nascar}}}{NASCAR Data (partial orderings).}
    \item{\code{\link{d_occup}}}{Occupation Data (complete orderings).}

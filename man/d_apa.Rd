@@ -7,7 +7,7 @@
 \description{The popular American Psychological Association dataset (\code{d_apa}) contains the results of the voting ballots of the 1980 presidential election. A total of \eqn{N=15449} voters ranked a maximum of \eqn{K=5} candidates, conventionally classified as research psychologists (candidate 1 and 3), clinical psychologists (candidate 4 and 5) and community psychologists (candidate 2). The winner of the election was candidate 3. The dataset is composed of partial top orderings of varying lengths. Missing positions are denoted with zero entries.}
 \usage{data(d_apa)}
 \format{
-  Data matrix of partial orderings with \eqn{N=15449} rows and \eqn{K=5} columns Each row lists the candidates from the most-liked (\code{Rank_1}) to the least-liked (\code{Rank_5}) in a given voting ballot. 
+Object of S3 class \code{c("top_ordering","matrix")} gathering a matrix of partial orderings with \eqn{N=15449} rows and \eqn{K=5} columns Each row lists the candidates from the most-liked (\code{Rank_1}) to the least-liked (\code{Rank_5}) in a given voting ballot. 
 }
 \references{
 Mollica, C. and Tardella, L. (2017). Bayesian Plackett-Luce mixture models for partially ranked data. \emph{Psychometrika}, \bold{82}(2), pages 442--258, ISSN: 0033-3123, DOI: 10.1007/s11336-016-9530-0.

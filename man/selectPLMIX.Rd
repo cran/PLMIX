@@ -48,7 +48,6 @@ Several model selection criteria are returned. The two versions of DIC correspon
 \examples{
 
 data(d_carconf)
-
 K <- ncol(d_carconf)
 
 ## Fit 1- and 2-component PL mixtures via MAP estimation 

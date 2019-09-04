@@ -5,7 +5,7 @@
 \description{The NASCAR dataset (\code{d_nascar}) collects the results of the 2002 season of stock car racing held in the United States. The 2002 championship consisted of \eqn{N=36} races, with 43 car drivers competing in each race. A total of \eqn{K=87} drivers participated in the 2002 season, taking part to a variable number of races: some of them competed in all the races, some others in only one. The results of the entire 2002 season were collected in the form of top-43 orderings, where the position of the not-competing drivers in each race is assumed lower than the 43th, but undetermined. Missing positions are denoted with zero entries.}
 \usage{data(d_nascar)}
 \format{
- Data matrix of partial orderings with \eqn{N=36} rows and \eqn{K=87} columns. Each row lists the car drivers from the top position (\code{Rank_1}) to the bottom one (\code{Rank_87}) in a given race. Columns from the 44th to the 87th are filled with zeros, because only 43 drivers competed in each race.
+Object of S3 class \code{c("top_ordering","matrix")} gathering a matrix of partial orderings with \eqn{N=36} rows and \eqn{K=87} columns. Each row lists the car drivers from the top position (\code{Rank_1}) to the bottom one (\code{Rank_87}) in a given race. Columns from the 44th to the 87th are filled with zeros, because only 43 drivers competed in each race.
 }
 \references{
 Caron, F. and Doucet, A. (2012). Efficient Bayesian inference for Generalized Bradley-Terry models. \emph{J. Comput. Graph. Statist.}, \bold{21}(1), pages 174--196.

@@ -1,7 +1,15 @@
 NEWS/ChangeLog for PLMIX
 --------------------------
 
-2.0.2   2019-08-01
+2.1.1   2019-09-02
+
+NEW FEATURES
+    o   Added a new dataset called `d_gaming`.
+
+DOCUMENTATION
+    o   Removed some typos from the manual.
+
+2.1.0   2019-08-01
 
 MAJOR CHANGES
     o   The pi_inv argument (formerly a numeric N*K matrix with the observed top-ordering) has been redefined as an object of class `top_ordering` or an object that can be coerced with the new function as.top_ordering.

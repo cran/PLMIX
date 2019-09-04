@@ -7,7 +7,7 @@ A sample of \eqn{N=143} graduates were asked to rank \eqn{K=10} professions acco
  1 = faculty member, 2 = owner of a business, 3 = applied scientist, 4 = operations researcher, 5 = industrial engineer, 6 = manager, 7 = mechanical engineer, 8 = supervisor, 9 = technician and 10 = foreman. The dataset is composed of complete orderings.}
 \usage{data(d_occup)}
 \format{
-  Data matrix of complete orderings with \eqn{N=143} rows and \eqn{K=10} columns. Each row lists the professions from the most-liked (\code{Rank_1}) to the least-liked (\code{Rank_10}) for a given graduate.
+Object of S3 class \code{c("top_ordering","matrix")} gathering a matrix of complete orderings with \eqn{N=143} rows and \eqn{K=10} columns. Each row lists the professions from the most-liked (\code{Rank_1}) to the least-liked (\code{Rank_10}) for a given graduate.
 }
 \references{
 

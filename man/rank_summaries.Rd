@@ -10,7 +10,7 @@ rank_summaries(data, format_input, mean_rank = TRUE, marginals = TRUE,
 \arguments{
 \item{data}{Numeric \eqn{N}\eqn{\times}{x}\eqn{K} data matrix of partial sequences.}
 
-\item{format_input}{Character string indicating the format of the \code{data} input (\code{"ordering"} or \code{"ranking"}).}
+\item{format_input}{Character string indicating the format of the \code{data} input, namely \code{"ordering"} or \code{"ranking"}.}
 
 \item{mean_rank}{Logical: whether the mean rank vector has to be computed. Default is \code{TRUE}.}
 

@@ -10,7 +10,7 @@ make_complete(data, format_input, nranked = NULL, probitems = rep(1,
 \arguments{
 \item{data}{Numeric \eqn{N}\eqn{\times}{x}\eqn{K} data matrix of partial sequences to be completed.}
 
-\item{format_input}{Character string indicating the format of the \code{data} input (\code{"ordering"} or \code{"ranking"}).}
+\item{format_input}{Character string indicating the format of the \code{data} input, namely \code{"ordering"} or \code{"ranking"}.}
 
 \item{nranked}{Optional numeric vector of length \eqn{N} with the number of items ranked by each sample unit.}
 

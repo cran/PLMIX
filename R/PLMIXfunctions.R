@@ -12,12 +12,10 @@ freq_to_unit <- function(freq_distr){
 #' @examples
 #' 
 #' library(gtools)
-#' 
 #' K <- 4
 #' perm_matrix <- permutations(n=K, r=K)
 #' freq_data <- cbind(perm_matrix, sample(1:factorial(K)))
 #' freq_data
-#' 
 #' freq_to_unit(freq_distr=freq_data)
 #' 
 #' @export 
@@ -142,14 +140,14 @@ is.top_ordering <- function(data,...){
   
   #' Top-ordering datasets
   #' 
-  #' Check the consistency of the input partial ordering data with a top-ordering dataset.
+  #' Check the consistency of partial ordering data with a top-ordering dataset.
   #' 
-  #' The argument \code{data} requires the partial sequences expressed in the ordering format. When the value of \code{is.top-ordering} is \code{FALSE}, the membership function returns also a message with the conditions that are not met for the \code{data} input to be a top-ordering dataset. \code{NA}'s in the input \code{data} are tacitly converted into zero entries. 
+  #' The argument \code{data} requires the partial sequences expressed in ordering format. When the value of \code{is.top-ordering} is \code{FALSE}, the membership function returns also a message with the conditions that are not met for the \code{data} to be a top-ordering dataset. \code{NA}'s in the input \code{data} are tacitly converted into zero entries. 
   #' 
   #' @param data An object containing the partial orderings whose consistency with a top-ordering dataset has to be tested. The following classes are admissible for \code{data}: numeric \code{matrix}, \code{data.frame}, \code{RandData} from the \code{rankdist} package and \code{rankings} from the \code{PlackettLuce} package.
   #' @param ... Further arguments passed to or from other methods (not used).
   #' 
-  #' @return Logical: \code{TRUE} if the input \code{data} is consistent with a top-ordering dataset (with a possible warning message if the supplied data need a further treatment with the coercion function \code{\link{as.top_ordering}} before being processed with the core functions of \pkg{PLMIX}) and \code{FALSE} otherwise.
+  #' @return Logical: \code{TRUE} if the \code{data} argument is consistent with a top-ordering dataset (with a possible warning message if the supplied data need a further treatment with the coercion function \code{\link{as.top_ordering}} before being processed with the core functions of \pkg{PLMIX}) and \code{FALSE} otherwise.
   #' 
   #' @references 
   #' Turner, H., Kormidis, I. and Firth, D. (2018). PlackettLuce: Plackett-Luce Models for Rankings. R package version 0.2-3. \url{https://CRAN.R-project.org/package=PlackettLuce}
@@ -158,7 +156,7 @@ is.top_ordering <- function(data,...){
   #' 
   #' @author Cristina Mollica and Luca Tardella
   #' 
-  #' @seealso \code{\link{as.top_ordering}}, \code{\link[PlackettLuce]{rankings}} and \code{\link[PlackettLuce]{rankings}}
+  #' @seealso \code{\link[PlackettLuce]{rankings}} and \code{\link[PlackettLuce]{rankings}}
   #' 
   #' @examples
   #' 
@@ -276,13 +274,13 @@ as.top_ordering <- function(data,format_input=NULL,aggr=NULL,freq_col=NULL,ties_
   #' 
   #' Attempt to coerce the input data into a top-ordering dataset.
   #' 
-  #' The coercion function \code{as.top_ordering} tries to coerce the input data into an object of class \code{top_ordering} after checking for possibles partial sequences that do not satisfy the top-ordering requirements. If none of the supplied sequences satisfies the top-ordering conditions, an error message is returned. \code{NA}'s in the input \code{data} are tacitly converted into zero entries.
+  #' The coercion function \code{as.top_ordering} tries to coerce the input data into an object of class \code{top_ordering} after checking for possible partial sequences that do not satisfy the top-ordering requirements. If none of the supplied sequences satisfies the top-ordering conditions, an error message is returned. \code{NA}'s in the input \code{data} are tacitly converted into zero entries.
   #' 
   #' @param data An object containing the partial sequences to be coerced into an object of class \code{top_ordering}. The following classes are admissible for \code{data}: numeric \code{matrix}, \code{data.frame}, \code{RandData} from the \code{rankdist} package and \code{rankings} from the \code{PlackettLuce} package.
-  #' @param format_input Character string indicating the format of the \code{data} input (\code{"ordering"} or \code{"ranking"}). Used only when the class of the \code{data} aargument is matrix or data frame. Default is \code{NULL}.
+  #' @param format_input Character string indicating the format of the \code{data} input, namely \code{"ordering"} or \code{"ranking"}. Used only when the class of the \code{data} argument is matrix or data frame. Default is \code{NULL}.
   #' @param aggr Logical: whether the \code{data} argument collects the distinct observed sequences with the corresponding frequencies (aggregated format). Used only when the class of the \code{data} aargument is matrix or data frame. Default is \code{NULL}.
-  #' @param freq_col Integer indicating the column of the \code{data} argument containing the frequencies of the distinct observed sequences. Used only when the class of the \code{data} aargument is matrix or data frame and \code{aggr} argument is \code{TRUE}. Default is \code{NULL}.
-  #' @param ties_method Character string indicating the treatment of sequences with ties (not used for \code{data} of class \code{RankData}). If \code{"remove"}, the sequences with ties are removed before acting the coercion; if \code{"random"} (default), tied positions are re-assigned at random before acting the coercion.
+  #' @param freq_col Integer indicating the column of the \code{data} argument containing the frequencies of the distinct observed sequences. Used only when the class of the \code{data} argument is matrix or data frame and \code{aggr} argument is \code{TRUE}. Default is \code{NULL}.
+  #' @param ties_method Character string indicating the treatment of sequences with ties (not used for data of class \code{RankData}). If \code{"remove"}, the sequences with ties are removed before acting the coercion; if \code{"random"} (default), tied positions are re-assigned at random before acting the coercion.
   #' @param ... Further arguments passed to or from other methods (not used).
   #' 
   #' @return An object of S3 class \code{c("top_ordering","matrix")}.
@@ -294,7 +292,7 @@ as.top_ordering <- function(data,format_input=NULL,aggr=NULL,freq_col=NULL,ties_
   #' 
   #' @author Cristina Mollica and Luca Tardella
   #' 
-  #' @seealso \code{\link{is.top_ordering}} 
+  #' @seealso \code{\link{is.top_ordering}}, \code{\link[PlackettLuce]{as.rankings}} and \code{\link[PlackettLuce]{rankings}}
   #' 
   #' @examples
   #' 
@@ -487,7 +485,7 @@ rank_ord_switch <- function(data,format_input,nranked=NULL){
 #' 
 #' 
 #' @param data Numeric \eqn{N}\eqn{\times}{x}\eqn{K} data matrix of partial sequences whose format has to be converted.
-#' @param format_input Character string indicating the format of the \code{data} input (\code{"ordering"} or \code{"ranking"}).
+#' @param format_input Character string indicating the format of the \code{data} input, namely \code{"ordering"} or \code{"ranking"}.
 #' @param nranked Optional numeric vector of length \eqn{N} with the number of items ranked by each sample unit. 
 #' 
 #' @return Numeric \eqn{N}\eqn{\times}{x}\eqn{K} data matrix of partial sequences with inverse format.
@@ -544,7 +542,7 @@ rank_summaries <- function(data,format_input,mean_rank=TRUE,marginals=TRUE,pc=TR
 #' Compute rank summaries and censoring patterns for a partial ordering/ranking dataset.
 #' 
 #' @param data Numeric \eqn{N}\eqn{\times}{x}\eqn{K} data matrix of partial sequences.
-#' @param format_input Character string indicating the format of the \code{data} input (\code{"ordering"} or \code{"ranking"}).
+#' @param format_input Character string indicating the format of the \code{data} input, namely \code{"ordering"} or \code{"ranking"}.
 #' @param mean_rank Logical: whether the mean rank vector has to be computed. Default is \code{TRUE}.
 #' @param marginals Logical: whether the marginal rank distributions have to be computed. Default is \code{TRUE}.
 #' @param pc Logical: whether the paired comparison matrix has to be computed. Default is \code{TRUE}.
@@ -619,7 +617,7 @@ paired_comparisons <- function(data,format_input,nranked=NULL){
 #' Construct the paired comparison matrix for a partial ordering/ranking dataset.
 #' 
 #' @param data Numeric \eqn{N}\eqn{\times}{x}\eqn{K} data matrix of partial sequences.
-#' @param format_input Character string indicating the format of the \code{data} input (\code{"ordering"} or \code{"ranking"}).
+#' @param format_input Character string indicating the format of the \code{data} input, namely \code{"ordering"} or \code{"ranking"}.
 #' @param nranked Optional numeric vector of length \eqn{N} with the number of items ranked by each sample unit. 
 #' 
 #' @return Numeric \eqn{K}\eqn{\times}{x}\eqn{K} paired comparison matrix: the \eqn{(i,i')}-th entry indicates the number of sample units that preferred item \eqn{i} to item \eqn{i'}.
@@ -661,7 +659,7 @@ make_partial <- function(data,format_input,nranked=NULL,probcens=rep(1,ncol(data
 #' The censoring of the complete sequences can be performed in: (i) a deterministic way, by specifying the number of top positions to be retained for each sample unit in the \code{nranked} argument; (ii) a random way, by sequentially specifying the probabilities of the top-1, top-2, \eqn{...}, top-\eqn{(K-1)} censoring patterns in the \code{probcens} argument. Recall that a top-\eqn{(K-1)} sequence corresponds to a complete ordering/ranking.
 #' 
 #' @param data Numeric \eqn{N}\eqn{\times}{x}\eqn{K} data matrix of complete sequences to be censored.
-#' @param format_input Character string indicating the format of the \code{data} input (\code{"ordering"} or \code{"ranking"}).
+#' @param format_input Character string indicating the format of the \code{data} input, namely \code{"ordering"} or \code{"ranking"}.
 #' @param nranked Numeric vector of length \eqn{N} with the desired number of items ranked by each sample unit after censoring. If not supplied (\code{NULL}), the censoring patterns are randomly generated according to the probabilities in the \code{probcens} argument. 
 #' @param probcens Numeric vector of length \eqn{(K-1)} with the probability of each censoring pattern to be employed for the random truncation of the complete sequences (normalization is not necessary). It works only if \code{nranked} argument is \code{NULL} (see 'Details'). Default is equal probabilities.
 #' 
@@ -715,7 +713,7 @@ make_complete <- function(data,format_input,nranked=NULL,probitems=rep(1,ncol(da
 #' The completion of the partial top rankings/orderings is performed according to the Plackett-Luce scheme, that is, with a sampling without replacement of the not-ranked items by using the positive values in the \code{probitems} argument as support parameters (normalization is not necessary).
 #' 
 #' @param data Numeric \eqn{N}\eqn{\times}{x}\eqn{K} data matrix of partial sequences to be completed.
-#' @param format_input Character string indicating the format of the \code{data} input (\code{"ordering"} or \code{"ranking"}).
+#' @param format_input Character string indicating the format of the \code{data} input, namely \code{"ordering"} or \code{"ranking"}.
 #' @param nranked Optional numeric vector of length \eqn{N} with the number of items ranked by each sample unit. 
 #' @param probitems Numeric vector with the \eqn{K} item-specific probabilities to be employed for the random generation of the missing positions/items (see 'Details'). Default is equal probabilities.
 #' 
@@ -859,12 +857,10 @@ likPLMIX <- function(p,ref_order,weights,pi_inv){
 #' @examples
 #' 
 #' data(d_apa)
-#' 
 #' K <- ncol(d_apa)
 #' G <- 3
 #' support_par <- matrix(1:(G*K), nrow=G, ncol=K)
 #' weights_par <- c(0.50, 0.25, 0.25)
-#' 
 #' loglikPLMIX(p=support_par, ref_order=matrix(1:K, nrow=G, ncol=K, byrow=TRUE), 
 #'             weights=weights_par, pi_inv=d_apa)
 #' 
@@ -1043,7 +1039,6 @@ mapPLMIX <- function(pi_inv,K,G,
 #' @examples
 #' 
 #' data(d_carconf)
-#' 
 #' MAP <- mapPLMIX(pi_inv=d_carconf, K=ncol(d_carconf), G=3, n_iter=400*3)
 #' str(MAP)
 #' MAP$P_map
@@ -1271,7 +1266,6 @@ mapPLMIX_multistart <- function(pi_inv,K,G,n_start=1,
 #' @examples
 #' 
 #' data(d_carconf)
-#' 
 #' MAP_mult <- mapPLMIX_multistart(pi_inv=d_carconf, K=ncol(d_carconf), G=3, 
 #'                                             n_start=2, n_iter=400*3)
 #' str(MAP_mult)
@@ -2372,7 +2366,6 @@ selectPLMIX <- function(pi_inv,seq_G,
 #' @examples
 #' 
 #' data(d_carconf)
-#' 
 #' K <- ncol(d_carconf)
 #' 
 #' ## Fit 1- and 2-component PL mixtures via MAP estimation 
@@ -2562,7 +2555,6 @@ label_switchPLMIX <- function(pi_inv,seq_G,
 #' @examples
 #' 
 #' data(d_carconf)
-#' 
 #' K <- ncol(d_carconf)
 #' 
 #' ## Fit 1- and 2-component PL mixtures via MAP estimation
@@ -2794,7 +2786,6 @@ ppcheckPLMIX <- function(pi_inv,seq_G,
 #' @examples
 #' 
 #' data(d_carconf)
-#' 
 #' K <- ncol(d_carconf)
 #' 
 #' ## Fit 1- and 2-component PL mixtures via MAP estimation
@@ -3021,7 +3012,6 @@ ppcheckPLMIX_cond <- function(pi_inv,seq_G,
 #' @examples
 #' 
 #' data(d_carconf)
-#' 
 #' K <- ncol(d_carconf)
 #' 
 #' ## Fit 1- and 2-component PL mixtures via MAP estimation

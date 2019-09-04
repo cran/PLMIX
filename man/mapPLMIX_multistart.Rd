@@ -52,7 +52,6 @@ Under noninformative (flat) prior setting, the EM algorithm for MAP estimation c
 \examples{
 
 data(d_carconf)
-
 MAP_mult <- mapPLMIX_multistart(pi_inv=d_carconf, K=ncol(d_carconf), G=3, 
                                             n_start=2, n_iter=400*3)
 str(MAP_mult)

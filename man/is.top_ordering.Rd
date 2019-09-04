@@ -12,13 +12,13 @@ is.top_ordering(data, ...)
 \item{...}{Further arguments passed to or from other methods (not used).}
 }
 \value{
-Logical: \code{TRUE} if the input \code{data} is consistent with a top-ordering dataset (with a possible warning message if the supplied data need a further treatment with the coercion function \code{\link{as.top_ordering}} before being processed with the core functions of \pkg{PLMIX}) and \code{FALSE} otherwise.
+Logical: \code{TRUE} if the \code{data} argument is consistent with a top-ordering dataset (with a possible warning message if the supplied data need a further treatment with the coercion function \code{\link{as.top_ordering}} before being processed with the core functions of \pkg{PLMIX}) and \code{FALSE} otherwise.
 }
 \description{
-Check the consistency of the input partial ordering data with a top-ordering dataset.
+Check the consistency of partial ordering data with a top-ordering dataset.
 }
 \details{
-The argument \code{data} requires the partial sequences expressed in the ordering format. When the value of \code{is.top-ordering} is \code{FALSE}, the membership function returns also a message with the conditions that are not met for the \code{data} input to be a top-ordering dataset. \code{NA}'s in the input \code{data} are tacitly converted into zero entries.
+The argument \code{data} requires the partial sequences expressed in ordering format. When the value of \code{is.top-ordering} is \code{FALSE}, the membership function returns also a message with the conditions that are not met for the \code{data} to be a top-ordering dataset. \code{NA}'s in the input \code{data} are tacitly converted into zero entries.
 }
 \examples{
 
@@ -48,7 +48,7 @@ Turner, H., Kormidis, I. and Firth, D. (2018). PlackettLuce: Plackett-Luce Model
 Qian, Z. (2018). rankdist: Distance Based Ranking Models. R package version 1.1.3. \url{https://CRAN.R-project.org/package=rankdist}
 }
 \seealso{
-\code{\link{as.top_ordering}}, \code{\link[PlackettLuce]{rankings}} and \code{\link[PlackettLuce]{rankings}}
+\code{\link[PlackettLuce]{rankings}} and \code{\link[PlackettLuce]{rankings}}
 }
 \author{
 Cristina Mollica and Luca Tardella

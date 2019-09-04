@@ -6,7 +6,7 @@
 }
 \usage{data(d_german)}
 \format{
-Data matrix of complete orderings with \eqn{N=2262} rows and \eqn{K=4} columns. Each row lists the political goals from the most desiderable (\code{Rank_1}) to the least desiderable (\code{Rank_4}) for a given respondent.
+Object of S3 class \code{c("top_ordering","matrix")} gathering a matrix of complete orderings with \eqn{N=2262} rows and \eqn{K=4} columns. Each row lists the political goals from the most desiderable (\code{Rank_1}) to the least desiderable (\code{Rank_4}) for a given respondent.
 }
 \references{
 Croon, M. A. (1989). Latent class models for the analysis of rankings. In De Soete, G., Feger, H. and Klauer, K. C. (eds), \emph{New Developments in Psychological Choice Modeling}, pages 99--121. North-Holland: Amsterdam.

@@ -10,13 +10,13 @@ as.top_ordering(data, format_input = NULL, aggr = NULL,
 \arguments{
 \item{data}{An object containing the partial sequences to be coerced into an object of class \code{top_ordering}. The following classes are admissible for \code{data}: numeric \code{matrix}, \code{data.frame}, \code{RandData} from the \code{rankdist} package and \code{rankings} from the \code{PlackettLuce} package.}
 
-\item{format_input}{Character string indicating the format of the \code{data} input (\code{"ordering"} or \code{"ranking"}). Used only when the class of the \code{data} aargument is matrix or data frame. Default is \code{NULL}.}
+\item{format_input}{Character string indicating the format of the \code{data} input, namely \code{"ordering"} or \code{"ranking"}. Used only when the class of the \code{data} argument is matrix or data frame. Default is \code{NULL}.}
 
 \item{aggr}{Logical: whether the \code{data} argument collects the distinct observed sequences with the corresponding frequencies (aggregated format). Used only when the class of the \code{data} aargument is matrix or data frame. Default is \code{NULL}.}
 
-\item{freq_col}{Integer indicating the column of the \code{data} argument containing the frequencies of the distinct observed sequences. Used only when the class of the \code{data} aargument is matrix or data frame and \code{aggr} argument is \code{TRUE}. Default is \code{NULL}.}
+\item{freq_col}{Integer indicating the column of the \code{data} argument containing the frequencies of the distinct observed sequences. Used only when the class of the \code{data} argument is matrix or data frame and \code{aggr} argument is \code{TRUE}. Default is \code{NULL}.}
 
-\item{ties_method}{Character string indicating the treatment of sequences with ties (not used for \code{data} of class \code{RankData}). If \code{"remove"}, the sequences with ties are removed before acting the coercion; if \code{"random"} (default), tied positions are re-assigned at random before acting the coercion.}
+\item{ties_method}{Character string indicating the treatment of sequences with ties (not used for data of class \code{RankData}). If \code{"remove"}, the sequences with ties are removed before acting the coercion; if \code{"random"} (default), tied positions are re-assigned at random before acting the coercion.}
 
 \item{...}{Further arguments passed to or from other methods (not used).}
 }
@@ -27,7 +27,7 @@ An object of S3 class \code{c("top_ordering","matrix")}.
 Attempt to coerce the input data into a top-ordering dataset.
 }
 \details{
-The coercion function \code{as.top_ordering} tries to coerce the input data into an object of class \code{top_ordering} after checking for possibles partial sequences that do not satisfy the top-ordering requirements. If none of the supplied sequences satisfies the top-ordering conditions, an error message is returned. \code{NA}'s in the input \code{data} are tacitly converted into zero entries.
+The coercion function \code{as.top_ordering} tries to coerce the input data into an object of class \code{top_ordering} after checking for possible partial sequences that do not satisfy the top-ordering requirements. If none of the supplied sequences satisfies the top-ordering conditions, an error message is returned. \code{NA}'s in the input \code{data} are tacitly converted into zero entries.
 }
 \examples{
 
@@ -70,7 +70,7 @@ Turner, H., Kormidis, I. and Firth, D. (2018). PlackettLuce: Plackett-Luce Model
 Qian, Z. (2018). rankdist: Distance Based Ranking Models. R package version 1.1.3. \url{https://CRAN.R-project.org/package=rankdist}
 }
 \seealso{
-\code{\link{is.top_ordering}}
+\code{\link{is.top_ordering}}, \code{\link[PlackettLuce]{as.rankings}} and \code{\link[PlackettLuce]{rankings}}
 }
 \author{
 Cristina Mollica and Luca Tardella

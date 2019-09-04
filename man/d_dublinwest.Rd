@@ -6,7 +6,7 @@
 The dataset is composed of partial top orderings of varying lengths. Missing positions are denoted with zero entries.}
 \usage{data(d_dublinwest)}
 \format{
-Data matrix of partial orderings with \eqn{N=29988} rows and \eqn{K=9} columns. Each row lists the candidates from the most-liked (\code{Rank_1}) to the least-liked (\code{Rank_9}) in a given voting ballot. 
+Object of S3 class \code{c("top_ordering","matrix")} gathering a partial orderings with \eqn{N=29988} rows and \eqn{K=9} columns. Each row lists the candidates from the most-liked (\code{Rank_1}) to the least-liked (\code{Rank_9}) in a given voting ballot. 
 }
 \references{
 Mattei, N. and Walsh, T. (2013) PrefLib: A Library of Preference Data. \emph{Proceedings of Third International Conference on Algorithmic Decision Theory} (ADT 2013). Springer, Lecture Notes in Artificial Intelligence, November 13-15, 2013.

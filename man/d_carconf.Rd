@@ -8,7 +8,7 @@ A sample of \eqn{N=435} customers were asked to construct their car by using an 
 The survey did not require a complete ranking elicitation, therefore the dataset is composed of partial top orderings of varying lengths. Missing positions are denoted with zero entries.}
 \usage{data(d_carconf)}
 \format{
-  Data matrix of partial orderings with \eqn{N=435} rows and \eqn{K=6} columns. Each row lists the car features from the most important (\code{Rank_1}) to the least important (\code{Rank_6}) for a given customer.
+Object of S3 class \code{c("top_ordering","matrix")} gathering a matrix of partial orderings with \eqn{N=435} rows and \eqn{K=6} columns. Each row lists the car features from the most important (\code{Rank_1}) to the least important (\code{Rank_6}) for a given customer.
 }
 \references{
 Mollica, C. and Tardella, L. (2017). Bayesian Plackett-Luce mixture models for partially ranked data. \emph{Psychometrika}, \bold{82}(2), pages 442--458, ISSN: 0033-3123, DOI: 10.1007/s11336-016-9530-0.

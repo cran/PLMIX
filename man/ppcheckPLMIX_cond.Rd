@@ -36,7 +36,6 @@ The \code{ppcheckPLMIX_cond} function returns two posterior predictive \eqn{p}-v
 \examples{
 
 data(d_carconf)
-
 K <- ncol(d_carconf)
 
 ## Fit 1- and 2-component PL mixtures via MAP estimation

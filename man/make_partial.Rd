@@ -10,7 +10,7 @@ make_partial(data, format_input, nranked = NULL, probcens = rep(1,
 \arguments{
 \item{data}{Numeric \eqn{N}\eqn{\times}{x}\eqn{K} data matrix of complete sequences to be censored.}
 
-\item{format_input}{Character string indicating the format of the \code{data} input (\code{"ordering"} or \code{"ranking"}).}
+\item{format_input}{Character string indicating the format of the \code{data} input, namely \code{"ordering"} or \code{"ranking"}.}
 
 \item{nranked}{Numeric vector of length \eqn{N} with the desired number of items ranked by each sample unit after censoring. If not supplied (\code{NULL}), the censoring patterns are randomly generated according to the probabilities in the \code{probcens} argument.}
 

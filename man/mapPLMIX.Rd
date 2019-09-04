@@ -53,7 +53,6 @@ The \code{\link{mapPLMIX}} function performs the MAP procedure with a single sta
 \examples{
 
 data(d_carconf)
-
 MAP <- mapPLMIX(pi_inv=d_carconf, K=ncol(d_carconf), G=3, n_iter=400*3)
 str(MAP)
 MAP$P_map
