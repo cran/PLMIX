@@ -43,11 +43,11 @@ MAP_mult$mod$bic
 
 }
 \references{
-Mollica, C. and Tardella, L. (2017). Bayesian Plackett-Luce mixture models for partially ranked data. \emph{Psychometrika}, \bold{82}(2), pages 442--458, ISSN: 0033-3123, DOI: 10.1007/s11336-016-9530-0.
+Mollica, C. and Tardella, L. (2017). Bayesian Plackett-Luce mixture models for partially ranked data. \emph{Psychometrika}, \bold{82}(2), pages 442--458, ISSN: 0033-3123, <doi:10.1007/s11336-016-9530-0>.
 
-Mollica, C. and Tardella, L. (2014). Epitope profiling via mixture modeling for ranked data. \emph{Statistics in Medicine}, \bold{33}(21), pages 3738--3758, ISSN: 0277-6715, DOI: 10.1002/sim.6224.
+Mollica, C. and Tardella, L. (2014). Epitope profiling via mixture modeling for ranked data. \emph{Statistics in Medicine}, \bold{33}(21), pages 3738--3758, ISSN: 0277-6715, <doi:10.1002/sim.6224>.
 
-Schwarz, G. (1978). Estimating the dimension of a model. \emph{Ann. Statist.}, \bold{6}(2), pages 461--464, ISSN: 0090-5364, DOI: 10.1002/sim.6224.
+Schwarz, G. (1978). Estimating the dimension of a model. \emph{Ann. Statist.}, \bold{6}(2), pages 461--464, ISSN: 0090-5364, <doi:10.1002/sim.6224>.
 }
 \seealso{
 \code{\link{mapPLMIX}} and \code{\link{mapPLMIX_multistart}}

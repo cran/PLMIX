@@ -6,7 +6,6 @@ using namespace Rcpp;
 ///' @param pi_inv Numeric \eqn{N}\eqn{\times}{x}\eqn{K} data matrix of partial orderings.
 ///' @return Numeric \eqn{K}\eqn{\times}{x}\eqn{K} matrix of top1 frequencies.
 // [[Rcpp::export]]
-
 Rcpp::IntegerMatrix top1freq1dim(Rcpp::IntegerMatrix pi_inv) {
     int N = pi_inv.nrow();
     int K = pi_inv.ncol();

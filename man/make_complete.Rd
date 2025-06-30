@@ -4,8 +4,12 @@
 \alias{make_complete}
 \title{Completion of partial rankings/orderings}
 \usage{
-make_complete(data, format_input, nranked = NULL, probitems = rep(1,
-  ncol(data)))
+make_complete(
+  data,
+  format_input,
+  nranked = NULL,
+  probitems = rep(1, ncol(data))
+)
 }
 \arguments{
 \item{data}{Numeric \eqn{N}\eqn{\times}{x}\eqn{K} data matrix of partial sequences to be completed.}
@@ -19,7 +23,7 @@ make_complete(data, format_input, nranked = NULL, probitems = rep(1,
 \value{
 A list of two named objects:
 
- \item{\code{completedata}}{ Numeric \eqn{N}\eqn{\times}{x}\eqn{K} data matrix of complete sequences with the same format of the input \code{data}.}	
+ \item{\code{completedata}}{ Numeric \eqn{N}\eqn{\times}{x}\eqn{K} data matrix of complete sequences with the same format of the input \code{data}.}
  \item{\code{nranked}}{ Numeric vector of length \eqn{N} with the number of items ranked by each sample unit of the input \code{data}.}
 }
 \description{
@@ -33,10 +37,10 @@ The completion of the partial top rankings/orderings is performed according to t
 ## Completion based on the top item frequencies
 data(d_dublinwest)
 head(d_dublinwest)
-top_item_freq <- rank_summaries(data=d_dublinwest, format_input="ordering", mean_rank=FALSE, 
+top_item_freq <- rank_summaries(data=d_dublinwest, format_input="ordering", mean_rank=FALSE,
                                 pc=FALSE)$marginals["Rank_1",]
 
-d_dublinwest_compl <- make_complete(data=d_dublinwest, format_input="ordering", 
+d_dublinwest_compl <- make_complete(data=d_dublinwest, format_input="ordering",
                                     probitems=top_item_freq)
 head(d_dublinwest_compl$completedata)
 

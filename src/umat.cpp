@@ -9,7 +9,7 @@ using namespace Rcpp;
 ///'
 ///' @return Binary \eqn{N}\eqn{\times}{x}\eqn{K} matrix indicating whether sample unit \eqn{s} ranked item \eqn{i}.
 // [[Rcpp::export]]
-  NumericMatrix umat(NumericMatrix pi_inv) {
+NumericMatrix umat(NumericMatrix pi_inv) {
 
     int N = pi_inv.nrow();
     int K = pi_inv.ncol();

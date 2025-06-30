@@ -4,10 +4,17 @@
 \alias{gibbsPLMIX}
 \title{Gibbs sampling for a Bayesian mixture of Plackett-Luce models}
 \usage{
-gibbsPLMIX(pi_inv, K, G, init = list(z = NULL, p = NULL),
-  n_iter = 1000, n_burn = 500, hyper = list(shape0 = matrix(1, nrow =
-  G, ncol = K), rate0 = rep(0.001, G), alpha0 = rep(1, G)),
-  centered_start = FALSE)
+gibbsPLMIX(
+  pi_inv,
+  K,
+  G,
+  init = list(z = NULL, p = NULL),
+  n_iter = 1000,
+  n_burn = 500,
+  hyper = list(shape0 = matrix(1, nrow = G, ncol = K), rate0 = rep(0.001, G), alpha0 =
+    rep(1, G)),
+  centered_start = FALSE
+)
 }
 \arguments{
 \item{pi_inv}{An object of class \code{top_ordering}, collecting the numeric \eqn{N}\eqn{\times}{x}\eqn{K} data matrix of partial orderings, or an object that can be coerced with \code{\link{as.top_ordering}}.}
@@ -52,7 +59,7 @@ GIBBS$W
 
 }
 \references{
-Mollica, C. and Tardella, L. (2017). Bayesian Plackett-Luce mixture models for partially ranked data. \emph{Psychometrika}, \bold{82}(2), pages 442--458, ISSN: 0033-3123, DOI: 10.1007/s11336-016-9530-0.
+Mollica, C. and Tardella, L. (2017). Bayesian Plackett-Luce mixture models for partially ranked data. \emph{Psychometrika}, \bold{82}(2), pages 442--458, ISSN: 0033-3123, <doi:10.1007/s11336-016-9530-0>.
 }
 \author{
 Cristina Mollica and Luca Tardella

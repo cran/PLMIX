@@ -14,17 +14,17 @@ using namespace Rcpp;
 ///' @param n_rank Numeric vector of length \eqn{N} with the number of items ranked by each sample unit.
 ///' @return Numeric \eqn{G}\eqn{\times}{x}\eqn{K} matrix of estimated component-specific support parameters.
 // [[Rcpp::export]]
-  NumericMatrix UpPhetpartial(NumericMatrix p, NumericMatrix ref_order, NumericMatrix pi_inv, NumericMatrix u_bin, NumericMatrix z_hat, NumericMatrix shape0, NumericVector rate0, IntegerVector n_rank) {
+NumericMatrix UpPhetpartial(NumericMatrix p, NumericMatrix ref_order, NumericMatrix pi_inv, NumericMatrix u_bin, NumericMatrix z_hat, NumericMatrix shape0, NumericVector rate0, IntegerVector n_rank) {
 
     int N = pi_inv.nrow() ;
     int K = pi_inv.ncol() ;
     int G = p.nrow() ;
 
-    NumericMatrix num(G,K) ;    
-    NumericMatrix den(G,K) ;    
-    NumericMatrix out(G,K) ;    
-    NumericMatrix pdenom(N,K) ;    
-    NumericVector temp(N) ;    
+    NumericMatrix num(G,K) ;
+    NumericMatrix den(G,K) ;
+    NumericMatrix out(G,K) ;
+    NumericMatrix pdenom(N,K) ;
+    NumericVector temp(N) ;
 
     int    s ;
     int    slot ;
@@ -43,7 +43,7 @@ using namespace Rcpp;
        num(group,item) = 0.0 ;
 
         for(s=0 ; s<N ; s++){
-               
+
        num(group,item) = num(group,item) + z_hat(s,group)*u_bin(s,item) ;
 
        temp[s] = 0.0 ;
@@ -54,7 +54,7 @@ using namespace Rcpp;
 /* selected at the current slot  */
 
        for( slot2=0 ; slot2<K ; slot2++){
-           temp_pdenom = temp_pdenom + p(group,slot2) ; 
+           temp_pdenom = temp_pdenom + p(group,slot2) ;
           }
 
    availablenext = 1.0 ;
@@ -70,7 +70,7 @@ if(availablenext == 1.0){
 /* but when the item is selected at the current slot */
 /* it is no longer available next  */
 
-         if( pi_inv(s,slot) == ((double) (item+1)) ){ 
+         if( pi_inv(s,slot) == ((double) (item+1)) ){
            availablenext = 0.0 ;
        }
             temp_pdenom = temp_pdenom - p(group,((int) pi_inv(s,slot))-1) ;
@@ -94,7 +94,7 @@ if(availablenext == 1.0){
 }
 }
 
-return out ; 
+return out ;
 
 }
 

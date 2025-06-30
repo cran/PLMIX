@@ -58,7 +58,7 @@ Rcpp::NumericMatrix chisqmeasureobsmatrix1dim(Rcpp::IntegerMatrix pi_inv, Rcpp::
   }
 
 
-  
+
   for(hmr=0; hmr<K; hmr++){
     for(slot=0; slot<K; slot++){
 	   /*           if(hmr>(K-4) && top1freq_star_mat(hmr,slot)>0.0){  */

@@ -4,8 +4,14 @@
 \alias{as.top_ordering}
 \title{Coercion into top-ordering datasets}
 \usage{
-as.top_ordering(data, format_input = NULL, aggr = NULL,
-  freq_col = NULL, ties_method = "random", ...)
+as.top_ordering(
+  data,
+  format_input = NULL,
+  aggr = NULL,
+  freq_col = NULL,
+  ties_method = "random",
+  ...
+)
 }
 \arguments{
 \item{data}{An object containing the partial sequences to be coerced into an object of class \code{top_ordering}. The following classes are admissible for \code{data}: numeric \code{matrix}, \code{data.frame}, \code{RandData} from the \code{rankdist} package and \code{rankings} from the \code{PlackettLuce} package.}
@@ -38,13 +44,13 @@ RR <- matrix(c(1, 2, 0, 0,
 2, 1, 1, 1,
 1, 2, 3, 0,
 2, 1, 1, 0,
-1, 0, 3, 2), nrow = 6, byrow = TRUE) 
+1, 0, 3, 2), nrow = 6, byrow = TRUE)
 RR_rank=as.rankings(RR)
 RR_rank
 as.top_ordering(RR_rank, ties_method="random")
 
 ## Coerce an object of class 'RankData' into an object of class 'top_ordering'
-library(rankdist) 
+library(rankdist)
 data(apa_partial_obj)
 d_apa_top_ord=as.top_ordering(data=apa_partial_obj)
 identical(d_apa,d_apa_top_ord)
@@ -70,7 +76,7 @@ Turner, H., Kormidis, I. and Firth, D. (2018). PlackettLuce: Plackett-Luce Model
 Qian, Z. (2018). rankdist: Distance Based Ranking Models. R package version 1.1.3. \url{https://CRAN.R-project.org/package=rankdist}
 }
 \seealso{
-\code{\link{is.top_ordering}}, \code{\link[PlackettLuce]{as.rankings}} and \code{\link[PlackettLuce]{rankings}}
+\code{\link{is.top_ordering}}
 }
 \author{
 Cristina Mollica and Luca Tardella

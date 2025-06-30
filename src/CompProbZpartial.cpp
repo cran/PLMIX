@@ -12,49 +12,54 @@ using namespace Rcpp;
 ///' @param omega Numeric vector of the \eqn{G} mixture weights.
 ///' @return Numeric \eqn{N}\eqn{\times}{x}\eqn{G} matrix of multinomial probabilities.
 // [[Rcpp::export]]
-  NumericMatrix CompProbZpartial(NumericMatrix p, NumericMatrix pi_inv, NumericMatrix Y, NumericMatrix u_bin, IntegerVector n_rank, NumericVector omega) {
+NumericMatrix CompProbZpartial(NumericMatrix p, NumericMatrix pi_inv, NumericMatrix Y, NumericMatrix u_bin, IntegerVector n_rank, NumericVector omega) {
 
     int N = pi_inv.nrow() ;
     int K = pi_inv.ncol() ;
     int G = p.nrow() ;
 
-    NumericMatrix out(N,G) ;    
-    NumericVector temp(K) ;    
+    NumericMatrix out(N,G) ;
+    NumericVector temp(K) ;
 
     int    s ;
     int    slot ;
     int    item ;
     int    group ;
     double    availablenext ;
+    double    normalizing_max ;
 
     for( s=0 ; s<N ; s++ ){
       for( group=0 ; group<G ; group++ ){
-        out(s,group) = 1.0 ;
+        out(s,group) = 0.0 ;///' log-scale
 
         for( item=0 ; item<K ; item++){
 
-          availablenext = 0.0 ;	
+          availablenext = 0.0 ;
           temp[item] = 0.0 ;
 
           availablenext = 1.0 ;
             for( slot=0 ; slot<n_rank[s] ; slot++){
-              if(availablenext == 1.0){        
-                   temp[item] = temp[item] + Y(s,slot) ; 
+              if(availablenext == 1.0){
+                   temp[item] = temp[item] + Y(s,slot) ;
                  }
-                    if( pi_inv(s,slot) == ((double) (item+1)) ){ 
+                    if( pi_inv(s,slot) == ((double) (item+1)) ){
                        availablenext = 0.0 ;
                     }
               }
 
           if (u_bin(s,item)>0.0){
-          out(s,group) = out(s,group)*p(group,item) ;
+          out(s,group) = out(s,group)+log(p(group,item)) ;///' log-scale
             }
-            out(s,group) = out(s,group)*exp(-p(group,item)*temp[item]);
+            out(s,group) = out(s,group)-p(group,item)*temp[item];///' log-scale
 }
-            out(s,group) = out(s,group) * omega[group];
-}     
-}
+            out(s,group) = out(s,group) + omega[group];///' log-scale
+}///' close g
+        normalizing_max = max(out(s,_));
+        for( group=0 ; group<G ; group++ ){
+            out(s,group) = exp(out(s,group) - normalizing_max);///
+        }
+}///' close s
 
-return out ; 
+return out ;
 
 }

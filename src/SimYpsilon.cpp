@@ -8,7 +8,7 @@ using namespace Rcpp;
 ///' @param n_rank Numeric vector of length \eqn{N} with the number of items ranked by each sample unit.
 ///' @return Numeric \eqn{N}\eqn{\times}{x}\eqn{K} matrix of posterior samples of the quantitative latent variables.
 // [[Rcpp::export]]
-  NumericMatrix SimYpsilon(NumericMatrix rate, NumericVector n_rank) {
+NumericMatrix SimYpsilon(NumericMatrix rate, NumericVector n_rank) {
 
     int N = rate.nrow();
     int K = rate.ncol();
@@ -24,6 +24,6 @@ using namespace Rcpp;
 }
 }
 
-return out ; 
+return out ;
 
 }

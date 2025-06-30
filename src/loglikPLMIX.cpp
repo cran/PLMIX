@@ -1,4 +1,5 @@
 #include <Rcpp.h>
+# include "fittingmeasure.h"
 using namespace Rcpp;
 
 //' @rdname loglikelihood
@@ -18,9 +19,10 @@ int    slot3 ;
 
 int    tt ;
 
-double f  ;
+NumericVector f(G);
 double g  ;
-double h  ;
+double logh  ;
+double m  ;
 double ll ;
 
 ll = 0.0 ;
@@ -28,11 +30,9 @@ ll = 0.0 ;
 
 for(s=0; s<N; s++){
 
-h = 0.0 ;
-
 for(j=0; j<G; j++){
 
-f = 0.0 ;
+f[j] = 0.0 ;
 
 slot  = 0 ;
 tt    = 1 ; 
@@ -50,7 +50,7 @@ g = g + p(j,slot3);
 while(tt>-1 && slot<K){       
 
 tt = pi_inv(s,slot)-1 ;
-f = f + (log(p(j,tt)) - log(g)) ;
+f[j] = f[j] + (log(p(j,tt)) - log(g)) ;
 
 /* UPDATE the denominator g removing the support for the current item */
 
@@ -65,12 +65,34 @@ slot = slot+1 ;
               tt = pi_inv(s,slot)-1 ;
             }
 }
+    
+    f[j] = f[j] + log(weights[j]) ;
 
-h = h + weights[j]*exp(f) ;
-
+ 
 }
+    
+    f = dbl_sort(f) ;
 
-ll = ll + log(h) ;
+    logh = f[0] ;
+    m = 1.0 ;
+
+    if(G>1){ ///'to avoid overflow of too small negative log-probability values in some components of the mixture,
+        ///we refer to the maximum (negative) log-prob as the starting summand contributor in the log-scale.
+        ///The other summands, being smaller, than the reference one, can be safely expontiated because their contribution
+        ///to the sum would add something or nothing according to whether the difference (w.r.t. the reference) is relatively small or large.
+        ///Idea: if G=4 and c1>c2>c3>c4, then log(exp(c1)+exp(c2)+exp(c3)+exp(c4))=c1+log(1+exp(c2-c1)+exp(c3-c1)+exp(c4-c1))
+        
+        for(j=1; j<G; j++){
+            
+            m = m + exp(f[j]-f[0]) ;
+            
+        }
+                
+    }
+    
+logh = logh + log(m) ;
+
+ll = ll + logh ;
 
 }
 

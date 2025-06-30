@@ -22,7 +22,7 @@ double chisqmeasureobs(Rcpp::IntegerMatrix pi_inv, Rcpp::NumericMatrix p, Rcpp::
        Rcpp::NumericMatrix tau_star_mat(K,K);
        Rcpp::IntegerMatrix T_mat(K,K);
 
-       Rcpp::NumericVector marg_p(K); 
+       Rcpp::NumericVector marg_p(K);
 
 
        for(slot=0; slot<K; slot++){
@@ -32,7 +32,7 @@ double chisqmeasureobs(Rcpp::IntegerMatrix pi_inv, Rcpp::NumericMatrix p, Rcpp::
        }
 
 
-       tau_mat = tau(pi_inv); 
+       tau_mat = tau(pi_inv);
        for(slot=0; slot<K; slot++){
          for(slot2=0; slot2<slot; slot2++){
 	   T_mat(slot,slot2) = tau_mat(slot,slot2) + tau_mat(slot2,slot);
@@ -44,7 +44,7 @@ double chisqmeasureobs(Rcpp::IntegerMatrix pi_inv, Rcpp::NumericMatrix p, Rcpp::
 
 
 
-       return f;  
+       return f;
 
 }
 

@@ -18,4 +18,6 @@ Rcpp::IntegerMatrix PLMIXsimnotronc(int N, int K, int G, Rcpp::NumericMatrix p, 
 
 Rcpp::IntegerVector quickintsample(int n, int size, Rcpp::NumericVector prob) ;
 
-Rcpp::IntegerVector quickintsample1dim(int n, int size, Rcpp::NumericVector prob) ; 
+Rcpp::IntegerVector quickintsample1dim(int n, int size, Rcpp::NumericVector prob) ;
+
+Rcpp::NumericVector dbl_sort(Rcpp::NumericVector x) ;

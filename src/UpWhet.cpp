@@ -8,14 +8,14 @@ using namespace Rcpp;
 ///' @param alpha0 Numeric vector of \eqn{G} Dirichlet hyperparameters.
 ///' @return Numeric vector of the \eqn{G} estimated mixture weights.
 // [[Rcpp::export]]
-  NumericVector UpWhet(NumericMatrix z_hat, NumericVector alpha0) {
+NumericVector UpWhet(NumericMatrix z_hat, NumericVector alpha0) {
 
     int N = z_hat.nrow();
     int G = z_hat.ncol();
     NumericVector out(G);
 
     int s ;
-    int group ; 
+    int group ;
     double sum=0.0 ;
 
     for( group=0 ; group<G ; group++){

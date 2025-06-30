@@ -4,9 +4,15 @@
 \alias{rPLMIX}
 \title{Random sample from a mixture of Plackett-Luce models}
 \usage{
-rPLMIX(n = 1, K, G, p = t(matrix(1/K, nrow = K, ncol = G)),
-  ref_order = t(matrix(1:K, nrow = K, ncol = G)), weights = rep(1/G,
-  G), format_output = "ordering")
+rPLMIX(
+  n = 1,
+  K,
+  G,
+  p = t(matrix(1/K, nrow = K, ncol = G)),
+  ref_order = t(matrix(1:K, nrow = K, ncol = G)),
+  weights = rep(1/G, G),
+  format_output = "ordering"
+)
 }
 \arguments{
 \item{n}{Number of observations to be sampled. Default is 1.}

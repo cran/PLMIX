@@ -4,8 +4,12 @@
 \alias{make_partial}
 \title{Censoring of complete rankings/orderings}
 \usage{
-make_partial(data, format_input, nranked = NULL, probcens = rep(1,
-  ncol(data) - 1))
+make_partial(
+  data,
+  format_input,
+  nranked = NULL,
+  probcens = rep(1, ncol(data) - 1)
+)
 }
 \arguments{
 \item{data}{Numeric \eqn{N}\eqn{\times}{x}\eqn{K} data matrix of complete sequences to be censored.}
@@ -19,7 +23,7 @@ make_partial(data, format_input, nranked = NULL, probcens = rep(1,
 \value{
 A list of two named objects:
 
- \item{\code{partialdata}}{ Numeric \eqn{N}\eqn{\times}{x}\eqn{K} data matrix of partial (censored) sequences with the same format of the input \code{data} and missing positions/items denoted with zero entries.}	
+ \item{\code{partialdata}}{ Numeric \eqn{N}\eqn{\times}{x}\eqn{K} data matrix of partial (censored) sequences with the same format of the input \code{data} and missing positions/items denoted with zero entries.}
  \item{\code{nranked}}{ Numeric vector of length \eqn{N} with the number of items ranked by each sample unit after censoring.}
 }
 \description{
@@ -32,8 +36,8 @@ The censoring of the complete sequences can be performed in: (i) a deterministic
 
 data(d_german)
 head(d_german)
-d_german_cens <- make_partial(data=d_german, format_input="ordering", 
-                              probcens=c(0.3, 0.3, 0.4))  
+d_german_cens <- make_partial(data=d_german, format_input="ordering",
+                              probcens=c(0.3, 0.3, 0.4))
 head(d_german_cens$partialdata)
 
 ## Check consistency with the nominal censoring probabilities

@@ -4,10 +4,18 @@
 \alias{mapPLMIX}
 \title{MAP estimation for a Bayesian mixture of Plackett-Luce models}
 \usage{
-mapPLMIX(pi_inv, K, G, init = list(p = NULL, omega = NULL),
-  n_iter = 1000, hyper = list(shape0 = matrix(1, nrow = G, ncol = K),
-  rate0 = rep(0, G), alpha0 = rep(1, G)), eps = 10^(-6),
-  centered_start = FALSE, plot_objective = FALSE)
+mapPLMIX(
+  pi_inv,
+  K,
+  G,
+  init = list(p = NULL, omega = NULL),
+  n_iter = 1000,
+  hyper = list(shape0 = matrix(1, nrow = G, ncol = K), rate0 = rep(0, G), alpha0 = rep(1,
+    G)),
+  eps = 10^(-6),
+  centered_start = FALSE,
+  plot_objective = FALSE
+)
 }
 \arguments{
 \item{pi_inv}{An object of class \code{top_ordering}, collecting the numeric \eqn{N}\eqn{\times}{x}\eqn{K} data matrix of partial orderings, or an object that can be coerced with \code{\link{as.top_ordering}}.}
@@ -60,9 +68,9 @@ MAP$W_map
 
 }
 \references{
-Mollica, C. and Tardella, L. (2017). Bayesian Plackett-Luce mixture models for partially ranked data. \emph{Psychometrika}, \bold{82}(2), pages 442--458, ISSN: 0033-3123, DOI: 10.1007/s11336-016-9530-0.
+Mollica, C. and Tardella, L. (2017). Bayesian Plackett-Luce mixture models for partially ranked data. \emph{Psychometrika}, \bold{82}(2), pages 442--458, ISSN: 0033-3123, <doi:10.1007/s11336-016-9530-0>.
 
-Gormley, I. C. and Murphy, T. B. (2006). Analysis of Irish third-level college applications data. \emph{Journal of the Royal Statistical Society: Series A}, \bold{169}(2), pages 361--379, ISSN: 0964-1998, DOI: 10.1111/j.1467-985X.2006.00412.x.
+Gormley, I. C. and Murphy, T. B. (2006). Analysis of Irish third-level college applications data. \emph{Journal of the Royal Statistical Society: Series A}, \bold{169}(2), pages 361--379, ISSN: 0964-1998, <doi:10.1111/j.1467-985X.2006.00412.x>.
 }
 \seealso{
 \code{\link{mapPLMIX_multistart}}

@@ -25,7 +25,7 @@ data(d_dublinwest)
 paired_comparisons(data=d_dublinwest, format_input="ordering")
 }
 \references{
-Mollica, C. and Tardella, L. (2017). Bayesian Plackett-Luce mixture models for partially ranked data. \emph{Psychometrika}, \bold{82}(2), pages 442--458, ISSN: 0033-3123, DOI: 10.1007/s11336-016-9530-0.
+Mollica, C. and Tardella, L. (2017). Bayesian Plackett-Luce mixture models for partially ranked data. \emph{Psychometrika}, \bold{82}(2), pages 442--458, ISSN: 0033-3123, <doi:10.1007/s11336-016-9530-0>.
 }
 \seealso{
 \code{\link{rank_summaries}}

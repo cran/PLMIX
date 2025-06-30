@@ -5,6 +5,11 @@
 
 using namespace Rcpp;
 
+#ifdef RCPP_USE_GLOBAL_ROSTREAM
+Rcpp::Rostream<true>&  Rcpp::Rcout = Rcpp::Rcpp_cout_get();
+Rcpp::Rostream<false>& Rcpp::Rcerr = Rcpp::Rcpp_cerr_get();
+#endif
+
 // CompProbZpartial
 NumericMatrix CompProbZpartial(NumericMatrix p, NumericMatrix pi_inv, NumericMatrix Y, NumericMatrix u_bin, IntegerVector n_rank, NumericVector omega);
 RcppExport SEXP _PLMIX_CompProbZpartial(SEXP pSEXP, SEXP pi_invSEXP, SEXP YSEXP, SEXP u_binSEXP, SEXP n_rankSEXP, SEXP omegaSEXP) {
@@ -238,6 +243,17 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// dbl_sort
+Rcpp::NumericVector dbl_sort(Rcpp::NumericVector x);
+RcppExport SEXP _PLMIX_dbl_sort(SEXP xSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< Rcpp::NumericVector >::type x(xSEXP);
+    rcpp_result_gen = Rcpp::wrap(dbl_sort(x));
+    return rcpp_result_gen;
+END_RCPP
+}
 // howmanyranked
 IntegerVector howmanyranked(NumericMatrix pi_inv);
 RcppExport SEXP _PLMIX_howmanyranked(SEXP pi_invSEXP) {
@@ -327,6 +343,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"_PLMIX_chisqmeasuretheo1dim", (DL_FUNC) &_PLMIX_chisqmeasuretheo1dim, 5},
     {"_PLMIX_chisqmeasuretheocond", (DL_FUNC) &_PLMIX_chisqmeasuretheocond, 5},
     {"_PLMIX_chisqmeasuretheomatrix1dim", (DL_FUNC) &_PLMIX_chisqmeasuretheomatrix1dim, 5},
+    {"_PLMIX_dbl_sort", (DL_FUNC) &_PLMIX_dbl_sort, 1},
     {"_PLMIX_howmanyranked", (DL_FUNC) &_PLMIX_howmanyranked, 1},
     {"_PLMIX_loglikPLMIX", (DL_FUNC) &_PLMIX_loglikPLMIX, 4},
     {"_PLMIX_quickintsample", (DL_FUNC) &_PLMIX_quickintsample, 3},

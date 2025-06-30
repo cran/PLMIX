@@ -4,8 +4,13 @@
 \alias{summary.gsPLMIX}
 \title{Summary of the Gibbs sampling procedure for a Bayesian mixture of Plackett-Luce models}
 \usage{
-\method{summary}{gsPLMIX}(object, quantiles = c(0.025, 0.25, 0.5, 0.75,
-  0.975), hpd_prob = 0.95, digits = 2, ...)
+\method{summary}{gsPLMIX}(
+  object,
+  quantiles = c(0.025, 0.25, 0.5, 0.75, 0.975),
+  hpd_prob = 0.95,
+  digits = 2,
+  ...
+)
 }
 \arguments{
 \item{object}{Object of class \code{gsPLMIX} returned by the \code{gibbsPLMIX} function.}

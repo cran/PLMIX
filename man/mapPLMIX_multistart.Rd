@@ -4,11 +4,21 @@
 \alias{mapPLMIX_multistart}
 \title{MAP estimation for a Bayesian mixture of Plackett-Luce models with multiple starting values}
 \usage{
-mapPLMIX_multistart(pi_inv, K, G, n_start = 1, init = rep(list(list(p =
-  NULL, omega = NULL)), times = n_start), n_iter = 200,
-  hyper = list(shape0 = matrix(1, nrow = G, ncol = K), rate0 = rep(0, G),
-  alpha0 = rep(1, G)), eps = 10^(-6), plot_objective = FALSE,
-  init_index = 1:n_start, parallel = FALSE, centered_start = FALSE)
+mapPLMIX_multistart(
+  pi_inv,
+  K,
+  G,
+  n_start = 1,
+  init = rep(list(list(p = NULL, omega = NULL)), times = n_start),
+  n_iter = 200,
+  hyper = list(shape0 = matrix(1, nrow = G, ncol = K), rate0 = rep(0, G), alpha0 = rep(1,
+    G)),
+  eps = 10^(-6),
+  plot_objective = FALSE,
+  init_index = 1:n_start,
+  parallel = FALSE,
+  centered_start = FALSE
+)
 }
 \arguments{
 \item{pi_inv}{An object of class \code{top_ordering}, collecting the numeric \eqn{N}\eqn{\times}{x}\eqn{K} data matrix of partial orderings, or an object that can be coerced with \code{\link{as.top_ordering}}.}
@@ -52,7 +62,7 @@ Under noninformative (flat) prior setting, the EM algorithm for MAP estimation c
 \examples{
 
 data(d_carconf)
-MAP_mult <- mapPLMIX_multistart(pi_inv=d_carconf, K=ncol(d_carconf), G=3, 
+MAP_mult <- mapPLMIX_multistart(pi_inv=d_carconf, K=ncol(d_carconf), G=3,
                                             n_start=2, n_iter=400*3)
 str(MAP_mult)
 MAP_mult$mod$P_map
@@ -60,9 +70,9 @@ MAP_mult$mod$W_map
 
 }
 \references{
-Mollica, C. and Tardella, L. (2017). Bayesian Plackett-Luce mixture models for partially ranked data. \emph{Psychometrika}, \bold{82}(2), pages 442--458, ISSN: 0033-3123, DOI: 10.1007/s11336-016-9530-0.
+Mollica, C. and Tardella, L. (2017). Bayesian Plackett-Luce mixture models for partially ranked data. \emph{Psychometrika}, \bold{82}(2), pages 442--458, ISSN: 0033-3123, <doi:10.1007/s11336-016-9530-0>.
 
-Gormley, I. C. and Murphy, T. B. (2006). Analysis of Irish third-level college applications data. \emph{Journal of the Royal Statistical Society: Series A}, \bold{169}(2), pages 361--379, ISSN: 0964-1998, DOI: 10.1111/j.1467-985X.2006.00412.x.
+Gormley, I. C. and Murphy, T. B. (2006). Analysis of Irish third-level college applications data. \emph{Journal of the Royal Statistical Society: Series A}, \bold{169}(2), pages 361--379, ISSN: 0964-1998, <doi:10.1111/j.1467-985X.2006.00412.x>.
 }
 \seealso{
 \code{\link{mapPLMIX}}

@@ -9,34 +9,34 @@ using namespace Rcpp;
 Rcpp::IntegerMatrix tau(Rcpp::IntegerMatrix pi_inv) {
     int N = pi_inv.nrow();
     int K = pi_inv.ncol();
-    
+
     Rcpp::IntegerMatrix tau(K,K);
     Rcpp::IntegerVector starttemp(K);
     Rcpp::IntegerVector temp(K);
-    
+
     int    s ;
     int    slot ;
     int    slot2 ;
     int    k ;
-    
+
     for(s=0; s<N; s++){
-        
+
         for(k=0; k<K; k++){
             starttemp[k] = 1;
             temp[k] = starttemp[k];
         }
-        
+
         for(slot=0; slot<(K-1); slot++){
             if(pi_inv(s,slot)>0){
-                
+
                 starttemp[pi_inv(s,slot)-1] = 0 ;
-                
+
                 for(k=0; k<K; k++){
                     temp[k]=starttemp[k] ;
                 }
-                
+
                 slot2 = slot+1 ;
-                
+
                 while(slot2<K){
                     if(pi_inv(s,slot)>0 && pi_inv(s,slot2)>0){
                         tau(pi_inv(s,slot)-1, pi_inv(s,slot2)-1) = tau(pi_inv(s,slot)-1, pi_inv(s,slot2)-1)+1 ;

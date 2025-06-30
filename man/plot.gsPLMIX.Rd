@@ -4,10 +4,19 @@
 \alias{plot.gsPLMIX}
 \title{Plot the Gibbs sampling simulations for a Bayesian mixture of Plackett-Luce models}
 \usage{
-\method{plot}{gsPLMIX}(x, file = "ggmcmc-output.pdf", family = NA,
-  plot = NULL, param_page = 5, width = 7, height = 10,
-  dev_type_html = "png", post_est = "mean", max_scale_radar = NULL,
-  ...)
+\method{plot}{gsPLMIX}(
+  x,
+  file = "ggmcmc-output.pdf",
+  family = NA,
+  plot = NULL,
+  param_page = 5,
+  width = 7,
+  height = 10,
+  dev_type_html = "png",
+  post_est = "mean",
+  max_scale_radar = NULL,
+  ...
+)
 }
 \arguments{
 \item{x}{Object of class \code{gsPLMIX} returned by the \code{gibbsPLMIX} function.}
@@ -67,7 +76,7 @@ Ashton, D. and Porter, S. (2016). radarchart: Radar Chart from 'Chart.js'. R pac
 
 Wickham, H. (2009). ggplot2: Elegant Graphics for Data Analysis. Springer-Verlag New York.
 
-Fernandez-i-Marin, X. (2006). ggmcmc: Analysis of MCMC Samples and Bayesian Inference, \emph{Journal of Statistical Software}, \bold{70}(9), pages 1--20, DOI: 10.18637/jss.v070.i09.
+Fernandez-i-Marin, X. (2006). ggmcmc: Analysis of MCMC Samples and Bayesian Inference, \emph{Journal of Statistical Software}, \bold{70}(9), pages 1--20, <doi:10.18637/jss.v070.i09>.
 }
 \seealso{
 \code{\link[ggmcmc]{ggs}}, \code{\link[ggmcmc]{ggmcmc}}, \code{\link[radarchart]{chartJSRadar}} and \code{\link[ggplot2]{ggplot}}

@@ -11,7 +11,7 @@ using namespace Rcpp;
 ///' @param n_rank Numeric vector of length \eqn{N} with the number of items ranked by each sample unit.
 ///' @return Numeric \eqn{N}\eqn{\times}{x}\eqn{K} matrix of rate parameters.
 // [[Rcpp::export]]
-  NumericMatrix CompRateYpartial(NumericMatrix p, NumericMatrix pi_inv, NumericVector ref_order, NumericMatrix z, NumericVector n_rank) {
+NumericMatrix CompRateYpartial(NumericMatrix p, NumericMatrix pi_inv, NumericVector ref_order, NumericMatrix z, NumericVector n_rank) {
 
     int N = pi_inv.nrow();
     int K = pi_inv.ncol();
@@ -30,7 +30,7 @@ using namespace Rcpp;
 
         for( group=0 ; group<G ; group++){
            for( slot3=0 ; slot3<K ; slot3++){
-              initialsum[group] = initialsum[group] + p(group,slot3) ; 
+              initialsum[group] = initialsum[group] + p(group,slot3) ;
             }
         }
 
@@ -38,14 +38,14 @@ using namespace Rcpp;
       for( group=0 ; group<G ; group++){
          if(z(s,group)>0){
            tempsum = initialsum[group] ;
-           for( slot=0 ; slot<n_rank[s] ; slot++){            
+           for( slot=0 ; slot<n_rank[s] ; slot++){
                   out(s,slot) = tempsum ;
-                  tempsum = tempsum - p(group,((int) pi_inv(s,slot))-1) ; 
+                  tempsum = tempsum - p(group,((int) pi_inv(s,slot))-1) ;
             }
          }
       }
   }
 
-return out ; 
+return out ;
 
 }

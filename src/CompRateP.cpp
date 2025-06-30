@@ -12,16 +12,16 @@ using namespace Rcpp;
 ///' @param rate0 Numeric vector of \eqn{G} rate hyperparameters.
 ///' @return Numeric \eqn{G}\eqn{\times}{x}\eqn{K} matrix of rate parameters.
 // [[Rcpp::export]]
-  NumericMatrix CompRateP(NumericMatrix pi_inv, NumericMatrix Y, NumericMatrix z, NumericMatrix u_bin, IntegerVector n_rank, NumericVector rate0) {
+NumericMatrix CompRateP(NumericMatrix pi_inv, NumericMatrix Y, NumericMatrix z, NumericMatrix u_bin, IntegerVector n_rank, NumericVector rate0) {
 
     int N = pi_inv.nrow() ;
     int K = pi_inv.ncol() ;
     int G = z.ncol() ;
 
-    NumericMatrix den(G,K) ;    
-    NumericMatrix out(G,K) ;    
-    NumericMatrix pdenom(N,K) ;    
-    NumericVector temp(N) ;    
+    NumericMatrix den(G,K) ;
+    NumericMatrix out(G,K) ;
+    NumericMatrix pdenom(N,K) ;
+    NumericVector temp(N) ;
 
     int    s ;
     int    slot ;
@@ -36,28 +36,28 @@ using namespace Rcpp;
 // compute colsums of z_hat multiplied by u matrix -> gamma.hat
 
        den(group,item) = 0.0 ;
-       
+
          for( s=0 ; s<N ; s++){
-        
-           temp[s] = 0.0 ; 
+
+           temp[s] = 0.0 ;
 
           availablenext = 1.0 ;
 
             for( slot=0 ; slot<n_rank[s] ; slot++){
-              if(availablenext == 1.0){        
-                   temp[s] = temp[s] + Y(s,slot) ; 
+              if(availablenext == 1.0){
+                   temp[s] = temp[s] + Y(s,slot) ;
                  }
-                    if( pi_inv(s,slot) == ((double) (item+1)) ){ 
+                    if( pi_inv(s,slot) == ((double) (item+1)) ){
                        availablenext = 0.0 ;
                     }
-              }            
+              }
 
        den(group,item) = den(group,item) + z(s,group)*temp[s] ;
-}      
+}
        out(group,item) = (den(group,item)+rate0[group]) ;
 }
 }
 
-return out ; 
+return out ;
 
 }

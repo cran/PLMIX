@@ -4,8 +4,15 @@
 \alias{ppcheckPLMIX_cond}
 \title{Conditional posterior predictive check for Bayesian mixtures of Plackett-Luce models}
 \usage{
-ppcheckPLMIX_cond(pi_inv, seq_G, MCMCsampleP, MCMCsampleW, top1 = TRUE,
-  paired = TRUE, parallel = FALSE)
+ppcheckPLMIX_cond(
+  pi_inv,
+  seq_G,
+  MCMCsampleP,
+  MCMCsampleW,
+  top1 = TRUE,
+  paired = TRUE,
+  parallel = FALSE
+)
 }
 \arguments{
 \item{pi_inv}{An object of class \code{top_ordering}, collecting the numeric \eqn{N}\eqn{\times}{x}\eqn{K} data matrix of partial orderings, or an object that can be coerced with \code{\link{as.top_ordering}}.}
@@ -39,38 +46,38 @@ data(d_carconf)
 K <- ncol(d_carconf)
 
 ## Fit 1- and 2-component PL mixtures via MAP estimation
-MAP_1 <- mapPLMIX_multistart(pi_inv=d_carconf, K=K, G=1, 
+MAP_1 <- mapPLMIX_multistart(pi_inv=d_carconf, K=K, G=1,
                              n_start=2, n_iter=400*1)
 
-MAP_2 <- mapPLMIX_multistart(pi_inv=d_carconf, K=K, G=2, 
+MAP_2 <- mapPLMIX_multistart(pi_inv=d_carconf, K=K, G=2,
                              n_start=2, n_iter=400*2)
-                                   
-MAP_3 <- mapPLMIX_multistart(pi_inv=d_carconf, K=K, G=3, 
+
+MAP_3 <- mapPLMIX_multistart(pi_inv=d_carconf, K=K, G=3,
                              n_start=2, n_iter=400*3)
-                                   
+
 mcmc_iter <- 30
 burnin <- 10
 
 ## Fit 1- and 2-component PL mixtures via Gibbs sampling procedure
-GIBBS_1 <- gibbsPLMIX(pi_inv=d_carconf, K=K, G=1, n_iter=mcmc_iter, 
+GIBBS_1 <- gibbsPLMIX(pi_inv=d_carconf, K=K, G=1, n_iter=mcmc_iter,
                       n_burn=burnin, init=list(p=MAP_1$mod$P_map,
                       z=binary_group_ind(MAP_1$mod$class_map,G=1)))
-GIBBS_2 <- gibbsPLMIX(pi_inv=d_carconf, K=K, G=2, n_iter=mcmc_iter, 
+GIBBS_2 <- gibbsPLMIX(pi_inv=d_carconf, K=K, G=2, n_iter=mcmc_iter,
                       n_burn=burnin, init=list(p=MAP_2$mod$P_map,
                       z=binary_group_ind(MAP_2$mod$class_map,G=2)))
-GIBBS_3 <- gibbsPLMIX(pi_inv=d_carconf, K=K, G=3, n_iter=mcmc_iter, 
+GIBBS_3 <- gibbsPLMIX(pi_inv=d_carconf, K=K, G=3, n_iter=mcmc_iter,
                       n_burn=burnin, init=list(p=MAP_3$mod$P_map,
                       z=binary_group_ind(MAP_3$mod$class_map,G=3)))
-                            
+
 ## Checking goodness-of-fit of the estimated mixtures
-CHECKCOND <- ppcheckPLMIX_cond(pi_inv=d_carconf, seq_G=1:3, 
-                               MCMCsampleP=list(GIBBS_1$P, GIBBS_2$P, GIBBS_3$P), 
+CHECKCOND <- ppcheckPLMIX_cond(pi_inv=d_carconf, seq_G=1:3,
+                               MCMCsampleP=list(GIBBS_1$P, GIBBS_2$P, GIBBS_3$P),
                                MCMCsampleW=list(GIBBS_1$W, GIBBS_2$W, GIBBS_3$W))
 CHECKCOND$post_pred_pvalue
 
 }
 \references{
-Mollica, C. and Tardella, L. (2017). Bayesian Plackett-Luce mixture models for partially ranked data. \emph{Psychometrika}, \bold{82}(2), pages 442--458, ISSN: 0033-3123, DOI: 10.1007/s11336-016-9530-0.
+Mollica, C. and Tardella, L. (2017). Bayesian Plackett-Luce mixture models for partially ranked data. \emph{Psychometrika}, \bold{82}(2), pages 442--458, ISSN: 0033-3123, <doi:10.1007/s11336-016-9530-0>.
 }
 \seealso{
 \code{\link{ppcheckPLMIX}}

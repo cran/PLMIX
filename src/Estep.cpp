@@ -16,7 +16,7 @@ int K = pi_inv.ncol();
 int G = p.nrow();
 
 NumericMatrix z(N,G);
- 
+
 int    s ;
 int    j ;
 
@@ -34,18 +34,18 @@ double h ;
 
 for(s=0; s<N; s++){
 
-h =0.0 ; 
+h =0.0 ;
 
 for(j=0; j<G; j++){
 
 f = 0.0 ;
 
 slot  = 0 ;
-tt    = 1 ; 
-while(tt>-1 && slot<K){       
+tt    = 1 ;
+while(tt>-1 && slot<K){
 tt = pi_inv(s,slot)-1 ;
-f = f + log(p(j,tt)) ; 
-slot = slot+1 ; 
+f = f + log(p(j,tt)) ;
+slot = slot+1 ;
           if(slot<K){
               tt = pi_inv(s,slot)-1 ;
             }
@@ -65,7 +65,7 @@ for( slot3=0; slot3<K; slot3++){
 temp_den = temp_den + p(j,slot3);
 }
 
-while(tt>-1 && slot<K){       
+while(tt>-1 && slot<K){
 tt = pi_inv(s,slot)-1 ;
 
 g = g + log(temp_den) ;
@@ -77,7 +77,7 @@ temp_den = temp_den - p(j,tt) ;
 if(temp_den<0.0){
 }
 
-slot = slot+1 ; 
+slot = slot+1 ;
           if(slot<K){
               tt = pi_inv(s,slot)-1 ;
             }
@@ -86,7 +86,7 @@ slot = slot+1 ;
 
 f = f - g ;
 
-z(s,j) = weights[j]*exp(f) ; // numerator 
+z(s,j) = weights[j]*exp(f) ; // numerator
 if(ISNAN(z(s,j))){
 z(s,j) = 0.000000000001;
 }
@@ -107,7 +107,7 @@ z(s,j) = 0.0000000001;
 }
 
 /* recompute z(s,j) normalization (sum up to 1 for each s) */
-h =0.0 ; 
+h =0.0 ;
 for(j=0; j<G; j++){
 h = h + z(s,j) ;
 }

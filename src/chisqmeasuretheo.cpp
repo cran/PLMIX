@@ -25,7 +25,7 @@ double chisqmeasuretheo(int N, Rcpp::NumericMatrix ref_order, Rcpp::NumericMatri
        Rcpp::NumericMatrix tau_star_mat(K,K);
        Rcpp::IntegerMatrix T_mat(K,K);
 
-       Rcpp::NumericVector marg_p(K); 
+       Rcpp::NumericVector marg_p(K);
 
 
 
@@ -37,7 +37,7 @@ double chisqmeasuretheo(int N, Rcpp::NumericMatrix ref_order, Rcpp::NumericMatri
 
        pi_inv = PLMIXsim(N, K, G, p, ref_order, weights, false, pi_inv_obs) ;
 
-       tau_mat = tau(pi_inv); 
+       tau_mat = tau(pi_inv);
        for(slot=0; slot<K; slot++){
          for(slot2=0; slot2<slot; slot2++){
 	   T_mat(slot,slot2) = tau_mat(slot,slot2) + tau_mat(slot2,slot);
@@ -49,6 +49,6 @@ double chisqmeasuretheo(int N, Rcpp::NumericMatrix ref_order, Rcpp::NumericMatri
 	 }
        }
 
-       return f;  
+       return f;
 
 }

@@ -4,10 +4,17 @@
 \alias{selectPLMIX}
 \title{Bayesian selection criteria for mixtures of Plackett-Luce models}
 \usage{
-selectPLMIX(pi_inv, seq_G, MCMCsampleP = vector(mode = "list", length =
-  length(seq_G)), MCMCsampleW = vector(mode = "list", length =
-  length(seq_G)), MAPestP, MAPestW, deviance, post_est = "mean",
-  parallel = FALSE)
+selectPLMIX(
+  pi_inv,
+  seq_G,
+  MCMCsampleP = vector(mode = "list", length = length(seq_G)),
+  MCMCsampleW = vector(mode = "list", length = length(seq_G)),
+  MAPestP,
+  MAPestW,
+  deviance,
+  post_est = "mean",
+  parallel = FALSE
+)
 }
 \arguments{
 \item{pi_inv}{An object of class \code{top_ordering}, collecting the numeric \eqn{N}\eqn{\times}{x}\eqn{K} data matrix of partial orderings, or an object that can be coerced with \code{\link{as.top_ordering}}.}
@@ -50,33 +57,33 @@ Several model selection criteria are returned. The two versions of DIC correspon
 data(d_carconf)
 K <- ncol(d_carconf)
 
-## Fit 1- and 2-component PL mixtures via MAP estimation 
-MAP_1 <- mapPLMIX_multistart(pi_inv=d_carconf, K=K, G=1, 
+## Fit 1- and 2-component PL mixtures via MAP estimation
+MAP_1 <- mapPLMIX_multistart(pi_inv=d_carconf, K=K, G=1,
                                    n_start=2, n_iter=400*1)
 
-MAP_2 <- mapPLMIX_multistart(pi_inv=d_carconf, K=K, G=2, 
+MAP_2 <- mapPLMIX_multistart(pi_inv=d_carconf, K=K, G=2,
                                    n_start=2, n_iter=400*2)
 
 mcmc_iter <- 30
 burnin <- 10
 
 ## Fit 1- and 2-component PL mixtures via Gibbs sampling procedure
-GIBBS_1 <- gibbsPLMIX(pi_inv=d_carconf, K=K, G=1, n_iter=mcmc_iter, 
+GIBBS_1 <- gibbsPLMIX(pi_inv=d_carconf, K=K, G=1, n_iter=mcmc_iter,
                       n_burn=burnin, init=list(p=MAP_1$mod$P_map,
                       z=binary_group_ind(MAP_1$mod$class_map,G=1)))
-GIBBS_2 <- gibbsPLMIX(pi_inv=d_carconf, K=K, G=2, n_iter=mcmc_iter, 
+GIBBS_2 <- gibbsPLMIX(pi_inv=d_carconf, K=K, G=2, n_iter=mcmc_iter,
                       n_burn=burnin, init=list(p=MAP_2$mod$P_map,
                       z=binary_group_ind(MAP_2$mod$class_map,G=2)))
-## Select the optimal number of components 
-SELECT <- selectPLMIX(pi_inv=d_carconf, seq_G=1:2, 
-                      MAPestP=list(MAP_1$mod$P_map, MAP_2$mod$P_map), 
-                      MAPestW=list(MAP_1$mod$W_map, MAP_2$mod$W_map), 
+## Select the optimal number of components
+SELECT <- selectPLMIX(pi_inv=d_carconf, seq_G=1:2,
+                      MAPestP=list(MAP_1$mod$P_map, MAP_2$mod$P_map),
+                      MAPestW=list(MAP_1$mod$W_map, MAP_2$mod$W_map),
                       deviance=list(GIBBS_1$deviance, GIBBS_2$deviance))
 SELECT$criteria
 
 }
 \references{
-Mollica, C. and Tardella, L. (2017). Bayesian Plackett-Luce mixture models for partially ranked data. \emph{Psychometrika}, \bold{82}(2), pages 442--458, ISSN: 0033-3123, DOI: 10.1007/s11336-016-9530-0.
+Mollica, C. and Tardella, L. (2017). Bayesian Plackett-Luce mixture models for partially ranked data. \emph{Psychometrika}, \bold{82}(2), pages 442--458, ISSN: 0033-3123, <doi:10.1007/s11336-016-9530-0>.
 
 Ando, T. (2007). Bayesian predictive information criterion for the evaluation of hierarchical Bayesian and empirical Bayes models. \emph{Biometrika}, \bold{94}(2), pages 443--458.
 

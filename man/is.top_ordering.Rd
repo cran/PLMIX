@@ -34,10 +34,10 @@ c(2,0,1,4,5),
 c(2,3,1,1,1),
 c(2,3,0,4,0))
 
-is.top_ordering(data=toy_data) 
+is.top_ordering(data=toy_data)
 
 ## A dataset from the StatRank package satisfying the conditions to be a top-ordering dataset
-library(StatRank) 
+library(StatRank)
 data(Data.Election9)
 is.top_ordering(data=Data.Election9)
 
@@ -46,9 +46,6 @@ is.top_ordering(data=Data.Election9)
 Turner, H., Kormidis, I. and Firth, D. (2018). PlackettLuce: Plackett-Luce Models for Rankings. R package version 0.2-3. \url{https://CRAN.R-project.org/package=PlackettLuce}
 
 Qian, Z. (2018). rankdist: Distance Based Ranking Models. R package version 1.1.3. \url{https://CRAN.R-project.org/package=rankdist}
-}
-\seealso{
-\code{\link[PlackettLuce]{rankings}} and \code{\link[PlackettLuce]{rankings}}
 }
 \author{
 Cristina Mollica and Luca Tardella

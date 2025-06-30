@@ -4,8 +4,13 @@
 \alias{rank_summaries}
 \title{Descriptive summaries for a partial ordering/ranking dataset}
 \usage{
-rank_summaries(data, format_input, mean_rank = TRUE, marginals = TRUE,
-  pc = TRUE)
+rank_summaries(
+  data,
+  format_input,
+  mean_rank = TRUE,
+  marginals = TRUE,
+  pc = TRUE
+)
 }
 \arguments{
 \item{data}{Numeric \eqn{N}\eqn{\times}{x}\eqn{K} data matrix of partial sequences.}

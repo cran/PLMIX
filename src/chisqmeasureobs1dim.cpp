@@ -37,7 +37,7 @@ double chisqmeasureobs1dim(Rcpp::IntegerMatrix pi_inv, Rcpp::NumericMatrix p, Rc
        /* that item has been chosen as top1 */
        /* for each conditional distribution (conditional on hmr ranked items) */
 
-       top1freq_mat = top1freq1dim(pi_inv); 
+       top1freq_mat = top1freq1dim(pi_inv);
 
        /* compute the THEORETICAL absolute frequency of times  */
        /* that item should be chosen as top1 */
@@ -46,27 +46,27 @@ double chisqmeasureobs1dim(Rcpp::IntegerMatrix pi_inv, Rcpp::NumericMatrix p, Rc
        for(hmr=0; hmr<K; hmr++){
            conditionalobs[hmr] = 0 ;
          for(slot=0; slot<K; slot++){
-	   conditionalobs[hmr] = conditionalobs[hmr]+top1freq_mat(hmr,slot); 
+	   conditionalobs[hmr] = conditionalobs[hmr]+top1freq_mat(hmr,slot);
 	 }
        }
 
        for(hmr=0; hmr<K; hmr++){
          for(slot=0; slot<K; slot++){
-	 top1freq_star_mat(hmr,slot) = ((double) (conditionalobs[hmr]))* marg_p[slot]; 
+	 top1freq_star_mat(hmr,slot) = ((double) (conditionalobs[hmr]))* marg_p[slot];
 	 }
        }
 
 
        for(hmr=0; hmr<K; hmr++){
-         for(slot=0; slot<K; slot++){	   
+         for(slot=0; slot<K; slot++){
 	   /*           if(hmr>(K-4) && top1freq_star_mat(hmr,slot)>0.0){  */
-          if(top1freq_star_mat(hmr,slot)>5.0){ 
+          if(top1freq_star_mat(hmr,slot)>5.0){
 	     f = f + (((double) top1freq_mat(hmr,slot))-top1freq_star_mat(hmr,slot))*(((double) top1freq_mat(hmr,slot))-top1freq_star_mat(hmr,slot))/(top1freq_star_mat(hmr,slot));
 	   }
 	 }
        }
 
-       return f;  
+       return f;
 
 }
 

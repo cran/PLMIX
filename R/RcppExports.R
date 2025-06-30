@@ -65,6 +65,10 @@ chisqmeasuretheomatrix1dim <- function(N, ref_order, p, weights, pi_inv_obs) {
     .Call(`_PLMIX_chisqmeasuretheomatrix1dim`, N, ref_order, p, weights, pi_inv_obs)
 }
 
+dbl_sort <- function(x) {
+    .Call(`_PLMIX_dbl_sort`, x)
+}
+
 howmanyranked <- function(pi_inv) {
     .Call(`_PLMIX_howmanyranked`, pi_inv)
 }
